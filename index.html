@@ -254,6 +254,1038 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/25/nodejs-promise/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Scott Du">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oueonj87a.bkt.clouddn.com/WechatIMG3.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="阿杜S考特">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/25/nodejs-promise/" itemprop="url">ECMAScript6异步操作</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-25T14:05:43+08:00">
+                2017-08-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+<p>前段时间有幸看到青哥写的Nodejs代码的影响，据说这货在默认的情况下性能很牛逼，主要在于nodejs默认都是单线程异步执行的。作为一个长时间写Java代码的人来说，直接下node还真不习惯，主要不习惯的一点就是，如果你要在node里写一段顺序执行的串行代码，可能会踩坑。废话不多说了，关于ES6的理论和规范可以参考<code>阮一峰</code>的《ECMAScript 6 入门》，<a href="http://es6.ruanyifeng.com/" target="_blank" rel="external">http://es6.ruanyifeng.com/</a></p>
+</blockquote>
+<h2 id="Demo-1"><a href="#Demo-1" class="headerlink" title="Demo 1"></a>Demo 1</h2><h3 id="要求每隔一秒输出一个累加的算式"><a href="#要求每隔一秒输出一个累加的算式" class="headerlink" title="要求每隔一秒输出一个累加的算式"></a>要求每隔一秒输出一个累加的算式</h3><blockquote>
+<p>计算1+2+3+4+5=15</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">第一秒: 1+2=3</div><div class="line">第二秒: 3+3=6</div><div class="line">第三秒: 6+4=10</div><div class="line">第四秒: 10+5=15</div></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>解法一：使用then语法</strong></p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 延迟timeout毫秒，执行x1+x2，并输出算式</div><div class="line"> **/</div><div class="line">function add(x1,x2,timeout) &#123;</div><div class="line">  return new Promise((resolve, reject) =&gt; &#123;</div><div class="line">    setTimeout(()=&gt;&#123;</div><div class="line">      result = x1 + x2;</div><div class="line">      console.log(x1 + &quot;+&quot; + x2 + &quot;=&quot; + result);</div><div class="line">      resolve(result);</div><div class="line">    &#125;,timeout);</div><div class="line">  &#125;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">/**</div><div class="line"> * 使用then的链式语法输出</div><div class="line"> **/</div><div class="line">function test_1() &#123;</div><div class="line">  console.log(&quot;then语法链式输出========&quot;);</div><div class="line">  add(1,2,1000).then((x)=&gt;&#123;</div><div class="line">    return add(x,3,1000)</div><div class="line">  &#125;).then((x)=&gt;&#123;</div><div class="line">    return add(x,4,1000)</div><div class="line">  &#125;).then((x)=&gt;&#123;</div><div class="line">    return add(x,5,1000)</div><div class="line">  &#125;).then((x)=&gt;&#123;</div><div class="line">    setTimeout(()=&gt;&#123;</div><div class="line">      console.log(&quot;链式语法输出:1+2+3+4+5=&quot; + x + &quot;\n\n&quot;);</div><div class="line">    &#125;,1000);</div><div class="line">  &#125;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">//执行测试</div><div class="line">test_1();</div></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>解法二：使用协程（coroutine）</strong></p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">const co = require(&apos;co&apos;);</div><div class="line"></div><div class="line">/**</div><div class="line"> * 延迟timeout毫秒，执行x1+x2，并输出算式</div><div class="line"> **/</div><div class="line">function add(x1,x2,timeout) &#123;</div><div class="line">  return new Promise((resolve, reject) =&gt; &#123;</div><div class="line">    setTimeout(()=&gt;&#123;</div><div class="line">      result = x1 + x2;</div><div class="line">      console.log(x1 + &quot;+&quot; + x2 + &quot;=&quot; + result);</div><div class="line">      resolve(result);</div><div class="line">    &#125;,timeout);</div><div class="line">  &#125;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">/**</div><div class="line"> * 使用Generator函数实现协程</div><div class="line"> **/</div><div class="line">function* g() &#123;</div><div class="line">  var x = 1;</div><div class="line">  for(let i = 2; i &lt;= 5; i++) &#123;</div><div class="line">    x = yield add(x,i,1000);</div><div class="line">  &#125;</div><div class="line">  return x;</div><div class="line">&#125;</div><div class="line"></div><div class="line">/**</div><div class="line"> * 使用co组件调度协程,并获取最后的结果输出</div><div class="line"> **/</div><div class="line">function test_2() &#123;</div><div class="line">  co(g).then((x)=&gt;&#123;</div><div class="line">    setTimeout(()=&gt;&#123;</div><div class="line">      console.log(&quot;协程语法输出:1+2+3+4+5=&quot; + x + &quot;\n\n&quot;);</div><div class="line">    &#125;,1000);</div><div class="line">  &#125;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">//执行测试</div><div class="line">test_2();</div></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>解法三: 使用async函数</strong><br>需要补充说明的是async函数其实就是解法二的语法糖，async相当于Generator函数的星号(*),await则相当于yield，仅此而已。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 延迟timeout毫秒，执行x1+x2，并输出算式</div><div class="line"> **/</div><div class="line">function add(x1,x2,timeout) &#123;</div><div class="line">  return new Promise((resolve, reject) =&gt; &#123;</div><div class="line">    setTimeout(()=&gt;&#123;</div><div class="line">      result = x1 + x2;</div><div class="line">      console.log(x1 + &quot;+&quot; + x2 + &quot;=&quot; + result);</div><div class="line">      resolve(result);</div><div class="line">    &#125;,timeout);</div><div class="line">  &#125;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">/**</div><div class="line"> * async方式实现协程</div><div class="line"> **/</div><div class="line">async function g() &#123;</div><div class="line">  let x = 1;</div><div class="line">  x = await add(x,2,1000);</div><div class="line">  x = await add(x,3,1000);</div><div class="line">  x = await add(x,4,1000);</div><div class="line">  x = await add(x,5,1000);</div><div class="line">  return x;</div><div class="line">&#125;</div><div class="line"></div><div class="line">/**</div><div class="line"> * 执行async协程，并获取最终的结果</div><div class="line"> **/</div><div class="line">function test_3() &#123;</div><div class="line">  g().then((x)=&gt;&#123;</div><div class="line">    setTimeout(()=&gt;&#123;</div><div class="line">      console.log(&quot;aync await语法输出:1+2+3+4+5=&quot; + x + &quot;\n\n&quot;);</div><div class="line">    &#125;,1000);</div><div class="line">  &#125;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">//执行测试</div><div class="line">test_3();</div></pre></td></tr></table></figure>
+<p>以上这三种方式都是等价的</p>
+<h2 id="Demo-2"><a href="#Demo-2" class="headerlink" title="Demo 2"></a>Demo 2</h2><h3 id="基于Demo1中的add方法计算1-2-3-…-100-5050"><a href="#基于Demo1中的add方法计算1-2-3-…-100-5050" class="headerlink" title="基于Demo1中的add方法计算1+2+3+…+100=5050"></a>基于Demo1中的add方法计算1+2+3+…+100=5050</h3><blockquote>
+<p>要求分10个异步任务执行，这类似于Java中多线程CountDownLatch的调度方式，主线程需要等待所有子线程执行完毕后，获取其结果进行计算的场景。<br>Task1: y1 = 1+2+…+10<br>Task2: y2 = 11+12+…+20<br>Task3: y3 = 21+22+…+30<br>Task4: y4 = 31+32+…+40<br>Task5: y5 = 41+42+…+50<br>Task6: y6 = 51+52+…+60<br>Task7: y7 = 61+62+…+70<br>Task8: y8 = 71+72+…+80<br>Task9: y9 = 81+82+…+90<br>Task10: y10 = 91+92+…+100<br>并行执行这10个任务，并在最后将y1+y2+…+y10求和计算出；由于add函数每次执行加法需要1秒，如果串行的执行需要100秒，那么如果利用并行机制可以可控制在10秒将1到100的和求出！</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 延迟timeout毫秒，执行x1+x2，并输出算式</div><div class="line"> **/</div><div class="line">function add(x1,x2,timeout) &#123;</div><div class="line">  return new Promise((resolve, reject) =&gt; &#123;</div><div class="line">    setTimeout(()=&gt;&#123;</div><div class="line">      result = x1 + x2;</div><div class="line">      console.log(x1 + &quot;+&quot; + x2 + &quot;=&quot; + result);</div><div class="line">      resolve(result);</div><div class="line">    &#125;,timeout);</div><div class="line">  &#125;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">/**</div><div class="line"> * 求1+2+3+...+100 = ?</div><div class="line"> * 使用多个协程并发执行</div><div class="line"> * 协程1 1+2+..+10 = x</div><div class="line"> * 协程2 11+12+..+20 = y</div><div class="line"> * ....</div><div class="line"> * 最后汇总 x+y+...=z</div><div class="line"> **/</div><div class="line">async function sum(begin,end) &#123;</div><div class="line">  let x = 0;</div><div class="line">  for(let i = begin; i &lt;= end; i++) &#123;</div><div class="line">    x = await add(x,i,1000);</div><div class="line">  &#125;</div><div class="line">  return x;</div><div class="line">&#125;</div><div class="line"></div><div class="line">Promise.all([sum(1,10),sum(11,20),sum(21,30),sum(31,40),sum(41,50),sum(51,60),sum(61,70),sum(71,80),sum(81,90),sum(91,100)]).then(result=&gt;&#123;</div><div class="line">   return result.reduce((x,y) =&gt; &#123; return x+y;&#125;);</div><div class="line">&#125;).then(x =&gt; &#123;</div><div class="line">  console.log(&quot;1+2+...+100=&quot;+x);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/11/git-common-command/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Scott Du">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oueonj87a.bkt.clouddn.com/WechatIMG3.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="阿杜S考特">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/11/git-common-command/" itemprop="url">Git常用命令速记</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-11T17:48:19+08:00">
+                2017-08-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>目前我每天都在使用Git维护代码，但是长期使用smartgit之类的客户端工具，许多常用的命令自然就记不住了。一般来说，日常使用只要记住下图所示的6个命令就可以了。但是如果要熟练使用，恐怕要记住60-1000个命令了。<br><img src="http://oueonj87a.bkt.clouddn.com/0DA07560-CCD2-4942-AA4A-1E38475ACE75.png" alt="0DA07560-CCD2-4942-AA4A-1E38475ACE75"><br>下面是常用的Git命令清单。几个名词译名如下：</p>
+<ol>
+<li>Workspace: 工作区域</li>
+<li>Index/Stage: 暂存区</li>
+<li>Repository: 仓库区（或本地仓库）</li>
+<li>Remote: 远程仓库</li>
+</ol>
+</blockquote>
+<h2 id="一、新建代码库"><a href="#一、新建代码库" class="headerlink" title="一、新建代码库"></a>一、新建代码库</h2><blockquote>
+<p>在当前目录创建一个Git代码库</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git init</div></pre></td></tr></table></figure>
+<blockquote>
+<p>新建一个目录，将其初始化为Git代码库</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git init [project-name]</div></pre></td></tr></table></figure>
+<blockquote>
+<p>下载一个项目和它的整个代码历史</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git clone [url]</div></pre></td></tr></table></figure>
+<h2 id="二、配置"><a href="#二、配置" class="headerlink" title="二、配置"></a>二、配置</h2><blockquote>
+<p>Git的配置文件为<code>.gitconfig</code>，它可以在用户主目录下（全局配置），也可以在项目目录下（项目配置）<br>显示当前的Git配置</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git config --list</div></pre></td></tr></table></figure>
+<blockquote>
+<p>编辑Git配置文件</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git config -e [--global]</div></pre></td></tr></table></figure>
+<blockquote>
+<p>设置提交代码时的用户信息</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git config [--global] user.name &quot;[name]&quot;</div><div class="line">$ git config [--global] user.email &quot;[email address]&quot;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>显示当前的Git配置</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git config --list</div></pre></td></tr></table></figure>
+<h2 id="三、增加-删除文件"><a href="#三、增加-删除文件" class="headerlink" title="三、增加/删除文件"></a>三、增加/删除文件</h2><blockquote>
+<p>添加指定文件到暂存区</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git add [file1] [file2] ...</div></pre></td></tr></table></figure>
+<blockquote>
+<p>添加指定目录到暂存区，包括子目录</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git add [dir]</div></pre></td></tr></table></figure>
+<blockquote>
+<p>添加当前目录的所有文件到暂存区</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git add .</div></pre></td></tr></table></figure>
+<blockquote>
+<p>添加每个变化前，都会要求确认<br>对于同一个文件的多处变化，可以实现分次提交</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git add -p</div></pre></td></tr></table></figure>
+<blockquote>
+<p>删除工作区文件，并且将这次删除放入暂存区</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git rm [file1] [file2] ...</div></pre></td></tr></table></figure>
+<blockquote>
+<p>停止追踪指定文件，但该文件会保留在工作区</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git rm --cached [file]</div></pre></td></tr></table></figure>
+<blockquote>
+<p>改名文件，并且将这个改名放入暂存区</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git mv [file-original] [file-renamed]</div></pre></td></tr></table></figure>
+<h2 id="四、代码提交"><a href="#四、代码提交" class="headerlink" title="四、代码提交"></a>四、代码提交</h2><blockquote>
+<p>提交暂存区到仓库区</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git commit -m [message]</div></pre></td></tr></table></figure>
+<blockquote>
+<p>提交暂存区的指定文件到仓库区</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git commit [file1] [file2] ... -m [message]</div></pre></td></tr></table></figure>
+<blockquote>
+<p>提交工作区自上次commit之后的变化，直接到仓库区</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git commit -a</div></pre></td></tr></table></figure>
+<blockquote>
+<p>提交时显示所有diff信息</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git commit -v</div></pre></td></tr></table></figure>
+<blockquote>
+<p>使用一次新的commit，替代上一次提交<br>如果代码没有任何新变化，则用来改写上一次commit的提交信息</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git commit --amend -m [message]</div></pre></td></tr></table></figure>
+<blockquote>
+<p>重做上一次commit，并包括指定文件的新变化</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git commit --amend [file1] [file2] ...</div></pre></td></tr></table></figure>
+<h2 id="五、分支"><a href="#五、分支" class="headerlink" title="五、分支"></a>五、分支</h2><blockquote>
+<p>列出所有本地分支</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git branch</div></pre></td></tr></table></figure>
+<blockquote>
+<p>列出所有远程分支</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git branch -r</div></pre></td></tr></table></figure>
+<blockquote>
+<p>列出所有本地分支和远程分支</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git branch -a</div></pre></td></tr></table></figure>
+<blockquote>
+<p>新建一个分支，但依然停留在当前分支</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git branch [branch-name]</div></pre></td></tr></table></figure>
+<blockquote>
+<p>新建一个分支，并切换到该分支</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git checkout -b [branch]</div></pre></td></tr></table></figure>
+<blockquote>
+<p>新建一个分支，指向指定commit</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git branch [branch] [commit]</div></pre></td></tr></table></figure>
+<blockquote>
+<p>新建一个分支，与指定的远程分支建立追踪关系</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git branch --track [branch] [remote-branch]</div></pre></td></tr></table></figure>
+<blockquote>
+<p>切换到指定分支，并更新工作区</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git checkout [branch-name]</div></pre></td></tr></table></figure>
+<blockquote>
+<p>切换到上一个分支</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git checkout -</div></pre></td></tr></table></figure>
+<blockquote>
+<p>建立追踪关系，在现有分支与指定的远程分支之间</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git branch --set-upstream [branch] [remote-branch]</div></pre></td></tr></table></figure>
+<blockquote>
+<p>合并指定分支到当前分支</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git merge [branch]</div></pre></td></tr></table></figure>
+<blockquote>
+<p>选择一个commit，合并进当前分支</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git cherry-pick [commit]</div></pre></td></tr></table></figure>
+<blockquote>
+<p>删除分支</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git branch -d [branch-name]</div></pre></td></tr></table></figure>
+<blockquote>
+<p>删除远程分支</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git push origin --delete [branch-name]</div><div class="line">$ git branch -dr [remote/branch]</div></pre></td></tr></table></figure>
+<h2 id="六、标签"><a href="#六、标签" class="headerlink" title="六、标签"></a>六、标签</h2><blockquote>
+<p>列出所有tag</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git tag</div></pre></td></tr></table></figure>
+<blockquote>
+<p>新建一个tag在当前commit</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git tag [tag]</div></pre></td></tr></table></figure>
+<blockquote>
+<p>新建一个tag在指定commit</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git tag [tag] [commit]</div></pre></td></tr></table></figure>
+<blockquote>
+<p>删除本地tag</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git tag -d [tag]</div></pre></td></tr></table></figure>
+<blockquote>
+<p>删除远程tag</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git push origin :refs/tags/[tagName]</div></pre></td></tr></table></figure>
+<blockquote>
+<p>查看tag信息</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git show [tag]</div></pre></td></tr></table></figure>
+<blockquote>
+<p>提交指定tag</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git push [remote] [tag]</div></pre></td></tr></table></figure>
+<blockquote>
+<p>提交所有tag</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git push [remote] --tags</div></pre></td></tr></table></figure>
+<blockquote>
+<p>新建一个分支，指向某个tag</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git checkout -b [branch] [tag]</div></pre></td></tr></table></figure>
+<h2 id="七、查看信息"><a href="#七、查看信息" class="headerlink" title="七、查看信息"></a>七、查看信息</h2><blockquote>
+<p>显示有变更的文件</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git status</div></pre></td></tr></table></figure>
+<blockquote>
+<p>显示当前分支的版本历史</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git log</div></pre></td></tr></table></figure>
+<blockquote>
+<p>显示commit历史，以及每次commit发生变更的文件</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git log --stat</div></pre></td></tr></table></figure>
+<blockquote>
+<p>搜索提交历史，根据关键词</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git log -S [keyword]</div></pre></td></tr></table></figure>
+<blockquote>
+<p>显示某个commit之后的所有变动，每个commit占据一行</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git log [tag] HEAD --pretty=format:%s</div></pre></td></tr></table></figure>
+<blockquote>
+<p>显示某个commit之后的所有变动，其”提交说明”必须符合搜索条件</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git log [tag] HEAD --grep feature</div></pre></td></tr></table></figure>
+<blockquote>
+<p>显示某个文件的版本历史，包括文件改名</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git log --follow [file]</div><div class="line">$ git whatchanged [file]</div></pre></td></tr></table></figure>
+<blockquote>
+<p>显示指定文件相关的每一次diff</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git log -p [file]</div></pre></td></tr></table></figure>
+<blockquote>
+<p>显示过去5次提交</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git log -5 --pretty --oneline</div></pre></td></tr></table></figure>
+<blockquote>
+<p>显示所有提交过的用户，按提交次数排序</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git shortlog -sn</div></pre></td></tr></table></figure>
+<blockquote>
+<p>显示指定文件是什么人在什么时间修改过</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git blame [file]</div></pre></td></tr></table></figure>
+<blockquote>
+<p>显示暂存区和工作区的差异</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git diff</div></pre></td></tr></table></figure>
+<blockquote>
+<p>显示暂存区和上一个commit的差异</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git diff --cached [file]</div></pre></td></tr></table></figure>
+<blockquote>
+<p>显示工作区与当前分支最新commit之间的差异</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git diff HEAD</div></pre></td></tr></table></figure>
+<blockquote>
+<p>显示两次提交之间的差异</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git diff [first-branch]...[second-branch]</div></pre></td></tr></table></figure>
+<blockquote>
+<p>显示今天你写了多少行代码</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git diff --shortstat &quot;@&#123;0 day ago&#125;&quot;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>显示某次提交的元数据和内容变化</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git show [commit]</div></pre></td></tr></table></figure>
+<blockquote>
+<p>显示某次提交发生变化的文件</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git show --name-only [commit]</div></pre></td></tr></table></figure>
+<blockquote>
+<p>显示某次提交时，某个文件的内容</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git show [commit]:[filename]</div></pre></td></tr></table></figure>
+<blockquote>
+<p>显示当前分支的最近几次提交</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git reflog</div></pre></td></tr></table></figure>
+<h2 id="八、远程同步"><a href="#八、远程同步" class="headerlink" title="八、远程同步"></a>八、远程同步</h2><blockquote>
+<p>下载远程仓库的所有变动</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git fetch [remote]</div></pre></td></tr></table></figure>
+<blockquote>
+<p>显示所有远程仓库</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git remote -v</div></pre></td></tr></table></figure>
+<blockquote>
+<p>显示某个远程仓库的信息</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git remote show [remote]</div></pre></td></tr></table></figure>
+<blockquote>
+<p>增加一个新的远程仓库，并命名</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git remote add [shortname] [url]</div></pre></td></tr></table></figure>
+<blockquote>
+<p>取回远程仓库的变化，并与本地分支合并</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git pull [remote] [branch]</div></pre></td></tr></table></figure>
+<blockquote>
+<p>上传本地指定分支到远程仓库</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git push [remote] [branch]</div></pre></td></tr></table></figure>
+<blockquote>
+<p>强行推送当前分支到远程仓库，即使有冲突</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git push [remote] --force</div></pre></td></tr></table></figure>
+<blockquote>
+<p>推送所有分支到远程仓库</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git push [remote] --all</div></pre></td></tr></table></figure>
+<p>##九、撤销</p>
+<blockquote>
+<p>恢复暂存区的指定文件到工作区</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git checkout [file]</div></pre></td></tr></table></figure>
+<blockquote>
+<p>恢复某个commit的指定文件到暂存区和工作区</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git checkout [commit] [file]</div></pre></td></tr></table></figure>
+<blockquote>
+<p>恢复暂存区的所有文件到工作区</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git checkout .</div></pre></td></tr></table></figure>
+<blockquote>
+<p>重置暂存区的指定文件，与上一次commit保持一致，但工作区不变</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git reset [file]</div></pre></td></tr></table></figure>
+<blockquote>
+<p>重置暂存区与工作区，与上一次commit保持一致</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git reset --hard</div></pre></td></tr></table></figure>
+<blockquote>
+<p>重置当前分支的指针为指定commit，同时重置暂存区，但工作区不变</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git reset [commit]</div></pre></td></tr></table></figure>
+<blockquote>
+<p>重置当前分支的HEAD为指定commit，同时重置暂存区和工作区，与指定commit一致</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git reset --hard [commit]</div></pre></td></tr></table></figure>
+<blockquote>
+<p>重置当前HEAD为指定commit，但保持暂存区和工作区不变</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git reset --keep [commit]</div></pre></td></tr></table></figure>
+<blockquote>
+<p>新建一个commit，用来撤销指定commit<br>后者的所有变化都将被前者抵消，并且应用到当前分支</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git revert [commit]</div></pre></td></tr></table></figure>
+<blockquote>
+<p>暂时将未提交的变化移除，稍后再移入</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git stash</div><div class="line">$ git stash pop</div></pre></td></tr></table></figure>
+<p>##十、其他</p>
+<blockquote>
+<p>生成一个可供发布的压缩包</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git archive</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/11/springcloud-microservice/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Scott Du">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oueonj87a.bkt.clouddn.com/WechatIMG3.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="阿杜S考特">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/11/springcloud-microservice/" itemprop="url">基于Spring Cloud的微服务架构实践</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-11T10:10:00+08:00">
+                2017-08-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>转自：<a href="http://gitbook.cn/thanks/orz.html#http://gitbook.cn/m/mazi/author/58def091507b3b4c285a5695" target="_blank" rel="external">七夜</a></p>
+<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><blockquote>
+<p>随着公司业务量的飞速发展，平台面临的挑战已经远远大于业务，需求量不断增加，技术人员数量增加，面临的复杂度也大大增加。在这样的场景下，平台的技术架构也完成了从传统的单体架构到微服务架构的演进。</p>
+<div align="center"><br><img src="http://oueonj87a.bkt.clouddn.com/屏幕快照 2017-08-11 10.12.53.png" alt="屏幕快照 2017-08-11 10.12.53"><br></div>
+
+</blockquote>
+<h1 id="系统架构的演进过程"><a href="#系统架构的演进过程" class="headerlink" title="系统架构的演进过程"></a>系统架构的演进过程</h1><blockquote>
+<h2 id="单一应用架构（第一代架构）"><a href="#单一应用架构（第一代架构）" class="headerlink" title="单一应用架构（第一代架构）"></a>单一应用架构（第一代架构）</h2><p>这是平台最开始的情况，当时流量小，为了节约成本，并将所有应用都打包放到一个应用里面，采用的架构为.net+sqlserver</p>
+<p><div align="center"><br><img src="http://oueonj87a.bkt.clouddn.com/屏幕快照 2017-08-11 10.18.41.png" alt="屏幕快照 2017-08-11 10.18.41"><br></div><br><strong>表示层</strong>：位于最外层（最上层），最接近用户。用于显示数据和接收用户输入的数据，为用户提供一种交互式操作的界面，平台所使用的是基于.net的web形式。<br><strong>业务逻辑层（Business Logic Layer）</strong>：无疑是系统架构中体现核心价值的部分。它的关注点主要集中在业务规则的定制、业务流程的实现等与业务需求有关的系统设计，也即是说它是与系统所应对的<code>领域(domain)</code>逻辑有关，很多时候，也将业务逻辑层称为领域层。业务逻辑层在体系架构中的位置很关键，它处于数据访问层与表示层中间，起到了数据交换中承上启下的作用。由于层是一种弱耦合结构，层与层之间的依赖是向下的，底层对于上层而言是“无知”的，改变上层的设计对于其调用的底层而言没有任何影响。如果在分层设计时，遵循了面向接口设计的思想，那么这种向下的依赖也应该是一种弱依赖关系。对于数据访问层而言，它是调用者；对于表示层而言，它却是被调用者。<br><strong>数据层</strong>数据访问层：有时候也称为是持久层，其功能主要是负责数据库的访问，可以访问数据库系统、二进制文件、文本文档或者是XML文档等等，平台在这个阶段使用的是hibernate.net+sqlserver。</p>
+</blockquote>
+<p>第一代架构看似很简单，却支撑了平台的早期业务发展，满足了网站用户访问量在几万规模的处理需求。但是当用户访问量呈现大规模增长，问题就暴露出来了：</p>
+<blockquote>
+<ul>
+<li><strong><em>维护成本不断增高</em></strong>：当出现故障时，有可能引起故障的原因组合就会比较多，这也会导致分析故障、定位故障、修复故障的成本相应增高，故障的平均修复周期会花费很多时间，并且任何一个模块出现故障将会影响其他应用模块；在开发人员对全局功能缺乏深度理解的情况下，修复一个故障，经常引入其他的故障，导致该过程陷入“修复越多，故障越多”的恶性循环。</li>
+<li><strong><em>可伸缩性差</em></strong>：应用程序的所有功能代码都运行在同一个服务器上，将会导致应用程序的水平扩展非常困难，只能使用垂直扩展。</li>
+<li><strong><em>交付周期变长</em></strong>：应用程序做任何细微的修改以及代码提交，都会触发对整个应用程序进行代码编译、运行单元测试、代码检查、构建并生成部署包、验证功能等，这也就版本的反馈周期变长，单位时间内构建的效率变得很低。</li>
+<li><strong><em>新人培训周期变长</em></strong>：随着应用程序的功能越来越多，代码变得越来越复杂的同时，对于新加入团队的成员而言，了解业务背景、熟悉应用程序、配置本地开发环境，这些看似简单的任务，却会花费更长的时间。</li>
+</ul>
+<h2 id="垂直应用架构（第二代架构）"><a href="#垂直应用架构（第二代架构）" class="headerlink" title="垂直应用架构（第二代架构）"></a>垂直应用架构（第二代架构）</h2><p>为了解决第一代架构面临的问题，团队制定了如下的策略，并形成了第二代应用架构（垂直应用架构）</p>
+<div align="center"><br><img src="http://oueonj87a.bkt.clouddn.com/屏幕快照 2017-08-11 11.02.33.png" alt="屏幕快照 2017-08-11 11.02.33"><br></div>
+
+<ul>
+<li>应用拆成独立的应用模块。</li>
+<li><p>各个应用模块独立部署，并在负载均衡通过<code>session</code>保持解决应用模块的水平扩展问题。<br><code>Sticky</code>就是基于<code>cookie</code>的一种负载均衡解决方案，通过<code>cookie</code>实现客户端与后端访问的都是同一个后端服务器。请求来了，服务器发个<code>cookie</code>，并说：下次来带上，直接来找我！在项目中，我们使用了淘宝开源的<code>tengine</code>中的session_sticky模块。</p>
+</li>
+<li><p>数据库拆分成不同数据库，由对应应用访问。</p>
+</li>
+<li>域名拆分。</li>
+<li>动静分离。</li>
+</ul>
+<p>可以看到第二代架构解决应用级别的水平扩展，经过优化后，该架构支撑了几十万用户的访问需求，在这一阶段有部分应用已经使用<code>java</code>完成了<code>mvc</code>架构的重写。当然也存在一些问题。</p>
+<ul>
+<li>应用之间耦合度高，相互依赖严重。</li>
+<li>应用模块之间交互复杂，有时直接访问对方模块的数据库。</li>
+<li>数据库设计过多的关联查询与慢查询，数据库优化困难。</li>
+<li>数据库单点访问严重，出现故障无法恢复。</li>
+<li>数据复制问题严重，造成大量数据无法恢复。<br>我们曾经尝试使用sqlserver always on解决扩展问题，但是实现发现在复制过程中出现至少10秒的延迟，因此放弃了这个方案。</li>
+<li>系统扩展困难。</li>
+<li>各个开发团队各自为战，开发效率低。</li>
+<li>测试工作量巨大，发布困难。</li>
+</ul>
+<h2 id="微服务架构（平台现状：第三代架构）"><a href="#微服务架构（平台现状：第三代架构）" class="headerlink" title="微服务架构（平台现状：第三代架构）"></a>微服务架构（平台现状：第三代架构）</h2><p>为了解决第一代与第二代架构存在的问题，我们对平台进行了梳理优化。根据平台业务需要以及对第一二代架构的总结，我们确定了第三代架构的核心需求：</p>
+<ul>
+<li>核心业务抽取出来，作为独立的服务对外服务。</li>
+<li>服务模块持续独立部署，减少版本交付周期。</li>
+<li>数据库按服务分库分表。</li>
+<li>大量使用缓存，提高访问。</li>
+<li>系统间交互使用轻量级的<code>rest</code>协议，摒弃<code>RPC</code>协议。</li>
+<li>去.net化，开发语言使用<code>java</code>来实现。并依此为基础进行了平台的第三代架构的重构工作。<br><div align="center"><br><img src="http://oueonj87a.bkt.clouddn.com/屏幕快照 2017-08-11 11.22.55.png" alt="屏幕快照 2017-08-11 11.22.55"><br></div><br>看第三代架构里面的组成，主要分为八个部分：</li>
+<li>CDN: CDN系统负责实时地根据网络流量和各个节点的连接、负载状况以及到用户的距离和响应时间等综合信息将用户的请求重新导向离用户最近的服务节点上。其目的是使用户可就近取得所需内容，解决Internet网络拥挤的状况，提高用户访问网站的响应速度。平台在选择CDN厂商时，需要考虑经营时间长短，是否有可扩充的贷款资源、灵活的流量和带宽选择、稳定的节点、性价比；综合前面几个因素平台采用了七牛的CDN服务。</li>
+<li>LB层：平台包括很多个业务域，不同的业务域有不同的集群，LB层（Load Balancer）是对多台业务服务器进行流量分发的负载均衡服务，通过流量分发扩展应用系统对外的服务能力，并消除单点故障提升了应用系统的可用性。选择哪种负载，需要综合考虑各种因素（是否满足高并发高性能，Session保持如何解决，负载均衡的算法如何，支持压缩，缓存的内存消耗），主要分为以下两种：LVS：工作在4层，Linux实现的高性能高并发、可伸缩性、可靠的负载均衡器，支持多种转发方式(NAT、DR、IP Tunneling)，其中DR模式支持通过广域网进行负载均衡。支持双击热备（Keepalived或者Heartbeat）。对网络环境的依赖性比较高。Nigix：工作在7层，事件驱动的、异步非阻塞的架构、支持对进程的高并发的负载均衡器/反向代理软件。可以针对域名、目录结构、正则规则针对http做一些分流。通过端口检测到服务器内部的故障，比如根据服务器处理网页返回的状态码、超时等等，并且会把返回错误的请求重新提交到另一个节点，不过其中缺点就是不支持url来检测。对于session sticky，我们通过基于cookie的扩展ngix-sticky-module来实现。这种也是平台目前所采用的方案。</li>
+<li>业务层：代表平台某一领域的业务提供的服务，对于平台而言，有商品、会员、直播、订单、财务、论坛等系统，不同的系统提供不同的领域服务。</li>
+<li>网关与注册中心：提供了同意的底层微服务api入口与注册管理。封装了内部的系统架构并向每个客户端提供Rest API，同时实现了监控、负载均衡、缓存、服务降级、限流等职责。目前平台采用ngix+consul来实现。</li>
+<li>服务层：该层为一些协同工作的小而自治的服务，平台根据业务的边界来确定了服务的边界，每个服务只专注自己边界之内。该层基于spring cloud来构建。</li>
+<li>基础设施层：该层为上层提供基础设施服务，主要为一下几类：redis集群：以高响应速度、内存操作为上层提供缓存服务。mongodb集群：由于mongodb具有灵活文档模型、高可用复制集、可扩展分片集群等特性，平台基于此为上层提供如文章、帖子、链路日志等存储服务。mongodb集群采用了复制+分片的架构解决可用性与扩展性问题。MySQL集群：存储会员、商品、订单等具有事务性要求的数据。Kafka：支撑了平台的所有消息服务。ES(ElasticSearch)：提供了平台的商品、会员、订单、日志等搜索服务。</li>
+<li>集成层：这个特点是整个平台中的最大亮点，包括实践持续集成CI、持续交付CD、DevOps文化，让每个人都参与交付，在规范的流程和标准的交付下，完成一个服务的自动部署发布，进而提高了版本交付链路的整体效率。</li>
+<li>监控层：将系统拆分为更小的、细粒度的微服务给平台带来了很多好处，但是，它也增加了平台系统的运维复杂性。给最终用户提供的任务服务都是有大量的微服务配合完成，一个初始调用最终会触发对个下游的服务调用，如何才能重建请求流，以重现与解决这个问题？为此部署开源的open-falcon平台提供应用级以上的监控、使用ELK提供应用日志的分析、使用自建服务提供链路日志跟踪以及基于spring config server实践统一配置服务。</li>
+</ul>
+</blockquote>
+<h1 id="微服务团队的工作方式"><a href="#微服务团队的工作方式" class="headerlink" title="微服务团队的工作方式"></a>微服务团队的工作方式</h1><blockquote>
+<p><strong><em>康威定律</em></strong>：任何组织在设计一套系统时，所交付的设计方案在结构上都与该组织的沟通结构保持一致。</p>
+<h2 id="工作方式"><a href="#工作方式" class="headerlink" title="工作方式"></a>工作方式</h2><p>在实践第三代架构时，我们对团队组织做了几个调整：</p>
+<ul>
+<li>按照业务边界进行了划分，在一个团队内全栈，让团队自治，按照这样的方式组建，将沟通的成本维持在系统的内部，每个子系统就会更加内聚，彼此的依赖耦合能力变弱，夸系统的沟通成本也就能降低<br><img src="http://oueonj87a.bkt.clouddn.com/屏幕快照 2017-08-11 11.58.14.png" alt="屏幕快照 2017-08-11 11.58.14"></li>
+<li>专门建立了一个架构师部门来负责第三代架构的推进工作。<br>通常对于一个架构师团队，有系统架构、应用架构、运维、DBA、敏捷专家五个角色组成是一个比较合理的结构。那么又如何可控制好架构组的产品，保证架构工作的顺利推进呢？</li>
+<li>首先：打造持续改进的自组织文化是实施微服务的关键基石。只有持续改进，持续学习和反馈，持续打造这样一个文化氛围和团队，微服务架构才能持续发展下去，保持新鲜的生命力，从而实现我们的初衷。</li>
+<li>其次：架构组的产品要经过严格的流程，因为架构组推行的是通用的解决方案，为了保证方案的质量，我们从方案调研到评审再到实施都有一个严格的闭环。<br><img src="http://oueonj87a.bkt.clouddn.com/屏幕快照 2017-08-11 12.02.48.png" alt="屏幕快照 2017-08-11 12.02.48"><br>再谈整个团队的交付流程与开发模式，如果没有预先定义好，则很难让微服务架构发挥出真正的价值，下面我们先来看看微服务架构的交付流程。<br><img src="http://oueonj87a.bkt.clouddn.com/屏幕快照 2017-08-11 12.04.07.png" alt="屏幕快照 2017-08-11 12.04.07"><br>使用微服务架构开发应用程序，我们实际上是针对一个个微服务进行设计、开发、测试、部署，因为每个服务之间是没有彼此依赖的，大概的交付流程就像上图这样。<strong>设计阶段：</strong>架构组将产品功能拆分为若干微服务，为每个微服务设计API接口（例如Rest API），需要给出API文档，包括API的名称、版本、请求参数、响应结果、错误代码等信息。在开发阶段，开发工程师去实现API接口，也包括完成API的单元测试工作，在此期间，前端工程师会并行开发Web UI部分，可根据API文档早出一些假数据（mock数据），这样一来，前端工程师就不必等待后端API全部开发完毕，才能开始自己的工作了，实现了前后端并行开发。<strong>测试阶段：</strong>这一阶段过程全自动化过程，开发人员提交代码到代码服务器，代码服务器触发持续集成构建、测试，如果测试通过则会自动通过Ansible脚本推送到模拟环境；在时间中对于线上环境则是先要走审核流程，通过之后才能推送到生成环境。提高工作效率，并且控制了部分可能因为测试不充分而导致的线上线下不稳定。<strong>开发模式</strong>在以上交付流程中，开发、测试、部署这三个阶段可能都会涉及到对代码行为的控制，我们还需要制定相关开发模式，以确保多人能够良好地协作。</li>
+<li>实践“绞杀者模式”：<br><img src="http://oueonj87a.bkt.clouddn.com/屏幕快照 2017-08-11 12.20.42.png" alt="屏幕快照 2017-08-11 12.20.42"><br>由于第三代架构跨度较大，并且面临着无法修改的.net遗留系统，我们采用绞杀者模式，在遗留系统外面增加新的Proxy代理微服务，并且在LB控制upstream的方式，而不是直接修改原有系统，逐步的实现对老系统的替换。</li>
+<li>开发规范<br><img src="http://oueonj87a.bkt.clouddn.com/屏幕快照 2017-08-11 12.23.05.png" alt="屏幕快照 2017-08-11 12.23.05"><br>经验表明，我们需要善用代码版本控制系统，我曾经遇到一个开发团队，由于分支没有规范，最后一个小版本上线合代码居然花了几个小时，最后开发人员自己都不知道合到哪个分支。拿GitLab来说，它很好地支持了多分支代码版本，我们需要利用这个特性来提高开发效率，上图就是我们目前的分支管理规范。最稳定的代码放在master分支上，我们不要直接在master分支上提交代码，只能在该分支上进行代码合并操作，例如将其他分支的代码合并到master分支上。我们日常开发中的代码需要从master分支上来一条develop分支出来，该分支所有人都能访问，但一般情况下，我们也不会直接在该分支上提交代码，代码同样是从其他分支合并到develop分支上去。当我们需要开发某个特性时，需要从develop分支拉出一条feature分支，例如feature-1与feature-2，在这些分支上并行地开发具体特性。当特性开发完毕后，我们决定需要发布某个版本了，此时需要从develop分支上拉一条release分支，例如release-1.0.0，并将需要发布的特性从相关feature分支一同合并到release分支上，随后将针对release分支推送到测试环境，测试工程师在该分支上做功能而是，开发工程师在该分支上修改bug。待测试工程师无法找到任何bug时，我们可将该release分支部署到预发环境。待上线完成后，将release分支上的代码同时合并到develop分支与master分支，并在master分支上打一个tag，例如v1.0.0。当生产环境发现bug时，我们需要从对应的tag上（例如v1.0.0）拉出一条hotfix分支（例如hotfix-1.0.1），并在该分支上做bug修复。待bug完全修复后，需将hotfix分支上的代码同时合并到develop分支与master分支。对于版本号我们也有要求，格式为：x.y.z，其中，x用于有重大重构时才会升级，y用于有新的特性发布时才会升级，z用于修改了某个bug后才会升级。针对每个微服务，我们都需要严格按照以上开发模式来执行。</li>
+</ul>
+</blockquote>
+<h1 id="微服务开发体系"><a href="#微服务开发体系" class="headerlink" title="微服务开发体系"></a>微服务开发体系</h1><blockquote>
+<p>我们已经对微服务团队的架构、交付流程、开发模式进行了描述，下面我们聊聊微服务的开发体系。</p>
+<h2 id="什么是微服务架构"><a href="#什么是微服务架构" class="headerlink" title="什么是微服务架构"></a>什么是微服务架构</h2><p>Martin Flower的定义：In short, the microservice architectural style[1] is an approach to developing a single application as a suite of small services, each running in its own process and communicating with lightweight mechanisms, often an HTTP resource API. These services are built around business capabilities and independently deployable by fully automated deployment machinery. There is a bare minimum of centralized management of these services, which may be written in different programming languages and use different data storage technologies<br>简单的说，微服务是软件架构上的一个设计风格，它倡导将一个原本独立的系统分成多个小型服务，这些小型服务都在各自独立的进程中运行，服务间通过基于HTTP的RESTful轻量级API进行通信协作。被拆分的每个微服务围绕系统中的某项或一些耦合度较高的业务进行构建，并且每个服务都维护着自身的数据存储、业务开发、自动化测试案例以及独立部署机制。由于有了轻量级通信机制，这些微服务间可以使用不同的语言来编写。</p>
+<h2 id="微服务的拆分粒度"><a href="#微服务的拆分粒度" class="headerlink" title="微服务的拆分粒度"></a>微服务的拆分粒度</h2><p>微服务到底拆分到一个多大的粒度，更多时候是需要在粒度与团队之间找到一个平衡点，微服务越小，微服务独立性带来的好处就越多。但是管理大量微服务也会越来越复杂。基本上拆分需要遵循以下几个原则：</p>
+<ul>
+<li>单一职责原则：即“把因相同原因而变化的东西聚合到一起，把因不同原因而变化的东西分离开来”。通过这个原则确定微服务边界。</li>
+<li>团队自主原则：团队越大，沟通与协助成本就会越高，我们在实践中一个团队不会超过8个人，团队内全栈，是一个全功能团队。</li>
+<li>先分数据库、后分服务：数据模型能否彻底分开，决定了微服务的边界功能是否彻底划清，实践中我们先讨论数据模型边界，数据模型的边界映射了业务的边界，进而从底向上完成服务拆分。<h2 id="如何搭建微服务架构"><a href="#如何搭建微服务架构" class="headerlink" title="如何搭建微服务架构"></a>如何搭建微服务架构</h2>为了搭建好微服务架构，技术选型是一个非常重要的阶段，只有选择合适的“演员”，才能把这台戏演好。<br><img src="http://oueonj87a.bkt.clouddn.com/屏幕快照 2017-08-11 12.45.54.png" alt="屏幕快照 2017-08-11 12.45.54"><br>我们使用Spring Cloud作为微服务开发框架，Spring Boot拥有嵌入式Tomcat，可直接运行一个jar包来发布微服务，此外它还提供了一系列“开箱即用”的插件，例如：配置中心，服务注册与发现，熔断器，路由，代理，控制总线，一次性令牌，全局锁，leader选举，分布式会话，集群状态等，可大量提高我们的开发效率。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>Spring Cloud</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>路由与负载均衡</td>
+<td>Ribbon</td>
+</tr>
+<tr>
+<td>注册中心</td>
+<td>Eureka</td>
+</tr>
+<tr>
+<td>网关</td>
+<td>Zuul</td>
+</tr>
+<tr>
+<td>断路器</td>
+<td>Hystrix</td>
+</tr>
+<tr>
+<td>分布式配置</td>
+<td>Config</td>
+</tr>
+<tr>
+<td>日志输出</td>
+<td>ELK</td>
+</tr>
+<tr>
+<td>认证集成</td>
+<td>oauth2</td>
+</tr>
+<tr>
+<td>消息总线</td>
+<td>Bus</td>
+</tr>
+<tr>
+<td>批量任务</td>
+<td>Task</td>
+</tr>
+</tbody>
+</table>
+<h2 id="工程结构规范"><a href="#工程结构规范" class="headerlink" title="工程结构规范"></a>工程结构规范</h2><p><img src="http://oueonj87a.bkt.clouddn.com/图片 1.png" alt="图片 1"><br>上图是我们实践中每个服务应该具有的项目组成结构。</p>
+<ol>
+<li>微服务名+service: 为对内其它微服务提供服务调用。服务名+api模块为服务间定义的接口规范，使用swagger+rest接口定义。服务名+server模块包含了能直接启动该服务的应用与配置。</li>
+<li>微服务名+web: 供上层web应用请求的入口，该服务中一般会调用底层微服务完成请求。 </li>
+</ol>
+<h2 id="API网关实践"><a href="#API网关实践" class="headerlink" title="API网关实践"></a>API网关实践</h2><p><img src="http://oueonj87a.bkt.clouddn.com/图片 2.png" alt="图片 2"><br>API网关作为后端所有微服务和API的访问入口，对微服务和API进行审计，流控，监控，计费等。常用的API网关解决方案有：</p>
+<ul>
+<li>应用层方案最有名的当然是Netflix的zuul，但这不意味着这种方案就最合适，比如netflix是因为使用AWS，对基础设施把控有限，所以才不得不在应用层做了zuul这样的方案，如果通盘考虑，这种方案不是最合适的方案。但是如果自己的团队对整体技术设施把控有限，且团队结构不完善，应用层方案也可能是最合适你的最佳方案。</li>
+<li>ngix+lua方案也是我们采用并认为最合适的方案，OpenResty和Kong是比较成熟的可选方案，不过Kong使用Postgres或者Cassandra，国内公司估计选择这两货的不多，但Kong的HTTP API设计还是很不错的。</li>
+<li>我们的方案使用ngix+lua+consul组合方案，虽然我们团队大多是java，选择zookeeper会是更加自然的选择，但是作为欣锐派，对压测结果进行了分析，我们最终选择使用consul。良好的HTTP API支持，可以动态管理upstream，这也意味着我们可以通过发布平台或者胶水系统无缝的实现服务注册和发现，对服务的访问方透明。<br><img src="http://oueonj87a.bkt.clouddn.com/图片 3.png" alt="图片 3"><br>在以上的方案中：consul作为状态处处或者配置中心（主要使用consul的KV存储功能）；ngix作为API网关，根据consul中upstreams的相关配置，动态分发流量到配置的upstreams节点；ngix根据配置项，连接到consul集群；启动的API或者微服务实例，通过手工/命令行/发布部署平台，将实例信息注册/写入consul；ngix获取到相应的upstreams信息更新，则动态变更ngix内部的upstreams分发配置，从而将流量路由和分发到对应的API和微服务实例结点；将以上注册和发现逻辑通过脚本或统一的发布部署平台固化后，就可以实现透明的服务访问和扩展。<strong>链路监控实践：</strong>我们发现，以前在单体应用下的日志监控很简单，在微服务架构下却成为了一个大问题，如果无法跟踪业务流，无法定位问题，在复杂的微服务交互关系中，我们就会非常被动，此时分布式链路监控应运而生，其核心就是调用链。通过一个全局的ID将分布在各个服务节点上同一次请求串联起来，还原原有的调用关系、追踪系统问题、分析调用数据、统计系统指标。<br>分布式链路跟踪最早见于2010年Google发表的一篇论文《dapper》。那么我们先来看一下什么是调用链，调用链其实就是将一次分布式请求还原成调用链路。显示的在后端查看一次分布式请求的调用情况，比如各个节点上的耗时、请求具体到了哪台机器上、每个服务节点的请求状态，等等。它能反映出一次请求中经理了多少个服务层级等信息（比如你的系统A调用B，B调用C，那么这次请求的层级就是3），如果你发现有些请求层级大于10，那么这个服务很有可能需要优化了。常见的解决方案有：</li>
+<li>Pinpoint<br>github地址：<a href="https://github.com/naver/pinpoint" target="_blank" rel="external">https://github.com/naver/pinpoint</a><br>Pinpint is an open source APM(Application Performance Management) tool for large-scale distributed systems written in Java.<br>对APM有兴趣的朋友都应该看看这个开源项目，这是一个韩国团队开源出来的，通过JavaAgent的机制来做字节码代码植入（探针），实现加入traceid和抓取性能数据的目的。<br>NewRelic、Oneapm之类的工具在java平台上的性能分析也是类似的机制。</li>
+<li>Zipkin<br>官网：OpenZipkin(A distributed tracing system) <a href="http://zipkin.io/" target="_blank" rel="external">http://zipkin.io/</a><br>github地址：<a href="https://github.com/openzipkin/zipkin/" target="_blank" rel="external">https://github.com/openzipkin/zipkin/</a><br>这是twitter开源出来的，也是参考Dapper的体系来做的。<br>Zipkin的java应用端是通过一个叫Brave的组件来实现对应用内部的性能分析数据采集。<br>Brave的github地址：<a href="https://github.com/openzipkin/brave" target="_blank" rel="external">https://github.com/openzipkin/brave</a><br>这个组件通过实现一系列的java拦截器，来做到对http/servlet请求、数据库访问的调用过程跟踪。然后通过在spring之类的配置文件里加入这些拦截器，完成对java应用的性能数据采集。</li>
+<li>CAT<br>github地址：<a href="https://github.com/dianping/cat" target="_blank" rel="external">https://github.com/dianping/cat</a><br>这个是大众点评开源出来的，实现的功能也还是蛮丰富的，国内也有一些公司在用了。不过CAT实现跟踪的手段，是要在代码里硬编码写一些“埋点”，也就是侵入式的。这样做有利有弊，好处是可以在自己需要的地方加埋点，比较有针对性；坏处是必须改动现有系统，很多开发团队不愿意。前面三个工具里面，如果不想重复造轮子，我推荐的顺序依次是Pinpoint-&gt;Zipkin-&gt;CAt。原因很简单，就是这三个工具对于程序源代码和配置文件的侵入性，是依次递增的。</li>
+<li>我们的解决方案针对于微服务，我们在spring cloud基础上，对微服务架构进行了扩展，基于Google Dapper的概念，设计了一套基于微服务架构的分布式跟踪系统（WeAPM）<br><img src="http://oueonj87a.bkt.clouddn.com/图片 4.png" alt="图片 4"><br>如上图所示，我们可以通过服务名、时间、日志类型、方法名、异常级别、接口耗时等参数查询响应的日志。在得到的TrakID可以查询到该请求的整个链路日志，为重现问题、分析日志提供了极大方便。<br><img src="http://oueonj87a.bkt.clouddn.com/图片 5.png" alt="图片 5"><h2 id="断路器实践"><a href="#断路器实践" class="headerlink" title="断路器实践"></a>断路器实践</h2>在微服务架构中，我们将系统拆分成了一个个的微服务，这样就有可能因为网络原因是依赖服务自身问题出现调用故障或延迟，而这些问题会直接导致调用方的对外服务也出现延迟，若此时调用方的请求不断增加，最后就会出现因等待出现故障的依赖方响应而形成任务积压，最终导致自身服务的瘫痪。为了解决这样的问题，因此产生了断路器模式<br><img src="http://oueonj87a.bkt.clouddn.com/图片 6.png" alt="图片 6"><br>我们在时间中使用了Hystrix来实现断路器的功能。Hystrix是Netflix开源的微服务框架套件一直，该框架目标在于通过控制那些访问远程系统、服务和第三方库的节点，从而对延迟和故障提供更强大的容错能力。Hystrix具备拥有回退机制和断路器功能的线程和信号隔离，请求缓存和请求打包，以及监控和配置等功能。断路器的使用流程如下：启用断路器</li>
+</ul>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@SpringBootApplication</span></div><div class="line"><span class="meta">@EnableCircuitBreaker</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Application</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        SrpingApplication.run(DVoiceWebApplication.class, args);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>代用使用方式</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Component</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StoreIntegration</span> </span>&#123;</div><div class="line">    <span class="meta">@HystrixCommand</span>(fallbackMethod = <span class="string">"defaultStores"</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">getStore</span><span class="params">(Map&lt;String, Object&gt; parameters)</span> </span>&#123;</div><div class="line">        <span class="comment">// do stuff that might fail</span></div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">defaultStore</span><span class="params">(Map&lt;String, Object&gt; parameters)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="comment">/* something useful */</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>配置文件</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">#配置Hystrix</div><div class="line">hystrix:</div><div class="line">  command:</div><div class="line">    default:</div><div class="line">      fallback:</div><div class="line">        enabled: true</div><div class="line">      circuitBreaker:</div><div class="line">        enabled: true</div><div class="line">      metrics:</div><div class="line">        rollingPercentile.enabled: false</div><div class="line">      execution:</div><div class="line">        isolation:</div><div class="line">          strategy: SEMAPHORE</div><div class="line">          thread:</div><div class="line">            interrupteOnTimeout: true</div><div class="line">            timeoutInMilliseconds: 1200</div><div class="line">  threadpool:</div><div class="line">    default:</div><div class="line">      coreSize: 30</div></pre></td></tr></table></figure>
+<blockquote>
+<h2 id="资源控制实践"><a href="#资源控制实践" class="headerlink" title="资源控制实践"></a>资源控制实践</h2><p>聊到资源控制，估计很多小伙伴会想到Docker，Docker确实是一个实现资源控制很不错的解决方案，我们前期做调研时也对是否使用Docker进行了评审，但是最终还是选择放弃，而使用linux的libcgroup脚本控制，原因如下：</p>
+<ul>
+<li>Docker更加适合大内存做资源可控制、容器化，但是我们线上服务器一般都是32G左右，使用Docker会有资源浪费。</li>
+<li>使用Docker会使运维复杂、来自业务的压力会很大。<br>为什么要有cgroup? Linux系统中经常有个需求就是希望能限制某个或者偶写进程的分配资源。也就是能完成一组容器的概念，在这个容器中，有分配好的特定比例的cpu时间，IO时间，可用内存大小等等。于是就出现了cgroup的概念，cgroup就是controller group，最初由google的工程师提出，后来被整合进Linux内核中，Docker也是基于此来实现。libcgroup使用流程：安装</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install libcgroup</div></pre></td></tr></table></figure>
+<blockquote>
+<p>启动服务</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">service cgcnfig start</div></pre></td></tr></table></figure>
+<blockquote>
+<p>配置文件模板(以memory为例)：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">mout &#123;</div><div class="line">    cpu = /sys/fs//cgroup/cpu;</div><div class="line">    cpuacct = /sys/fs/cgroup/cpuacct;</div><div class="line">    devices = /sys/fs/cgroup/devices;</div><div class="line">    memory = /sys/fs/cgroup/memory;</div><div class="line">    freezer = /sys/fs/cgroup/freezer;   </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>看到memory子系统是挂载在目录/sys/fs/cgroup/memory下，进入这个目录创建一个文件夹，就创建了一个control group了。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mkdir test</div><div class="line">echo &quot;服务进程号&quot;&gt;&gt; task(tasks是test目录下的一个文件)</div></pre></td></tr></table></figure>
+<blockquote>
+<p>这样就当前这个终端进程加入到了内存限制的croup中了。</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/10/香农第二定理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Scott Du">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oueonj87a.bkt.clouddn.com/WechatIMG3.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="阿杜S考特">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/10/香农第二定理/" itemprop="url">香农第二定理在商业中的应用</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-10T10:24:13+08:00">
+                2017-08-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><strong>香农第二定理</strong></p>
+<blockquote>
+<p>有噪信道编码定理。当信道的信息传输率不超过信道容量时，采用合适的信道编码方法可以实现任意高的传输可靠性，但若信息传输率超过了信道容量，就不可能实现可靠的传输。<br>设某信道有$r$个输入符号，$s$个输出符号，信道容量为$C$，当信道的信息传输率$R&lt;C$，码长$N$足够长时，总可以在输入的集合中(含有$r^N$个长度为$N$的码符号序列)，找到$M$其中$M&lt;=2^{N(C-a)}$ ，$a$为任意小的正数)个码字，分别代表$M$个等可能性的消息，组成一个码以及相应的译码规则,使信道输出端的最小平均错误译码概率$P_{min}$达到任意小。</p>
+<p>$$C=B\cdot \log_{2}(1+\frac{S}{N})$$<br><em>注：$B$为<code>信道带宽</code>；$\frac{S}{N}$为<code>信噪比</code>，通常用分贝（dB）表示。</em></p>
+</blockquote>
+<p>虽然信息论最初是作为通信的理论出现的，但是今天它在管理上的应用和在通信上一样广泛。一些商业现象可以用信息论原理来解释。</p>
+<p>在聊香农第二定理之前，我们先来聊一聊早期通信发展史上的一个故事。在20世纪40年代之前，电视还没有兴起，收音机是大家获得新闻和享受娱乐的主要方式。由于节目的频道越来越多，因此频道之间的距离越来越近。比如原来从900千赫兹到1600千赫兹之间有10个电台，均匀分布，每个频道之间的距离为70千赫兹，如果一下子增加到100个电台，频道之间的距离只剩下7千赫兹了。这时大家发现不同电台之间会互相干扰。</p>
+<p>当时无线电专家们的想法是，如果能把频率调得更准一点，不就能不再相互干扰了吗？于是工程师们努力了很长时间，后来他们发现不论自己怎么努力调准频率，噪音都难以消除，但是没有人知道为什么。</p>
+<p>解决这个问题的是香农，他用熵的概念将信息量化后，也从理论上给出了无线电两个频率之间能够传输的信息速率上限，这个上限被称为带宽。香农指出，如果传输信息的速率不超过这个带宽，你总能找到一个方法，让这些信息都传出去而且不出错，但是如果传输的速率达到或者超过带宽，不论你用什么样的编码方法，信息传输的错误率一定是100%。这就是香农第二定理。</p>
+<p>对于这个定理，经历过中国互联网发展过程的读者应该都有亲身体会。在最早期拨号上网时，大家只能看邮件，如果你想打开一个网页，不仅等待时间非常长，而且浏览器经常就卡死在那里了。为什么会是这样呢，因为拨号上网带宽太窄（不超过56K），传输速度只要快一点，就会出错，然后就需要重新传输，当然可能再出错，于是就陷入了“传输－出错－重传－再出错”的怪圈，最后把浏览器搞死。</p>
+<p>到了DSL（数字用户线路）上网时，我们浏览网页就很流畅了，但是看视频还是有问题，原因就是香农第二定理的限制。同样的道理，我们在宽带网络上网时可以看视频，在光纤入户时可以看高清。也就是说，有多少带宽，就可以多快地传输数据。</p>
+<p>虽然在过去的20年里，无线上网的速度增加了很多，但是它却并不能够无限制增长，因为在空中，无线电波的频率是有范围的，而这个频率的范围决定了总的带宽。如果一个地区上网的人多了，每个人能够分配到的带宽就很有限，不管怎样改进技术，上网的速度都无法突破香农第二定理所给的极限。很多人以为有了3G、4G、5G和未来的6G，无线上网能够像光纤一样快，那是不切实际的。</p>
+<p>接下来我们聊聊这个定理在商业上的应用。我们总是讲，有多少人脉做多大生意，这个人脉其实就是带宽。如果一个商人能够有几个商业伙伴，而另一个商人有几十个同样水平的商业伙伴，那么后者的生意就会比前者大。在当今社会，同一个时代几个公司，彼此产品在质量上没有太大的区别，人脉常常决定了生意的成败。</p>
+<p>每一次工业革命都伴随着通信的革命，也就给商人们拓宽做生意的带宽提供了条件。在农耕文明时代，假如有一个浙江湖州的小工匠，做毛笔做得很好，知道这件事的只有他周围的一些朋友和文人墨客，这就是他的人脉。这些人或许会帮他去宣传，这样经过口口相传，几年后他的生意可能会做到整个杭州，经过他一辈子的努力，如果运气好，他的生意可以做到上海。当然，大部分人没有这样的运气。农耕文明时代的这种商业模式使得中间商人要赚取大部分利润，因为带宽（人脉）的限制，他们传播的成本特别高。</p>
+<p>到了工业时代，伴随着第一次工业革命和第二次工业革命，商业媒体和广告业开始出现。一个工厂的产品信息可以比较快地、以比较低的成本传播出去，也就是说，传播的带宽增加了很多。产品推广的速度大大增加。再加上工业化生产带来了产品的同质性，这样品牌的推广既是可能的，也是必要的。这样的结果是垄断的出现和全球品牌的诞生。</p>
+<p>在电话、无线电和电视出现后，全世界通信的带宽进一步增加，这使得一个国家的产品有可能卖到全世界。由此可以看出带宽对商业的重要性。当然，由于电视这样的传播手段带宽成本较高，因此真正能够销售到全球的只有比较大的公司的产品。相比之下，局限在一个地域的收音机和报纸的带宽成本较低，本地的一些商业要靠它们推广。因此，在电视时代，你可以看到上海和广东生产的产品向湖州这些小地方推广。但是，小地方生产的商品虽然传播到大城市比农业时代快得多，但是依然很难做生意。</p>
+<p>到了互联网时代，人类第一次有了廉价的、能够触达全世界的带宽，使得电子商务能够快速发展。淘宝从本质上讲，就是拓宽了商业的带宽。一方面，一个偏远地区的小企业甚至个体制造业的产品，可以大量地卖到全国，甚至世界各地。另一方面，对于消费者来讲，他们接受商品信息的带宽也大大地拓宽了。在农业时代，他们只能获得当地的商品信息和购买本地生产的产品，但是到了互联网时代，一个小村子里的人也有了从全国各地挑选自己中意的商品的可能性。正是由于掌握了商业上的带宽，淘宝才变得那样值钱。</p>
+<p>我们今天常常讲互联网思维，其本质就是控制带宽和利用带宽。今天无论是滴滴打车还是Uber都不拥有一辆汽车，但是生意却超过任何出租车公司。在线房屋租赁公司爱彼迎（Airbnb）不拥有一个酒店，但是业务却比全世界最大的酒店集团还要大。这里面的原因就是他们拥有了商业的带宽。这也应验了那句俗话，有多大的人脉，做多大的生意。而在商业上，人脉和带宽是划等号的。</p>
+<p>讲到这里，你可能已经明白我的用意了，我们今天做任何事情，都要努力拓展带宽，因为根据香农的理论，带宽永远是通信量的瓶颈。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/09/2017-5-毛里求斯/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -370,6 +1402,158 @@
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/10/雪莱和叶芝的诗/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Scott Du">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oueonj87a.bkt.clouddn.com/WechatIMG3.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="阿杜S考特">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/07/10/雪莱和叶芝的诗/" itemprop="url">雪莱和叶芝的诗</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-10T15:10:53+08:00">
+                2017-07-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>雪莱这个名字大家应该都不陌生，要理解英语的美妙就要读雪莱的诗，这就如同要理解中文的美妙就要读李白杜甫等人的诗一样。雪莱只活了30岁，但是在英国文坛的地位却很高。他应该算是莎士比亚之后诗坛的三杰之一，另外两个人是拜伦和济慈，但很遗憾他们两人活得也都不长。</p>
+<p>在威斯敏斯特教堂内有英国国王们和先贤们的墓地和衣冠冢，其中最著名的就是以牛顿墓为中心的科学家基地，以及以莎士比亚衣冠冢为中心的文学家墓地，在哪里，雪莱和济慈守候在莎士比亚身旁。</p>
+<p>中国人熟悉雪莱大抵是因为《西风颂》，里面有“冬天来了，春天还会远吗？”这个名句。他最重要的诗歌是长诗《解放了的普罗米修斯》，在这首诗中，雪莱表达了自己反抗暴政的思想。不过我最喜欢的是他的小诗《致——》，查良铮的翻译也很美妙：</p>
+<blockquote>
+<p><strong>音乐，虽然消失了柔声，<br>却仍旧在记忆力颤动——<br>芬芳，虽然早谢了紫罗兰，<br>却也留存在它所刺激的感官。</strong></p>
+<p><strong>玫瑰花，当她的花时尽了，<br>用落红为她的所爱铺成棉床；<br>对你的思念也如此，待你远行了，<br>爱情就枕着思念进入梦乡。</strong></p>
+</blockquote>
+<p>如果你能静下心来读英文的原文，会惊讶于它的美感：</p>
+<blockquote>
+<p><strong>Music, when soft voices die,<br>Vibrates in the memory<br>Odours, when sweet violets sicken,<br>Live within the sense they quicken.</strong></p>
+<p><strong>Rose leaves, when the rose is dead,<br>Are heap’d for the beloved’s bed;<br>And so thy thoughts, when thou art gone,<br>Love itself shall slumber on.</strong></p>
+</blockquote>
+<p>雪莱另一首让我感动的是他的十六行诗，诗名也是《致——》，中文翻译如下，原文附在最后。</p>
+<blockquote>
+<p><strong>有一个字经常被人亵渎<br>我不会再来亵渎<br>有一种感情被人假意鄙薄<br>你也不会再来鄙薄<br>有一种希望太似绝望<br>何须再加堤防<br>你的怜悯之情无人能比<br>温暖着我的心</strong></p>
+<p><strong>我不能给你人们所谓的爱情<br>但不知你能否接受<br>这颗心对你的仰慕之情<br>连上天也不会拒绝<br>犹如飞蛾扑向星星<br>又犹如黑夜追求黎明<br>这种思慕之情<br>早已跳出了人间苦境</strong></p>
+</blockquote>
+<p>提到雪莱，就要讲讲受到他影响很深的爱尔兰诗人叶芝了，他是爱尔兰凯尔特复兴运动的领袖。在一篇关于雪莱的文章中叶芝写道：“我重读了《解放了的普罗米修斯》。在世界上的所有伟大著作中，它在我心里的地位比我预想的还要高得多。”叶芝在中国读者心中非常有名的一首诗是《当你老了》。翻译如下：</p>
+<blockquote>
+<p><strong>当你老了，头白了，睡意昏沉<br>炉火旁打盹，请取下这部诗歌慢慢读，<br>回想你过去眼神的柔和<br>回想它们昔日浓重的阴影</strong></p>
+<p><strong>多少人爱你青春欢畅的时辰<br>爱慕你的美丽，假意或真心<br>只有一个人爱你那朝圣者的灵魂<br>爱你衰老了的脸上痛苦的皱纹</strong></p>
+<p><strong>垂下头来，在红光闪耀的路子旁<br>凄然地轻轻诉说那爱情的消逝<br>在头顶的山上它缓缓踱着步子<br>在一群星星中间隐藏这脸庞</strong></p>
+</blockquote>
+<p>附录：诗原文</p>
+<blockquote>
+<p>To<br>——Shelley</p>
+<p>On word is too often profaned<br>For me to profane it,<br>One feeling too falsely disdained<br>For thee to disdain it;<br>One hope is too like despair<br>For prudence to smother,<br>And pity from thee more dear<br>Than that from another.</p>
+<p>I can give not what men call love,<br>But wilt thou accept not<br>The worship the heart lifts above<br>And the Heavens reject not,<br>The desire of the moth for the star,<br>Of the night for the morrow,<br>The devotion to something afar<br>From the sphere of our sorrow?</p>
+<p>When you are old<br>——Yeats</p>
+<p>When you are old and grey and full of sleep,<br>And nodding by the fire, take down this book,<br>And slowly read, and dream of the soft look<br>Your eyes had once, and of their shadows deep;</p>
+<p>How many loved your moments of glad grace,<br>And loved your beauty with love false or true,<br>But one man loved the pilgrim soul in you,<br>And loved the sorrows of your changing face;</p>
+<p>And bending down beside the glowing bars,<br>Murmur, a little sadly, how Love fled<br>And paced upon the mountains overhead<br>And hid his face amid a crowd of stars.</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
@@ -416,7 +1600,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -428,10 +1612,10 @@
             
             
             <div class="site-state-item site-state-tags">
-              <a href="/tags/index.html">
-                <span class="site-state-item-count">1</span>
+              
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">标签</span>
-              </a>
+              
             </div>
           
 
