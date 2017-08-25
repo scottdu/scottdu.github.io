@@ -94,18 +94,18 @@
 
 
 
-<meta name="description" content="前言 前段时间有幸看到青哥写的Nodejs代码的影响，据说这货在默认的情况下性能很牛逼，主要在于nodejs默认都是单线程异步执行的。作为一个长时间写Java代码的人来说，直接下node还真不习惯，主要不习惯的一点就是，如果你要在node里写一段顺序执行的串行代码，可能会踩坑。废话不多说了，关于ES6的理论和规范可以参考阮一峰的《ECMAScript 6 入门》，http://es6.ruanyi">
+<meta name="description" content="前言 前段时间有幸看到青哥写的Nodejs代码的影响，据说这货在默认的情况下性能很牛逼，主要在于nodejs默认都是单线程异步执行的。作为一个长时间写Java代码的人来说，直接写node还真不习惯，主要不习惯的一点就是，如果你要在node里写一段顺序执行的串行代码，可能会踩坑。废话不多说了，关于ES6的理论和规范可以参考阮一峰的《ECMAScript 6 入门》，http://es6.ruanyi">
 <meta name="keywords" content="技术">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ECMAScript6异步操作">
 <meta property="og:url" content="http://yoursite.com/2017/08/25/nodejs-promise/index.html">
 <meta property="og:site_name" content="阿杜S考特">
-<meta property="og:description" content="前言 前段时间有幸看到青哥写的Nodejs代码的影响，据说这货在默认的情况下性能很牛逼，主要在于nodejs默认都是单线程异步执行的。作为一个长时间写Java代码的人来说，直接下node还真不习惯，主要不习惯的一点就是，如果你要在node里写一段顺序执行的串行代码，可能会踩坑。废话不多说了，关于ES6的理论和规范可以参考阮一峰的《ECMAScript 6 入门》，http://es6.ruanyi">
+<meta property="og:description" content="前言 前段时间有幸看到青哥写的Nodejs代码的影响，据说这货在默认的情况下性能很牛逼，主要在于nodejs默认都是单线程异步执行的。作为一个长时间写Java代码的人来说，直接写node还真不习惯，主要不习惯的一点就是，如果你要在node里写一段顺序执行的串行代码，可能会踩坑。废话不多说了，关于ES6的理论和规范可以参考阮一峰的《ECMAScript 6 入门》，http://es6.ruanyi">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-08-25T08:34:31.000Z">
+<meta property="og:updated_time" content="2017-08-25T08:39:17.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ECMAScript6异步操作">
-<meta name="twitter:description" content="前言 前段时间有幸看到青哥写的Nodejs代码的影响，据说这货在默认的情况下性能很牛逼，主要在于nodejs默认都是单线程异步执行的。作为一个长时间写Java代码的人来说，直接下node还真不习惯，主要不习惯的一点就是，如果你要在node里写一段顺序执行的串行代码，可能会踩坑。废话不多说了，关于ES6的理论和规范可以参考阮一峰的《ECMAScript 6 入门》，http://es6.ruanyi">
+<meta name="twitter:description" content="前言 前段时间有幸看到青哥写的Nodejs代码的影响，据说这货在默认的情况下性能很牛逼，主要在于nodejs默认都是单线程异步执行的。作为一个长时间写Java代码的人来说，直接写node还真不习惯，主要不习惯的一点就是，如果你要在node里写一段顺序执行的串行代码，可能会踩坑。废话不多说了，关于ES6的理论和规范可以参考阮一峰的《ECMAScript 6 入门》，http://es6.ruanyi">
 
 
 
@@ -325,7 +325,7 @@
 
       
         <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
-<p>前段时间有幸看到青哥写的Nodejs代码的影响，据说这货在默认的情况下性能很牛逼，主要在于nodejs默认都是单线程异步执行的。作为一个长时间写Java代码的人来说，直接下node还真不习惯，主要不习惯的一点就是，如果你要在node里写一段顺序执行的串行代码，可能会踩坑。废话不多说了，关于ES6的理论和规范可以参考<code>阮一峰</code>的《ECMAScript 6 入门》，<a href="http://es6.ruanyifeng.com/" target="_blank" rel="external">http://es6.ruanyifeng.com/</a></p>
+<p>前段时间有幸看到青哥写的Nodejs代码的影响，据说这货在默认的情况下性能很牛逼，主要在于nodejs默认都是单线程异步执行的。作为一个长时间写Java代码的人来说，直接写node还真不习惯，主要不习惯的一点就是，如果你要在node里写一段顺序执行的串行代码，可能会踩坑。废话不多说了，关于ES6的理论和规范可以参考<code>阮一峰</code>的《ECMAScript 6 入门》，<a href="http://es6.ruanyifeng.com/" target="_blank" rel="external">http://es6.ruanyifeng.com/</a></p>
 </blockquote>
 <h2 id="Demo-1"><a href="#Demo-1" class="headerlink" title="Demo 1"></a>Demo 1</h2><h3 id="要求每隔一秒输出一个累加的算式"><a href="#要求每隔一秒输出一个累加的算式" class="headerlink" title="要求每隔一秒输出一个累加的算式"></a>要求每隔一秒输出一个累加的算式</h3><blockquote>
 <p>计算1+2+3+4+5=15</p>
