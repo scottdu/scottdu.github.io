@@ -7,7 +7,7 @@
 
 <html class="theme-next pisces use-motion" lang="zh-Hans">
 <head>
-  <meta charset="UTF-8"/>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
@@ -140,7 +140,7 @@
 
 
 
-  <title>香农第二定理在商业中的应用 | 阿杜S考特</title>
+  <title>香农第二定理在商业中的应用 | 阿杜S考特</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -159,7 +159,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail ">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -327,7 +327,7 @@
         <p><strong>香农第二定理</strong></p>
 <blockquote>
 <p>有噪信道编码定理。当信道的信息传输率不超过信道容量时，采用合适的信道编码方法可以实现任意高的传输可靠性，但若信息传输率超过了信道容量，就不可能实现可靠的传输。<br>设某信道有$r$个输入符号，$s$个输出符号，信道容量为$C$，当信道的信息传输率$R&lt;C$，码长$N$足够长时，总可以在输入的集合中(含有$r^N$个长度为$N$的码符号序列)，找到$M$其中$M&lt;=2^{N(C-a)}$ ，$a$为任意小的正数)个码字，分别代表$M$个等可能性的消息，组成一个码以及相应的译码规则,使信道输出端的最小平均错误译码概率$P_{min}$达到任意小。</p>
-<p>$$C=B\cdot \log_{2}(1+\frac{S}{N})$$<br><em>注：$B$为<code>信道带宽</code>；$\frac{S}{N}$为<code>信噪比</code>，通常用分贝（dB）表示。</em></p>
+<script type="math/tex; mode=display">C=B\cdot \log_{2}(1+\frac{S}{N})</script><p><em>注：$B$为<code>信道带宽</code>；$\frac{S}{N}$为<code>信噪比</code>，通常用分贝（dB）表示。</em></p>
 </blockquote>
 <p>虽然信息论最初是作为通信的理论出现的，但是今天它在管理上的应用和在通信上一样广泛。一些商业现象可以用信息论原理来解释。</p>
 <p>在聊香农第二定理之前，我们先来聊一聊早期通信发展史上的一个故事。在20世纪40年代之前，电视还没有兴起，收音机是大家获得新闻和享受娱乐的主要方式。由于节目的频道越来越多，因此频道之间的距离越来越近。比如原来从900千赫兹到1600千赫兹之间有10个电台，均匀分布，每个频道之间的距离为70千赫兹，如果一下子增加到100个电台，频道之间的距离只剩下7千赫兹了。这时大家发现不同电台之间会互相干扰。</p>
@@ -453,7 +453,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -466,7 +466,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -508,7 +508,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -625,7 +625,24 @@
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 
 

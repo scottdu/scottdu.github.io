@@ -7,7 +7,7 @@
 
 <html class="theme-next pisces use-motion" lang="zh-Hans">
 <head>
-  <meta charset="UTF-8"/>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
@@ -94,18 +94,14 @@
 
 
 
-<meta name="description" content="转自：七夜 背景 随着公司业务量的飞速发展，平台面临的挑战已经远远大于业务，需求量不断增加，技术人员数量增加，面临的复杂度也大大增加。在这样的场景下，平台的技术架构也完成了从传统的单体架构到微服务架构的演进。    系统架构的演进过程 单一应用架构（第一代架构）这是平台最开始的情况，当时流量小，为了节约成本，并将所有应用都打包放到一个应用里面，采用的架构为.net+sqlserver 表示层：位于">
+<meta name="description" content="转自：七夜 背景 随着公司业务量的飞速发展，平台面临的挑战已经远远大于业务，需求量不断增加，技术人员数量增加，面临的复杂度也大大增加。在这样的场景下，平台的技术架构也完成了从传统的单体架构到微服务架构的演进。  ![屏幕快照 2017-08-11 10.12.53](http://oueonj87a.bkt.clouddn.com/屏幕快照 2017-08-11 10.12.53.png)">
 <meta name="keywords" content="技术">
 <meta property="og:type" content="article">
 <meta property="og:title" content="基于Spring Cloud的微服务架构实践">
 <meta property="og:url" content="http://yoursite.com/2017/08/11/springcloud-microservice/index.html">
 <meta property="og:site_name" content="阿杜S考特">
-<meta property="og:description" content="转自：七夜 背景 随着公司业务量的飞速发展，平台面临的挑战已经远远大于业务，需求量不断增加，技术人员数量增加，面临的复杂度也大大增加。在这样的场景下，平台的技术架构也完成了从传统的单体架构到微服务架构的演进。    系统架构的演进过程 单一应用架构（第一代架构）这是平台最开始的情况，当时流量小，为了节约成本，并将所有应用都打包放到一个应用里面，采用的架构为.net+sqlserver 表示层：位于">
+<meta property="og:description" content="转自：七夜 背景 随着公司业务量的飞速发展，平台面临的挑战已经远远大于业务，需求量不断增加，技术人员数量增加，面临的复杂度也大大增加。在这样的场景下，平台的技术架构也完成了从传统的单体架构到微服务架构的演进。  ![屏幕快照 2017-08-11 10.12.53](http://oueonj87a.bkt.clouddn.com/屏幕快照 2017-08-11 10.12.53.png)">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://oueonj87a.bkt.clouddn.com/屏幕快照 2017-08-11 10.12.53.png">
-<meta property="og:image" content="http://oueonj87a.bkt.clouddn.com/屏幕快照 2017-08-11 10.18.41.png">
-<meta property="og:image" content="http://oueonj87a.bkt.clouddn.com/屏幕快照 2017-08-11 11.02.33.png">
-<meta property="og:image" content="http://oueonj87a.bkt.clouddn.com/屏幕快照 2017-08-11 11.22.55.png">
 <meta property="og:image" content="http://oueonj87a.bkt.clouddn.com/屏幕快照 2017-08-11 11.58.14.png">
 <meta property="og:image" content="http://oueonj87a.bkt.clouddn.com/屏幕快照 2017-08-11 12.02.48.png">
 <meta property="og:image" content="http://oueonj87a.bkt.clouddn.com/屏幕快照 2017-08-11 12.04.07.png">
@@ -121,8 +117,8 @@
 <meta property="og:updated_time" content="2017-08-25T06:04:16.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基于Spring Cloud的微服务架构实践">
-<meta name="twitter:description" content="转自：七夜 背景 随着公司业务量的飞速发展，平台面临的挑战已经远远大于业务，需求量不断增加，技术人员数量增加，面临的复杂度也大大增加。在这样的场景下，平台的技术架构也完成了从传统的单体架构到微服务架构的演进。    系统架构的演进过程 单一应用架构（第一代架构）这是平台最开始的情况，当时流量小，为了节约成本，并将所有应用都打包放到一个应用里面，采用的架构为.net+sqlserver 表示层：位于">
-<meta name="twitter:image" content="http://oueonj87a.bkt.clouddn.com/屏幕快照 2017-08-11 10.12.53.png">
+<meta name="twitter:description" content="转自：七夜 背景 随着公司业务量的飞速发展，平台面临的挑战已经远远大于业务，需求量不断增加，技术人员数量增加，面临的复杂度也大大增加。在这样的场景下，平台的技术架构也完成了从传统的单体架构到微服务架构的演进。  ![屏幕快照 2017-08-11 10.12.53](http://oueonj87a.bkt.clouddn.com/屏幕快照 2017-08-11 10.12.53.png)">
+<meta name="twitter:image" content="http://oueonj87a.bkt.clouddn.com/屏幕快照 2017-08-11 11.58.14.png">
 
 
 
@@ -157,7 +153,7 @@
 
 
 
-  <title>基于Spring Cloud的微服务架构实践 | 阿杜S考特</title>
+  <title>基于Spring Cloud的微服务架构实践 | 阿杜S考特</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -176,7 +172,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail ">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -341,15 +337,19 @@
       
 
       
-        <p>转自：<a href="http://gitbook.cn/thanks/orz.html#http://gitbook.cn/m/mazi/author/58def091507b3b4c285a5695" target="_blank" rel="external">七夜</a></p>
+        <p>转自：<a href="http://gitbook.cn/thanks/orz.html#http://gitbook.cn/m/mazi/author/58def091507b3b4c285a5695" target="_blank" rel="noopener">七夜</a></p>
 <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><blockquote>
 <p>随着公司业务量的飞速发展，平台面临的挑战已经远远大于业务，需求量不断增加，技术人员数量增加，面临的复杂度也大大增加。在这样的场景下，平台的技术架构也完成了从传统的单体架构到微服务架构的演进。</p>
-<div align="center"><br><img src="http://oueonj87a.bkt.clouddn.com/屏幕快照 2017-08-11 10.12.53.png" alt="屏幕快照 2017-08-11 10.12.53"><br></div>
+<div align="center">
+![屏幕快照 2017-08-11 10.12.53](http://oueonj87a.bkt.clouddn.com/屏幕快照 2017-08-11 10.12.53.png)
+</div>
 
 </blockquote>
 <h1 id="系统架构的演进过程"><a href="#系统架构的演进过程" class="headerlink" title="系统架构的演进过程"></a>系统架构的演进过程</h1><blockquote>
 <h2 id="单一应用架构（第一代架构）"><a href="#单一应用架构（第一代架构）" class="headerlink" title="单一应用架构（第一代架构）"></a>单一应用架构（第一代架构）</h2><p>这是平台最开始的情况，当时流量小，为了节约成本，并将所有应用都打包放到一个应用里面，采用的架构为.net+sqlserver</p>
-<p><div align="center"><br><img src="http://oueonj87a.bkt.clouddn.com/屏幕快照 2017-08-11 10.18.41.png" alt="屏幕快照 2017-08-11 10.18.41"><br></div><br><strong>表示层</strong>：位于最外层（最上层），最接近用户。用于显示数据和接收用户输入的数据，为用户提供一种交互式操作的界面，平台所使用的是基于.net的web形式。<br><strong>业务逻辑层（Business Logic Layer）</strong>：无疑是系统架构中体现核心价值的部分。它的关注点主要集中在业务规则的定制、业务流程的实现等与业务需求有关的系统设计，也即是说它是与系统所应对的<code>领域(domain)</code>逻辑有关，很多时候，也将业务逻辑层称为领域层。业务逻辑层在体系架构中的位置很关键，它处于数据访问层与表示层中间，起到了数据交换中承上启下的作用。由于层是一种弱耦合结构，层与层之间的依赖是向下的，底层对于上层而言是“无知”的，改变上层的设计对于其调用的底层而言没有任何影响。如果在分层设计时，遵循了面向接口设计的思想，那么这种向下的依赖也应该是一种弱依赖关系。对于数据访问层而言，它是调用者；对于表示层而言，它却是被调用者。<br><strong>数据层</strong>数据访问层：有时候也称为是持久层，其功能主要是负责数据库的访问，可以访问数据库系统、二进制文件、文本文档或者是XML文档等等，平台在这个阶段使用的是hibernate.net+sqlserver。</p>
+<p><div align="center">
+![屏幕快照 2017-08-11 10.18.41](http://oueonj87a.bkt.clouddn.com/屏幕快照 2017-08-11 10.18.41.png)
+</div><br><strong>表示层</strong>：位于最外层（最上层），最接近用户。用于显示数据和接收用户输入的数据，为用户提供一种交互式操作的界面，平台所使用的是基于.net的web形式。<br><strong>业务逻辑层（Business Logic Layer）</strong>：无疑是系统架构中体现核心价值的部分。它的关注点主要集中在业务规则的定制、业务流程的实现等与业务需求有关的系统设计，也即是说它是与系统所应对的<code>领域(domain)</code>逻辑有关，很多时候，也将业务逻辑层称为领域层。业务逻辑层在体系架构中的位置很关键，它处于数据访问层与表示层中间，起到了数据交换中承上启下的作用。由于层是一种弱耦合结构，层与层之间的依赖是向下的，底层对于上层而言是“无知”的，改变上层的设计对于其调用的底层而言没有任何影响。如果在分层设计时，遵循了面向接口设计的思想，那么这种向下的依赖也应该是一种弱依赖关系。对于数据访问层而言，它是调用者；对于表示层而言，它却是被调用者。<br><strong>数据层</strong>数据访问层：有时候也称为是持久层，其功能主要是负责数据库的访问，可以访问数据库系统、二进制文件、文本文档或者是XML文档等等，平台在这个阶段使用的是hibernate.net+sqlserver。</p>
 </blockquote>
 <p>第一代架构看似很简单，却支撑了平台的早期业务发展，满足了网站用户访问量在几万规模的处理需求。但是当用户访问量呈现大规模增长，问题就暴露出来了：</p>
 <blockquote>
@@ -360,7 +360,9 @@
 <li><strong><em>新人培训周期变长</em></strong>：随着应用程序的功能越来越多，代码变得越来越复杂的同时，对于新加入团队的成员而言，了解业务背景、熟悉应用程序、配置本地开发环境，这些看似简单的任务，却会花费更长的时间。</li>
 </ul>
 <h2 id="垂直应用架构（第二代架构）"><a href="#垂直应用架构（第二代架构）" class="headerlink" title="垂直应用架构（第二代架构）"></a>垂直应用架构（第二代架构）</h2><p>为了解决第一代架构面临的问题，团队制定了如下的策略，并形成了第二代应用架构（垂直应用架构）</p>
-<div align="center"><br><img src="http://oueonj87a.bkt.clouddn.com/屏幕快照 2017-08-11 11.02.33.png" alt="屏幕快照 2017-08-11 11.02.33"><br></div>
+<div align="center">
+![屏幕快照 2017-08-11 11.02.33](http://oueonj87a.bkt.clouddn.com/屏幕快照 2017-08-11 11.02.33.png)
+</div>
 
 <ul>
 <li>应用拆成独立的应用模块。</li>
@@ -389,7 +391,9 @@
 <li>数据库按服务分库分表。</li>
 <li>大量使用缓存，提高访问。</li>
 <li>系统间交互使用轻量级的<code>rest</code>协议，摒弃<code>RPC</code>协议。</li>
-<li>去.net化，开发语言使用<code>java</code>来实现。并依此为基础进行了平台的第三代架构的重构工作。<br><div align="center"><br><img src="http://oueonj87a.bkt.clouddn.com/屏幕快照 2017-08-11 11.22.55.png" alt="屏幕快照 2017-08-11 11.22.55"><br></div><br>看第三代架构里面的组成，主要分为八个部分：</li>
+<li>去.net化，开发语言使用<code>java</code>来实现。并依此为基础进行了平台的第三代架构的重构工作。<br><div align="center"> 
+![屏幕快照 2017-08-11 11.22.55](http://oueonj87a.bkt.clouddn.com/屏幕快照 2017-08-11 11.22.55.png)
+</div><br>看第三代架构里面的组成，主要分为八个部分：</li>
 <li>CDN: CDN系统负责实时地根据网络流量和各个节点的连接、负载状况以及到用户的距离和响应时间等综合信息将用户的请求重新导向离用户最近的服务节点上。其目的是使用户可就近取得所需内容，解决Internet网络拥挤的状况，提高用户访问网站的响应速度。平台在选择CDN厂商时，需要考虑经营时间长短，是否有可扩充的贷款资源、灵活的流量和带宽选择、稳定的节点、性价比；综合前面几个因素平台采用了七牛的CDN服务。</li>
 <li>LB层：平台包括很多个业务域，不同的业务域有不同的集群，LB层（Load Balancer）是对多台业务服务器进行流量分发的负载均衡服务，通过流量分发扩展应用系统对外的服务能力，并消除单点故障提升了应用系统的可用性。选择哪种负载，需要综合考虑各种因素（是否满足高并发高性能，Session保持如何解决，负载均衡的算法如何，支持压缩，缓存的内存消耗），主要分为以下两种：LVS：工作在4层，Linux实现的高性能高并发、可伸缩性、可靠的负载均衡器，支持多种转发方式(NAT、DR、IP Tunneling)，其中DR模式支持通过广域网进行负载均衡。支持双击热备（Keepalived或者Heartbeat）。对网络环境的依赖性比较高。Nigix：工作在7层，事件驱动的、异步非阻塞的架构、支持对进程的高并发的负载均衡器/反向代理软件。可以针对域名、目录结构、正则规则针对http做一些分流。通过端口检测到服务器内部的故障，比如根据服务器处理网页返回的状态码、超时等等，并且会把返回错误的请求重新提交到另一个节点，不过其中缺点就是不支持url来检测。对于session sticky，我们通过基于cookie的扩展ngix-sticky-module来实现。这种也是平台目前所采用的方案。</li>
 <li>业务层：代表平台某一领域的业务提供的服务，对于平台而言，有商品、会员、直播、订单、财务、论坛等系统，不同的系统提供不同的领域服务。</li>
@@ -421,6 +425,7 @@
 <li>团队自主原则：团队越大，沟通与协助成本就会越高，我们在实践中一个团队不会超过8个人，团队内全栈，是一个全功能团队。</li>
 <li>先分数据库、后分服务：数据模型能否彻底分开，决定了微服务的边界功能是否彻底划清，实践中我们先讨论数据模型边界，数据模型的边界映射了业务的边界，进而从底向上完成服务拆分。<h2 id="如何搭建微服务架构"><a href="#如何搭建微服务架构" class="headerlink" title="如何搭建微服务架构"></a>如何搭建微服务架构</h2>为了搭建好微服务架构，技术选型是一个非常重要的阶段，只有选择合适的“演员”，才能把这台戏演好。<br><img src="http://oueonj87a.bkt.clouddn.com/屏幕快照 2017-08-11 12.45.54.png" alt="屏幕快照 2017-08-11 12.45.54"><br>我们使用Spring Cloud作为微服务开发框架，Spring Boot拥有嵌入式Tomcat，可直接运行一个jar包来发布微服务，此外它还提供了一系列“开箱即用”的插件，例如：配置中心，服务注册与发现，熔断器，路由，代理，控制总线，一次性令牌，全局锁，leader选举，分布式会话，集群状态等，可大量提高我们的开发效率。</li>
 </ul>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -467,6 +472,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <h2 id="工程结构规范"><a href="#工程结构规范" class="headerlink" title="工程结构规范"></a>工程结构规范</h2><p><img src="http://oueonj87a.bkt.clouddn.com/图片 1.png" alt="图片 1"><br>上图是我们实践中每个服务应该具有的项目组成结构。</p>
 <ol>
 <li>微服务名+service: 为对内其它微服务提供服务调用。服务名+api模块为服务间定义的接口规范，使用swagger+rest接口定义。服务名+server模块包含了能直接启动该服务的应用与配置。</li>
@@ -477,21 +483,21 @@
 <li>应用层方案最有名的当然是Netflix的zuul，但这不意味着这种方案就最合适，比如netflix是因为使用AWS，对基础设施把控有限，所以才不得不在应用层做了zuul这样的方案，如果通盘考虑，这种方案不是最合适的方案。但是如果自己的团队对整体技术设施把控有限，且团队结构不完善，应用层方案也可能是最合适你的最佳方案。</li>
 <li>ngix+lua方案也是我们采用并认为最合适的方案，OpenResty和Kong是比较成熟的可选方案，不过Kong使用Postgres或者Cassandra，国内公司估计选择这两货的不多，但Kong的HTTP API设计还是很不错的。</li>
 <li>我们的方案使用ngix+lua+consul组合方案，虽然我们团队大多是java，选择zookeeper会是更加自然的选择，但是作为欣锐派，对压测结果进行了分析，我们最终选择使用consul。良好的HTTP API支持，可以动态管理upstream，这也意味着我们可以通过发布平台或者胶水系统无缝的实现服务注册和发现，对服务的访问方透明。<br><img src="http://oueonj87a.bkt.clouddn.com/图片 3.png" alt="图片 3"><br>在以上的方案中：consul作为状态处处或者配置中心（主要使用consul的KV存储功能）；ngix作为API网关，根据consul中upstreams的相关配置，动态分发流量到配置的upstreams节点；ngix根据配置项，连接到consul集群；启动的API或者微服务实例，通过手工/命令行/发布部署平台，将实例信息注册/写入consul；ngix获取到相应的upstreams信息更新，则动态变更ngix内部的upstreams分发配置，从而将流量路由和分发到对应的API和微服务实例结点；将以上注册和发现逻辑通过脚本或统一的发布部署平台固化后，就可以实现透明的服务访问和扩展。<strong>链路监控实践：</strong>我们发现，以前在单体应用下的日志监控很简单，在微服务架构下却成为了一个大问题，如果无法跟踪业务流，无法定位问题，在复杂的微服务交互关系中，我们就会非常被动，此时分布式链路监控应运而生，其核心就是调用链。通过一个全局的ID将分布在各个服务节点上同一次请求串联起来，还原原有的调用关系、追踪系统问题、分析调用数据、统计系统指标。<br>分布式链路跟踪最早见于2010年Google发表的一篇论文《dapper》。那么我们先来看一下什么是调用链，调用链其实就是将一次分布式请求还原成调用链路。显示的在后端查看一次分布式请求的调用情况，比如各个节点上的耗时、请求具体到了哪台机器上、每个服务节点的请求状态，等等。它能反映出一次请求中经理了多少个服务层级等信息（比如你的系统A调用B，B调用C，那么这次请求的层级就是3），如果你发现有些请求层级大于10，那么这个服务很有可能需要优化了。常见的解决方案有：</li>
-<li>Pinpoint<br>github地址：<a href="https://github.com/naver/pinpoint" target="_blank" rel="external">https://github.com/naver/pinpoint</a><br>Pinpint is an open source APM(Application Performance Management) tool for large-scale distributed systems written in Java.<br>对APM有兴趣的朋友都应该看看这个开源项目，这是一个韩国团队开源出来的，通过JavaAgent的机制来做字节码代码植入（探针），实现加入traceid和抓取性能数据的目的。<br>NewRelic、Oneapm之类的工具在java平台上的性能分析也是类似的机制。</li>
-<li>Zipkin<br>官网：OpenZipkin(A distributed tracing system) <a href="http://zipkin.io/" target="_blank" rel="external">http://zipkin.io/</a><br>github地址：<a href="https://github.com/openzipkin/zipkin/" target="_blank" rel="external">https://github.com/openzipkin/zipkin/</a><br>这是twitter开源出来的，也是参考Dapper的体系来做的。<br>Zipkin的java应用端是通过一个叫Brave的组件来实现对应用内部的性能分析数据采集。<br>Brave的github地址：<a href="https://github.com/openzipkin/brave" target="_blank" rel="external">https://github.com/openzipkin/brave</a><br>这个组件通过实现一系列的java拦截器，来做到对http/servlet请求、数据库访问的调用过程跟踪。然后通过在spring之类的配置文件里加入这些拦截器，完成对java应用的性能数据采集。</li>
-<li>CAT<br>github地址：<a href="https://github.com/dianping/cat" target="_blank" rel="external">https://github.com/dianping/cat</a><br>这个是大众点评开源出来的，实现的功能也还是蛮丰富的，国内也有一些公司在用了。不过CAT实现跟踪的手段，是要在代码里硬编码写一些“埋点”，也就是侵入式的。这样做有利有弊，好处是可以在自己需要的地方加埋点，比较有针对性；坏处是必须改动现有系统，很多开发团队不愿意。前面三个工具里面，如果不想重复造轮子，我推荐的顺序依次是Pinpoint-&gt;Zipkin-&gt;CAt。原因很简单，就是这三个工具对于程序源代码和配置文件的侵入性，是依次递增的。</li>
+<li>Pinpoint<br>github地址：<a href="https://github.com/naver/pinpoint" target="_blank" rel="noopener">https://github.com/naver/pinpoint</a><br>Pinpint is an open source APM(Application Performance Management) tool for large-scale distributed systems written in Java.<br>对APM有兴趣的朋友都应该看看这个开源项目，这是一个韩国团队开源出来的，通过JavaAgent的机制来做字节码代码植入（探针），实现加入traceid和抓取性能数据的目的。<br>NewRelic、Oneapm之类的工具在java平台上的性能分析也是类似的机制。</li>
+<li>Zipkin<br>官网：OpenZipkin(A distributed tracing system) <a href="http://zipkin.io/" target="_blank" rel="noopener">http://zipkin.io/</a><br>github地址：<a href="https://github.com/openzipkin/zipkin/" target="_blank" rel="noopener">https://github.com/openzipkin/zipkin/</a><br>这是twitter开源出来的，也是参考Dapper的体系来做的。<br>Zipkin的java应用端是通过一个叫Brave的组件来实现对应用内部的性能分析数据采集。<br>Brave的github地址：<a href="https://github.com/openzipkin/brave" target="_blank" rel="noopener">https://github.com/openzipkin/brave</a><br>这个组件通过实现一系列的java拦截器，来做到对http/servlet请求、数据库访问的调用过程跟踪。然后通过在spring之类的配置文件里加入这些拦截器，完成对java应用的性能数据采集。</li>
+<li>CAT<br>github地址：<a href="https://github.com/dianping/cat" target="_blank" rel="noopener">https://github.com/dianping/cat</a><br>这个是大众点评开源出来的，实现的功能也还是蛮丰富的，国内也有一些公司在用了。不过CAT实现跟踪的手段，是要在代码里硬编码写一些“埋点”，也就是侵入式的。这样做有利有弊，好处是可以在自己需要的地方加埋点，比较有针对性；坏处是必须改动现有系统，很多开发团队不愿意。前面三个工具里面，如果不想重复造轮子，我推荐的顺序依次是Pinpoint-&gt;Zipkin-&gt;CAt。原因很简单，就是这三个工具对于程序源代码和配置文件的侵入性，是依次递增的。</li>
 <li>我们的解决方案针对于微服务，我们在spring cloud基础上，对微服务架构进行了扩展，基于Google Dapper的概念，设计了一套基于微服务架构的分布式跟踪系统（WeAPM）<br><img src="http://oueonj87a.bkt.clouddn.com/图片 4.png" alt="图片 4"><br>如上图所示，我们可以通过服务名、时间、日志类型、方法名、异常级别、接口耗时等参数查询响应的日志。在得到的TrakID可以查询到该请求的整个链路日志，为重现问题、分析日志提供了极大方便。<br><img src="http://oueonj87a.bkt.clouddn.com/图片 5.png" alt="图片 5"><h2 id="断路器实践"><a href="#断路器实践" class="headerlink" title="断路器实践"></a>断路器实践</h2>在微服务架构中，我们将系统拆分成了一个个的微服务，这样就有可能因为网络原因是依赖服务自身问题出现调用故障或延迟，而这些问题会直接导致调用方的对外服务也出现延迟，若此时调用方的请求不断增加，最后就会出现因等待出现故障的依赖方响应而形成任务积压，最终导致自身服务的瘫痪。为了解决这样的问题，因此产生了断路器模式<br><img src="http://oueonj87a.bkt.clouddn.com/图片 6.png" alt="图片 6"><br>我们在时间中使用了Hystrix来实现断路器的功能。Hystrix是Netflix开源的微服务框架套件一直，该框架目标在于通过控制那些访问远程系统、服务和第三方库的节点，从而对延迟和故障提供更强大的容错能力。Hystrix具备拥有回退机制和断路器功能的线程和信号隔离，请求缓存和请求打包，以及监控和配置等功能。断路器的使用流程如下：启用断路器</li>
 </ul>
 </blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@SpringBootApplication</span></div><div class="line"><span class="meta">@EnableCircuitBreaker</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Application</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        SrpingApplication.run(DVoiceWebApplication.class, args);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@EnableCircuitBreaker</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Application</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SrpingApplication.run(DVoiceWebApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>代用使用方式</p>
 </blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Component</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StoreIntegration</span> </span>&#123;</div><div class="line">    <span class="meta">@HystrixCommand</span>(fallbackMethod = <span class="string">"defaultStores"</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">getStore</span><span class="params">(Map&lt;String, Object&gt; parameters)</span> </span>&#123;</div><div class="line">        <span class="comment">// do stuff that might fail</span></div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">defaultStore</span><span class="params">(Map&lt;String, Object&gt; parameters)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="comment">/* something useful */</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StoreIntegration</span> </span>&#123;</span><br><span class="line">    <span class="meta">@HystrixCommand</span>(fallbackMethod = <span class="string">"defaultStores"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">getStore</span><span class="params">(Map&lt;String, Object&gt; parameters)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// do stuff that might fail</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">defaultStore</span><span class="params">(Map&lt;String, Object&gt; parameters)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="comment">/* something useful */</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>配置文件</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">#配置Hystrix</div><div class="line">hystrix:</div><div class="line">  command:</div><div class="line">    default:</div><div class="line">      fallback:</div><div class="line">        enabled: true</div><div class="line">      circuitBreaker:</div><div class="line">        enabled: true</div><div class="line">      metrics:</div><div class="line">        rollingPercentile.enabled: false</div><div class="line">      execution:</div><div class="line">        isolation:</div><div class="line">          strategy: SEMAPHORE</div><div class="line">          thread:</div><div class="line">            interrupteOnTimeout: true</div><div class="line">            timeoutInMilliseconds: 1200</div><div class="line">  threadpool:</div><div class="line">    default:</div><div class="line">      coreSize: 30</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">#配置Hystrix</span><br><span class="line">hystrix:</span><br><span class="line">  command:</span><br><span class="line">    default:</span><br><span class="line">      fallback:</span><br><span class="line">        enabled: true</span><br><span class="line">      circuitBreaker:</span><br><span class="line">        enabled: true</span><br><span class="line">      metrics:</span><br><span class="line">        rollingPercentile.enabled: false</span><br><span class="line">      execution:</span><br><span class="line">        isolation:</span><br><span class="line">          strategy: SEMAPHORE</span><br><span class="line">          thread:</span><br><span class="line">            interrupteOnTimeout: true</span><br><span class="line">            timeoutInMilliseconds: 1200</span><br><span class="line">  threadpool:</span><br><span class="line">    default:</span><br><span class="line">      coreSize: 30</span><br></pre></td></tr></table></figure>
 <blockquote>
 <h2 id="资源控制实践"><a href="#资源控制实践" class="headerlink" title="资源控制实践"></a>资源控制实践</h2><p>聊到资源控制，估计很多小伙伴会想到Docker，Docker确实是一个实现资源控制很不错的解决方案，我们前期做调研时也对是否使用Docker进行了评审，但是最终还是选择放弃，而使用linux的libcgroup脚本控制，原因如下：</p>
 <ul>
@@ -499,19 +505,19 @@
 <li>使用Docker会使运维复杂、来自业务的压力会很大。<br>为什么要有cgroup? Linux系统中经常有个需求就是希望能限制某个或者偶写进程的分配资源。也就是能完成一组容器的概念，在这个容器中，有分配好的特定比例的cpu时间，IO时间，可用内存大小等等。于是就出现了cgroup的概念，cgroup就是controller group，最初由google的工程师提出，后来被整合进Linux内核中，Docker也是基于此来实现。libcgroup使用流程：安装</li>
 </ul>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install libcgroup</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install libcgroup</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>启动服务</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">service cgcnfig start</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">service cgcnfig start</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>配置文件模板(以memory为例)：</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">mout &#123;</div><div class="line">    cpu = /sys/fs//cgroup/cpu;</div><div class="line">    cpuacct = /sys/fs/cgroup/cpuacct;</div><div class="line">    devices = /sys/fs/cgroup/devices;</div><div class="line">    memory = /sys/fs/cgroup/memory;</div><div class="line">    freezer = /sys/fs/cgroup/freezer;   </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mout &#123;</span><br><span class="line">    cpu = /sys/fs//cgroup/cpu;</span><br><span class="line">    cpuacct = /sys/fs/cgroup/cpuacct;</span><br><span class="line">    devices = /sys/fs/cgroup/devices;</span><br><span class="line">    memory = /sys/fs/cgroup/memory;</span><br><span class="line">    freezer = /sys/fs/cgroup/freezer;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>看到memory子系统是挂载在目录/sys/fs/cgroup/memory下，进入这个目录创建一个文件夹，就创建了一个control group了。</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mkdir test</div><div class="line">echo &quot;服务进程号&quot;&gt;&gt; task(tasks是test目录下的一个文件)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir test</span><br><span class="line">echo &quot;服务进程号&quot;&gt;&gt; task(tasks是test目录下的一个文件)</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>这样就当前这个终端进程加入到了内存限制的croup中了。</p>
 </blockquote>
@@ -634,7 +640,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -647,7 +653,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -705,7 +711,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -822,7 +828,24 @@
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 
 

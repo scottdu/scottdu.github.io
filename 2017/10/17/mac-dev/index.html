@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="技术," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="前言 工欲善其事，必先利其器  通过AppStore安装Xcode安装完毕后请在shell命令行中执行如下命令安装Xcode的命令行工具：1xcode-select --install 修改sudo权限（方便以后执行sudo命令时不需要输入密码）请在shell中执行sudo visudo，修改以下部分内容： 1%admin ALL = (ALL) NOPASSWD: ALL 安装命令行工具安装Ho">
+<meta name="keywords" content="技术">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mac下开发环境搭建">
+<meta property="og:url" content="http://yoursite.com/2017/10/17/mac-dev/index.html">
+<meta property="og:site_name" content="阿杜S考特">
+<meta property="og:description" content="前言 工欲善其事，必先利其器  通过AppStore安装Xcode安装完毕后请在shell命令行中执行如下命令安装Xcode的命令行工具：1xcode-select --install 修改sudo权限（方便以后执行sudo命令时不需要输入密码）请在shell中执行sudo visudo，修改以下部分内容： 1%admin ALL = (ALL) NOPASSWD: ALL 安装命令行工具安装Ho">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://ovhbzkbox.bkt.clouddn.com/2017-10-17-launchrocket.png">
+<meta property="og:updated_time" content="2018-07-30T14:49:31.438Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Mac下开发环境搭建">
+<meta name="twitter:description" content="前言 工欲善其事，必先利其器  通过AppStore安装Xcode安装完毕后请在shell命令行中执行如下命令安装Xcode的命令行工具：1xcode-select --install 修改sudo权限（方便以后执行sudo命令时不需要输入密码）请在shell中执行sudo visudo，修改以下部分内容： 1%admin ALL = (ALL) NOPASSWD: ALL 安装命令行工具安装Ho">
+<meta name="twitter:image" content="http://ovhbzkbox.bkt.clouddn.com/2017-10-17-launchrocket.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/10/17/mac-dev/"/>
+
+
+
+
+
+  <title>Mac下开发环境搭建 | 阿杜S考特</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">阿杜S考特</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">个人空间</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/17/mac-dev/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Scott Du">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oueonj87a.bkt.clouddn.com/WechatIMG3.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="阿杜S考特">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Mac下开发环境搭建</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-17T17:02:07+08:00">
+                2017-10-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+<p>工欲善其事，必先利其器</p>
+</blockquote>
+<h4 id="通过AppStore安装Xcode"><a href="#通过AppStore安装Xcode" class="headerlink" title="通过AppStore安装Xcode"></a>通过AppStore安装Xcode</h4><h5 id="安装完毕后请在shell命令行中执行如下命令安装Xcode的命令行工具："><a href="#安装完毕后请在shell命令行中执行如下命令安装Xcode的命令行工具：" class="headerlink" title="安装完毕后请在shell命令行中执行如下命令安装Xcode的命令行工具："></a>安装完毕后请在<code>shell</code>命令行中执行如下命令安装Xcode的命令行工具：</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xcode-select --install</span><br></pre></td></tr></table></figure>
+<h5 id="修改sudo权限（方便以后执行sudo命令时不需要输入密码）"><a href="#修改sudo权限（方便以后执行sudo命令时不需要输入密码）" class="headerlink" title="修改sudo权限（方便以后执行sudo命令时不需要输入密码）"></a>修改sudo权限（方便以后执行sudo命令时不需要输入密码）</h5><p>请在<code>shell</code>中执行<code>sudo visudo</code>，修改以下部分内容：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">%</span>admin ALL = (ALL) NOPASSWD: ALL</span><br></pre></td></tr></table></figure>
+<h4 id="安装命令行工具"><a href="#安装命令行工具" class="headerlink" title="安装命令行工具"></a>安装命令行工具</h4><h5 id="安装Homebrew"><a href="#安装Homebrew" class="headerlink" title="安装Homebrew"></a>安装<code>Homebrew</code></h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 安装 homebrew</span><br><span class="line">/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 添加 homebrew tap</span><br><span class="line">brew tap caskroom/cask</span><br><span class="line">brew tap caskroom/versions</span><br></pre></td></tr></table></figure>
+<h5 id="安装zsh相关"><a href="#安装zsh相关" class="headerlink" title="安装zsh相关"></a>安装zsh相关</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">brew install zsh zsh-completions</span><br><span class="line">sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"</span><br></pre></td></tr></table></figure>
+<h5 id="安装JDK"><a href="#安装JDK" class="headerlink" title="安装JDK"></a>安装JDK</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> JDK 8 必须安装</span><br><span class="line">brew cask install java8</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> JDK 9 可选安装</span><br><span class="line">brew cask install java</span><br></pre></td></tr></table></figure>
+<p>如果想要安装多个版本的JDK，可以使用<code>jenv</code>来管理：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 安装并设置 jenv</span><br><span class="line">brew install jenv</span><br><span class="line">echo 'export PATH="$HOME/.jenv/bin:$PATH"' &gt;&gt; ~/.zshrc</span><br><span class="line">echo 'eval "$(jenv init -)"' &gt;&gt; ~/.zshrc</span><br></pre></td></tr></table></figure>
+<p>安装 jenv 之后，重新开启一个 shell 窗口来设置 JDK，例如：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 添加多个 JDK 到 jenv</span><br><span class="line">jenv add /Library/Java/JavaVirtualMachines/jdk1.8.0_144.jdk/Contents/Home</span><br><span class="line">jenv add /Library/Java/JavaVirtualMachines/jdk-9.jdk/Contents/Home</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 开启 export 插件</span><br><span class="line">jenv enable-plugin export</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 设置全局 JDK 为 JDK 8</span><br><span class="line">jenv global 1.8</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 查看当前 JDK 版本</span><br><span class="line">java -version</span><br></pre></td></tr></table></figure>
+<h5 id="安装Maven"><a href="#安装Maven" class="headerlink" title="安装Maven"></a>安装Maven</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install maven</span><br></pre></td></tr></table></figure>
+<h5 id="安装其他命令行工具"><a href="#安装其他命令行工具" class="headerlink" title="安装其他命令行工具"></a>安装其他命令行工具</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install autojump wget git diff-so-fancy</span><br></pre></td></tr></table></figure>
+<h5 id="配置zsh"><a href="#配置zsh" class="headerlink" title="配置zsh"></a>配置zsh</h5><p>编辑~/.zshrc，内容如下</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span># 修改 plugins 部分的代码如下</span><br><span class="line"></span><br><span class="line">plugins=(osx autojump git)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span># 在文件末尾添加以下代码</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> Config zsh completions</span><br><span class="line">fpath=(/usr/local/share/zsh-completions $fpath)</span><br><span class="line"><span class="meta">#</span> Config autojump</span><br><span class="line">[ -f /usr/local/etc/profile.d/autojump.sh ] &amp;&amp; . /usr/local/etc/profile.d/autojump.sh</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> Config JAVA HOME</span><br><span class="line">export JAVA_HOME=`/usr/libexec/java_home`</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> Config NVM for Node.js</span><br><span class="line">export NVM_HOME="$HOME/.nvm"</span><br><span class="line">export NVM_NODEJS_ORG_MIRROR=https://npm.taobao.org/mirrors/node</span><br><span class="line">export PHANTOMJS_CDNURL=http://npm.taobao.org/mirrors/phantomjs</span><br><span class="line">export SELENIUM_CDNURL=http://npm.taobao.org/mirrorss/selenium</span><br><span class="line">export CHROMEDRIVER_CDNURL=http://npm.taobao.org/mirrors/chromedriver</span><br><span class="line">[ -s "$NVM_HOME/nvm.sh" ] &amp;&amp; . "$NVM_HOME/nvm.sh"</span><br></pre></td></tr></table></figure>
+<h5 id="配置git"><a href="#配置git" class="headerlink" title="配置git"></a>配置git</h5><p>创建~/.gitconfig，内容如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line">[user]</span><br><span class="line">    name = &lt;nickname&gt;</span><br><span class="line">    email = &lt;nickname@wacai.com&gt;</span><br><span class="line"></span><br><span class="line">[alias]</span><br><span class="line">    ci = commit -m</span><br><span class="line">    co = checkout</span><br><span class="line">    st = status</span><br><span class="line">    br = branch</span><br><span class="line">    wc = whatchanged</span><br><span class="line">    df = diff</span><br><span class="line">    up = pull --rebase --autostash --all</span><br><span class="line">    pom = push origin master</span><br><span class="line">    unstage = reset HEAD</span><br><span class="line">    last = log -1 HEAD</span><br><span class="line">    sl = shortlog -s</span><br><span class="line">    lg = log -p</span><br><span class="line">    gl = log --all --graph --pretty=format:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset' --abbrev-commit --date=relative</span><br><span class="line">    praise = blame</span><br><span class="line"></span><br><span class="line">[core]</span><br><span class="line">    autocrlf = &lt;macOS 配置为 input，Windows 配置为 true&gt;</span><br><span class="line">    quotepath = false</span><br><span class="line">    ignorecase = false</span><br><span class="line">    pager = diff-so-fancy | less --tabs=4 -RFX</span><br><span class="line">    whitespace = trailing-space,space-before-tab,indent-with-non-tab</span><br><span class="line">    editor = /usr/bin/vim</span><br><span class="line"></span><br><span class="line">[merge]</span><br><span class="line">    ff = false</span><br><span class="line"></span><br><span class="line">[pull]</span><br><span class="line">    rebase = true</span><br><span class="line"></span><br><span class="line">[push]</span><br><span class="line">    default = simple</span><br><span class="line"></span><br><span class="line">[color]</span><br><span class="line">    status = auto</span><br><span class="line">    branch = auto</span><br><span class="line">    diff = auto</span><br><span class="line">    ui = true</span><br><span class="line">    pager = true</span><br><span class="line"></span><br><span class="line">[color "branch"]</span><br><span class="line">    current = green reverse</span><br><span class="line">    local = yellow</span><br><span class="line">    remote = red</span><br><span class="line"></span><br><span class="line">[color "status"]</span><br><span class="line">    added = yellow bold</span><br><span class="line">    changed = red bold</span><br><span class="line">    untracked = white bold</span><br><span class="line"></span><br><span class="line">[color "diff"]</span><br><span class="line">    meta = yellow bold</span><br><span class="line">    frag = magenta bold</span><br><span class="line">    old = red bold</span><br><span class="line">    new = green bold</span><br><span class="line"></span><br><span class="line">[color "diff-highlight"]</span><br><span class="line">    oldNormal = red bold</span><br><span class="line">    oldHighlight = red bold 52</span><br><span class="line">    newNormal = green bold</span><br><span class="line">    newHighlight = green bold 22</span><br></pre></td></tr></table></figure>
+<h5 id="安装Node相关工具"><a href="#安装Node相关工具" class="headerlink" title="安装Node相关工具"></a>安装Node相关工具</h5><p>先创建~/.npmrc，内容如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">proxy=null</span><br><span class="line">registry=https://registry.npm.taobao.org</span><br><span class="line">disturl=https://npm.taobao.org/dist</span><br></pre></td></tr></table></figure>
+<p>然后安装 nvm 和 Node。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.4/install.sh | bash</span><br><span class="line">nvm install node</span><br></pre></td></tr></table></figure>
+<h5 id="安装其他中间件"><a href="#安装其他中间件" class="headerlink" title="安装其他中间件"></a>安装其他中间件</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install mysql mongodb nginx jenkins zookeeper redis tomcat</span><br></pre></td></tr></table></figure>
+<p>安装launchrocket</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew cask install launchrocket</span><br></pre></td></tr></table></figure>
+<p>安装完launchrocket之后，可以在Mac的系统偏好设置中找到，可以通过界面来操作所有中间件的启停<br><img src="http://ovhbzkbox.bkt.clouddn.com/2017-10-17-launchrocket.png" alt="launchrocket"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/技术/" rel="tag"># 技术</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/25/nodejs-promise/" rel="next" title="ECMAScript6异步操作">
+                <i class="fa fa-chevron-left"></i> ECMAScript6异步操作
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/10/22/Bayes/" rel="prev" title="贝叶斯相关定理及其互联网应用">
+                贝叶斯相关定理及其互联网应用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://oueonj87a.bkt.clouddn.com/WechatIMG3.jpeg"
+               alt="Scott Du" />
+          <p class="site-author-name" itemprop="name">Scott Du</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#通过AppStore安装Xcode"><span class="nav-number">1.0.1.</span> <span class="nav-text">通过AppStore安装Xcode</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#安装完毕后请在shell命令行中执行如下命令安装Xcode的命令行工具："><span class="nav-number">1.0.1.1.</span> <span class="nav-text">安装完毕后请在shell命令行中执行如下命令安装Xcode的命令行工具：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#修改sudo权限（方便以后执行sudo命令时不需要输入密码）"><span class="nav-number">1.0.1.2.</span> <span class="nav-text">修改sudo权限（方便以后执行sudo命令时不需要输入密码）</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安装命令行工具"><span class="nav-number">1.0.2.</span> <span class="nav-text">安装命令行工具</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#安装Homebrew"><span class="nav-number">1.0.2.1.</span> <span class="nav-text">安装Homebrew</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#安装zsh相关"><span class="nav-number">1.0.2.2.</span> <span class="nav-text">安装zsh相关</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#安装JDK"><span class="nav-number">1.0.2.3.</span> <span class="nav-text">安装JDK</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#安装Maven"><span class="nav-number">1.0.2.4.</span> <span class="nav-text">安装Maven</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#安装其他命令行工具"><span class="nav-number">1.0.2.5.</span> <span class="nav-text">安装其他命令行工具</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#配置zsh"><span class="nav-number">1.0.2.6.</span> <span class="nav-text">配置zsh</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#配置git"><span class="nav-number">1.0.2.7.</span> <span class="nav-text">配置git</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#安装Node相关工具"><span class="nav-number">1.0.2.8.</span> <span class="nav-text">安装Node相关工具</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#安装其他中间件"><span class="nav-number">1.0.2.9.</span> <span class="nav-text">安装其他中间件</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Scott Du</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="算法," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="一、贝叶斯定理(Bayes’ Theorem)  贝叶斯定理是英国数学家托马斯.贝叶斯 (Thomas Bayes)于1763年发表的一片论文中提出的，用来描述两个条件概率之间的关系。  1.1 条件概率P(A|B)=\frac{P(AB)}{P(B)}1.2 全概率公式P(A)=\sum_{i}^{}P(A|B_{i})P(B_{i}) 1.3 贝叶斯公式P(B_{i}|A)=\frac{P(A">
+<meta name="keywords" content="算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="贝叶斯相关定理及其互联网应用">
+<meta property="og:url" content="http://yoursite.com/2017/10/22/Bayes/index.html">
+<meta property="og:site_name" content="阿杜S考特">
+<meta property="og:description" content="一、贝叶斯定理(Bayes’ Theorem)  贝叶斯定理是英国数学家托马斯.贝叶斯 (Thomas Bayes)于1763年发表的一片论文中提出的，用来描述两个条件概率之间的关系。  1.1 条件概率P(A|B)=\frac{P(AB)}{P(B)}1.2 全概率公式P(A)=\sum_{i}^{}P(A|B_{i})P(B_{i}) 1.3 贝叶斯公式P(B_{i}|A)=\frac{P(A">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://ovhbzkbox.bkt.clouddn.com/2017-10-22-bayes.png">
+<meta property="og:image" content="http://ovhbzkbox.bkt.clouddn.com/2017-10-22-condition_prob.png">
+<meta property="og:image" content="http://ovhbzkbox.bkt.clouddn.com/2017-10-22-bayes_theom.jpg">
+<meta property="og:image" content="http://ovhbzkbox.bkt.clouddn.com/2017-10-22-spam.png">
+<meta property="og:image" content="http://ovhbzkbox.bkt.clouddn.com/2017-10-22-baidu.png">
+<meta property="og:updated_time" content="2018-07-30T14:49:31.435Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="贝叶斯相关定理及其互联网应用">
+<meta name="twitter:description" content="一、贝叶斯定理(Bayes’ Theorem)  贝叶斯定理是英国数学家托马斯.贝叶斯 (Thomas Bayes)于1763年发表的一片论文中提出的，用来描述两个条件概率之间的关系。  1.1 条件概率P(A|B)=\frac{P(AB)}{P(B)}1.2 全概率公式P(A)=\sum_{i}^{}P(A|B_{i})P(B_{i}) 1.3 贝叶斯公式P(B_{i}|A)=\frac{P(A">
+<meta name="twitter:image" content="http://ovhbzkbox.bkt.clouddn.com/2017-10-22-bayes.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/10/22/Bayes/"/>
+
+
+
+
+
+  <title>贝叶斯相关定理及其互联网应用 | 阿杜S考特</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">阿杜S考特</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">个人空间</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/22/Bayes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Scott Du">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oueonj87a.bkt.clouddn.com/WechatIMG3.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="阿杜S考特">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">贝叶斯相关定理及其互联网应用</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-22T01:54:37+08:00">
+                2017-10-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="一、贝叶斯定理-Bayes’-Theorem"><a href="#一、贝叶斯定理-Bayes’-Theorem" class="headerlink" title="一、贝叶斯定理(Bayes’ Theorem)"></a>一、贝叶斯定理(Bayes’ Theorem)</h1><p><img src="http://ovhbzkbox.bkt.clouddn.com/2017-10-22-bayes.png" alt="bayes"></p>
+<blockquote>
+<p>贝叶斯定理是英国数学家<strong><em>托马斯.贝叶斯</em></strong> (Thomas Bayes)于1763年发表的一片论文中提出的，用来描述两个条件概率之间的关系。</p>
+</blockquote>
+<h2 id="1-1-条件概率"><a href="#1-1-条件概率" class="headerlink" title="1.1 条件概率"></a>1.1 条件概率</h2><script type="math/tex; mode=display">P(A|B)=\frac{P(AB)}{P(B)}</script><h2 id="1-2-全概率公式"><a href="#1-2-全概率公式" class="headerlink" title="1.2 全概率公式"></a>1.2 全概率公式</h2><script type="math/tex; mode=display">P(A)=\sum_{i}^{}P(A|B_{i})P(B_{i})</script><p><img src="http://ovhbzkbox.bkt.clouddn.com/2017-10-22-condition_prob.png" alt="condition_prob"></p>
+<h2 id="1-3-贝叶斯公式"><a href="#1-3-贝叶斯公式" class="headerlink" title="1.3 贝叶斯公式"></a>1.3 贝叶斯公式</h2><script type="math/tex; mode=display">P(B_{i}|A)=\frac{P(A|B_{i})P(B_{i})}{\sum_{j}^{}P(A|B_{j})P(B_{j})}</script><h2 id="1-4-贝叶斯定理"><a href="#1-4-贝叶斯定理" class="headerlink" title="1.4 贝叶斯定理"></a>1.4 贝叶斯定理</h2><p><img src="http://ovhbzkbox.bkt.clouddn.com/2017-10-22-bayes_theom.jpg" alt="bayes_theo"></p>
+<h1 id="二、举几个栗子"><a href="#二、举几个栗子" class="headerlink" title="二、举几个栗子"></a>二、举几个栗子</h1><h2 id="2-1-病人分类的栗子"><a href="#2-1-病人分类的栗子" class="headerlink" title="2.1 病人分类的栗子"></a>2.1 病人分类的栗子</h2><p>某个医院早上收了六个门诊病人，如下表</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>编号</th>
+<th>症状</th>
+<th>职业</th>
+<th>疾病</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>打喷嚏</td>
+<td>护士</td>
+<td>感冒</td>
+</tr>
+<tr>
+<td>2</td>
+<td>打喷嚏</td>
+<td>农夫</td>
+<td>过敏</td>
+</tr>
+<tr>
+<td>3</td>
+<td>头痛</td>
+<td>建筑工人</td>
+<td>脑震荡</td>
+</tr>
+<tr>
+<td>4</td>
+<td>头痛</td>
+<td>建筑工人</td>
+<td>感冒</td>
+</tr>
+<tr>
+<td>5</td>
+<td>打喷嚏</td>
+<td>教师</td>
+<td>感冒</td>
+</tr>
+<tr>
+<td>6</td>
+<td>头痛</td>
+<td>教师</td>
+<td>脑震荡</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>现在又来了第七个病人，是一个打喷嚏的建筑工人。问：他患上感冒的概率有多大？</p>
+<blockquote>
+<p>根据贝叶斯定理</p>
+</blockquote>
+<script type="math/tex; mode=display">P(A|B)=\frac{P(B|A)P(A)}{P(B)}</script><blockquote>
+<p>可得</p>
+</blockquote>
+<script type="math/tex; mode=display">P(感冒|打喷嚏\times建筑工人)=\frac{P(打喷嚏\times建筑工人|感冒)\times P(感冒)}{P(打喷嚏\times建筑工人)}</script><blockquote>
+<p>假设“打喷嚏”和“建筑工人”这两个特征都是独立的，那么以上的等式就等价于</p>
+</blockquote>
+<script type="math/tex; mode=display">P(感冒|打喷嚏\times建筑工人)=\frac{P(打喷嚏|感冒) \times P(建筑工人|感冒) \times P(感冒)}{P(打喷嚏) \times P(建筑工人)}</script><blockquote>
+<p>因此上面的公式可以计算出</p>
+</blockquote>
+<script type="math/tex; mode=display">P(感冒|打喷嚏\times建筑工人)=\frac{0.66 \times 0.33 \times 0.5}{0.5 \times 0.33} = 0.66</script><blockquote>
+<p>因此，这个打喷嚏的建筑工人，有66%的概率是得了感冒。同理，可以计算这个病人患上过敏或脑震荡的概率。比较这几个概率，就可以知道他最可能得什么病。这就是贝叶斯分类器的基本方法：在统计资料的基础上，依据某些特征，计算各个类别的概率，从而实现分类。</p>
+</blockquote>
+<h2 id="2-2-性别推断的例子"><a href="#2-2-性别推断的例子" class="headerlink" title="2.2 性别推断的例子"></a>2.2 性别推断的例子</h2><p>下面是一组人类身体特征的统计资料</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>性别</th>
+<th>身高（英尺）</th>
+<th>体重（磅）</th>
+<th>脚掌（英寸）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>男</td>
+<td>6</td>
+<td>180</td>
+<td>12</td>
+</tr>
+<tr>
+<td>男</td>
+<td>5.92</td>
+<td>190</td>
+<td>11</td>
+</tr>
+<tr>
+<td>男</td>
+<td>5.58</td>
+<td>170</td>
+<td>12</td>
+</tr>
+<tr>
+<td>男</td>
+<td>5.92</td>
+<td>165</td>
+<td>10</td>
+</tr>
+<tr>
+<td>女</td>
+<td>5</td>
+<td>100</td>
+<td>6</td>
+</tr>
+<tr>
+<td>女</td>
+<td>5.5</td>
+<td>150</td>
+<td>8</td>
+</tr>
+<tr>
+<td>女</td>
+<td>5.42</td>
+<td>130</td>
+<td>7</td>
+</tr>
+<tr>
+<td>女</td>
+<td>5.75</td>
+<td>150</td>
+<td>9</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>已知某人的身高6英尺、体重130磅，脚掌8英寸，请问该人的性别？</p>
+<blockquote>
+<p>假设男性和女性的身高、体重、脚掌都是正态分布，通过样本计算出均值和方差，也就是得到正态分布的密度函数。有了密度函数，就可以把值代入，算出某一点的密度函数的值。</p>
+<p>比如，男性的身高是均值5.855、方差0.035的正态分布。所以，男性的身高为6英尺的概率的相对值等于1.5789（大于1并没有关系，因为这里是密度函数的值，只用来反映各个值的相对可能性）。</p>
+</blockquote>
+<script type="math/tex; mode=display">p(height|male)=\frac{1}{\sqrt{2\pi\sigma^2}}exp(\frac{-(6-\mu)^2}{2\sigma^2})\approx1.5789</script><blockquote>
+<p>有了这些数据就可以计算性别的分类了。</p>
+</blockquote>
+<script type="math/tex; mode=display">\boxed{P(身高=6|男)\times P(体重=130|男)\times P(脚掌=8|男)\times P(男)\\ = 6.1984\times e^{-9}\\
+P(身高=6|女)\times P(体重=130|女)\times P(脚掌=8|女)\times P(女)\\ = 6.1984\times e^{-4}}</script><blockquote>
+<p>由此可以看到，女性的概率比男性要高出约10000倍，所以可以推断该人为女性</p>
+</blockquote>
+<h1 id="三、互联网应用场景"><a href="#三、互联网应用场景" class="headerlink" title="三、互联网应用场景"></a>三、互联网应用场景</h1><h2 id="3-1-垃圾邮件的过滤"><a href="#3-1-垃圾邮件的过滤" class="headerlink" title="3.1 垃圾邮件的过滤"></a>3.1 垃圾邮件的过滤</h2><h3 id="3-1-1-背景"><a href="#3-1-1-背景" class="headerlink" title="3.1.1 背景"></a>3.1.1 背景</h3><p><img width="400" src="http://ovhbzkbox.bkt.clouddn.com/2017-10-22-spam.png"></p>
+<p>垃圾邮件是一种令人头痛的顽症，困扰着所有的互联网用户。<br>正确识别垃圾邮件的技术难度非常大。传统的垃圾邮件过滤方法，主要有”关键词法”和”校验码法”等。前者的过滤依据是特定的词语；后者则是计算邮件文本的校验码，再与已知的垃圾邮件进行对比。它们的识别效果都不理想，而且很容易规避。</p>
+<p>2002年，<code>Paul Graham</code>提出使用”贝叶斯推断”过滤垃圾邮件。他说，这样做的效果，好得不可思议。1000封垃圾邮件可以过滤掉995封，且没有一个误判。</p>
+<p>另外，这种过滤器还具有自我学习的功能，会根据新收到的邮件，不断调整。收到的垃圾邮件越多，它的准确率就越高。</p>
+<h3 id="3-1-2-训练集"><a href="#3-1-2-训练集" class="headerlink" title="3.1.2 训练集"></a>3.1.2 训练集</h3><p>首先我们需要提供两组已经识别好的邮件，一组是正常的邮件，另一组是垃圾邮件。</p>
+<p>我们用这两组邮件，对过滤器进行“训练”。这两组邮件的规模越大，训练的效果就越好。<code>Paul Graham</code>使用的邮件规模，是正常邮件和垃圾邮件各4000封。</p>
+<p>“训练”过程很简单。首先，解析所有的邮件，提取每一个词。然后计算每个词语在正常邮件和垃圾邮件中出现的频率。</p>
+<p>比如，假设“sex”这个词，在4000封垃圾邮件中，有200封包含这个词，那么它出现的频率就是5%；而如果在4000封正常邮件中，只有2封包含这个词，那么出现频率就是0.05%（【注】如果某个词只出现在垃圾邮件中，<code>Paul Graham</code>就假定，它在正常邮件的出现频率是1%，反之亦然。这样做是为了避免概率为0。随着邮件数量的增加，计算结果会自动调整。）<br>有了这个初步的统计结果，过滤器就可以投入使用了。</p>
+<h3 id="3-1-2-使用过程"><a href="#3-1-2-使用过程" class="headerlink" title="3.1.2 使用过程"></a>3.1.2 使用过程</h3><p>我们收到了一封新邮件。在未进行统计分析之前，我们假设它是垃圾邮件的概率为50%。（【注】有研究表明，用户收到的电子邮件中，80%是垃圾邮件。但是，这里依然假设垃圾邮件的“先验概率”为50%）</p>
+<p>我们用$S$代表垃圾邮件（Spam），$H$表示正常邮件（healthy）。因此$P(S)$和$P(H)$的先验概率都是50%，即<script type="math/tex">P(S)=P(H)=50\%</script></p>
+<p>然后，对这封邮件进行解析，发现其中包含了sex这个词，请问这封邮件属于垃圾邮件的概率有多高？</p>
+<p>我们用$W$表示“sex”这个词，那么问题就转化为如何计算$P(S|W)$的值，即在某个词语（$W$）已经存在的条件下，垃圾邮件($S$)的概率有多大？</p>
+<blockquote>
+<p>根据贝叶斯公式，马上可以写出</p>
+</blockquote>
+<script type="math/tex; mode=display">P(S|W)=\frac{P(W|S)P(S)}{P(W|S)P(S)+P(W|H)P(H)}</script><blockquote>
+<p>其中，$P(W|S)$和$P(W|H)$的含义是，这个词语在垃圾邮件和正常邮件中，分别出现的概率。这两个值可以从训练集中得到，对sex这个词来说，上文假定它们分别等于5%和0.05%。另外，$P(S)$和$P(H)$的值，前面假设都等于50%。所以，马上可以计算$P(S|W)$的值。</p>
+</blockquote>
+<script type="math/tex; mode=display">P(S|W)=\frac{5\%\times50\%}{5\%\times50\%+0.05\%\times50\%}=99.0\%</script><blockquote>
+<p>因此，这封新邮件是垃圾邮件的概率等于99%。这说明，sex这个词的推断能力很强，将50%的”先验概率”一下子提高到了99%的”后验概率”。</p>
+</blockquote>
+<h3 id="3-1-3-问题及改进"><a href="#3-1-3-问题及改进" class="headerlink" title="3.1.3 问题及改进"></a>3.1.3 问题及改进</h3><p>做完上面一步，请问我们能否得出结论，这封新邮件就是垃圾邮件？</p>
+<p>回答是不能。因为一封邮件包含很多词语，一些词语（比如sex）说这是垃圾邮件，另一些说这不是。你怎么知道以哪个词为准？</p>
+<p><code>Paul Graham</code>的做法是，选出这封信中$P(S|W)$最高的15个词，计算它们的<code>联合概率</code>。（【注】如果有的词是第一次出现，无法计算P(S|W)，Paul Graham就假定这个值等于0.4。因为垃圾邮件用的往往都是某些固定的词语，所以如果你从来没见过某个词，它多半是一个正常的词。）</p>
+<p>所谓<code>联合概率</code>，就是指在多个事件发生的情况下，另一个事件发生概率有多大。比如，已知W1和W2是两个不同的词语，它们都出现在某封电子邮件之中，那么这封邮件是垃圾邮件的概率，就是<code>联合概率</code>。</p>
+<p>在已知$W1$和$W2$的情况下，无非就是两种结果：垃圾邮件（事件$E1$）或正常邮件（事件$E2$）。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>事件</th>
+<th>W1</th>
+<th>W2</th>
+<th>是否垃圾邮件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>E1</td>
+<td>出现</td>
+<td>出现</td>
+<td>是的</td>
+</tr>
+<tr>
+<td>E2</td>
+<td>出现</td>
+<td>出现</td>
+<td>不是</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>其中，$W1$和$W2$和垃圾邮件的概率分别如下</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>事件</th>
+<th>W1</th>
+<th>W2</th>
+<th>垃圾邮件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>E1</td>
+<td>P(S\</td>
+<td>W1)</td>
+<td>P(S\</td>
+<td>W2)</td>
+<td>P(S)</td>
+</tr>
+<tr>
+<td>E2</td>
+<td>1-P(S\</td>
+<td>W1)</td>
+<td>1-P(S\</td>
+<td>W2)</td>
+<td>1-P(S)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>如果假定所有事件都是独立事件（【注】严格地说，这个假定不成立，但是这里可以忽略），那么就可以计算P(E1)和P(E2)：</p>
+<script type="math/tex; mode=display">
+P(E1)=P(S|W1)P(S|W2)P(S)
+\\
+P(E2)=(1-P(S|W1))(1-P(S|W2))(1-P(S))</script><p>又由于在$W1$和$W2$已经发生的情况下，垃圾邮件的概率等于下面的式子：</p>
+<script type="math/tex; mode=display">P=\frac{P(E1)}{P(E1)+P(E2)}</script><p>即</p>
+<script type="math/tex; mode=display">P=\frac{P(S|W1)P(S|W2)P(S)}{P(S|W1)P(S|W2)P(S)+(1-P(S|W1))(1-P(S|W2))(1-P(S))}</script><p>将$P(S|W1)=0.5$代入，得到</p>
+<script type="math/tex; mode=display">P=\frac{P(S|w1)P(S|W2)}{P(S|W1)P(S|W2)+(1-P(S|W1))(1-P(S|W2))}</script><p>将$P(S|W1)$记为$P1$，$P(S|W2)$记为$P2$，公式就变为</p>
+<script type="math/tex; mode=display">P=\frac{P1P2}{P1P2+(1-P1)(1-P2)}</script><p>就就是<code>联合概率</code>的计算公式。</p>
+<p>将上面的公式扩展到15个词的情况，就得到了最终的概率计算公式:</p>
+<script type="math/tex; mode=display">P=\frac{P_1P_2\dots P_{15}}{P_1P_2\dots P_{15}+(1-P_1)(1-P_2)\dots (1-P_{15})}</script><p>一封邮件是不是垃圾邮件，就用这个式子进行计算。这时我们还需要一个用于比较的门槛值。Paul Graham的门槛值是0.9，概率大于0.9，表示15个词联合认定，这封邮件有90%以上的可能属于垃圾邮件；概率小于0.9，就表示是正常邮件。</p>
+<p>有了这个公式以后，一封正常的信件即使出现sex这个词，也不会被认定为垃圾邮件了。</p>
+<h2 id="3-2-单词拼写检查"><a href="#3-2-单词拼写检查" class="headerlink" title="3.2 单词拼写检查"></a>3.2 单词拼写检查</h2><h3 id="3-2-1-场景"><a href="#3-2-1-场景" class="headerlink" title="3.2.1 场景"></a>3.2.1 场景</h3><p>当你在使用搜索引擎的时候，如果你拼错了一个单词，它会提示你正确的拼法。比如你不小心输入ehllo</p>
+<p><img src="http://ovhbzkbox.bkt.clouddn.com/2017-10-22-baidu.png" alt="baidu"></p>
+<p>搜索引擎会提醒你：您要找的是不是hello，你可以意识到正确的拼法应该是hello</p>
+<p>这就叫做“拼写检查”(spelling correct)。有好几种方法可以实现这个功能，Google使用的是基于贝叶斯推断的统计学方法。这种方法的特点是快，在很短的时间内处理大量的文本，并且有很高的精确度（90%以上）。Google的研发总监Peter Norvig写过一篇著名的文章，解释过这种原理。（【注】<a href="http://norvig.com/spell-correct.html）" target="_blank" rel="noopener">http://norvig.com/spell-correct.html）</a></p>
+<p>下面我们就来看看，怎么利用贝叶斯推断，实现”拼写检查”。其实很简单，一小段代码就够了。</p>
+<h3 id="3-2-2-原理"><a href="#3-2-2-原理" class="headerlink" title="3.2.2 原理"></a>3.2.2 原理</h3><p>用户输入了一个单词。这时分成两种情况：拼写正确，或者拼写不正确。我们把拼写正确的情况记做$c$（代表correct），拼写错误的情况记做$w$（代表wrong）。</p>
+<p>所谓”拼写检查”，就是在发生$w$的情况下，试图推断出$c$。从概率论的角度看，就是已知$w$，然后在若干个备选方案中，找出可能性最大的那个$c$，也就是求下面这个式子的最大值。</p>
+<script type="math/tex; mode=display">P(c|w)</script><p>根据贝叶斯定理</p>
+<script type="math/tex; mode=display">P(c|w)=\frac{P(w|c)P(c)}{P(w)}</script><p>对于所有备选的c来说，对应的都是同一个w，所以它们的P(w)是相同的，因此我们求的其实是$P(w|c)P(c)$的最大值。</p>
+<p>$P(c)$的含义是，某个正确的词的出现”概率”，它可以用”频率”代替。如果我们有一个足够大的文本库，那么这个文本库中每个单词的出现频率，就相当于它的发生概率。某个词的出现频率越高，$P(c)$就越大。</p>
+<p>$P(w|c)$的含义是，在试图拼写$c$的情况下，出现拼写错误$w$的概率。这需要统计数据的支持，但是为了简化问题，我们假设两个单词在字形上越接近，就有越可能拼错，$P(w|C)$就越大。举例来说，相差一个字母的拼法，就比相差两个字母的拼法，发生概率更高。你想拼写单词<code>hello</code>，那么错误拼成<code>hallo</code>（相差一个字母）的可能性，就比拼成<code>haallo</code>高（相差两个字母）。</p>
+<p>所以，我们只要找到与输入单词在字形上最相近的那些词，再在其中挑出出现频率最高的一个，就能实现 $P(w|c)P(c)$ 的最大值。</p>
+<h3 id="3-2-3-算法"><a href="#3-2-3-算法" class="headerlink" title="3.2.3 算法"></a>3.2.3 算法</h3><p>最简单的算法，只需要四步就够了。</p>
+<p><strong>第一步，建立一个足够大的文本库。</strong></p>
+<p><strong>第二步，取出文本库的每一个单词，统计它们的出现频率。</strong></p>
+<p><strong>第三步，根据用户输入的单词，得到其所有可能的拼写相近的形式。</strong></p>
+<blockquote>
+<p>所谓”拼写相近”，指的是两个单词之间的”编辑距离”（edit distance）不超过2。也就是说，两个词只相差1到2个字母，只通过——删除、交换、更改和插入——这四种操作中的一种，就可以让一个词变成另一个词。</p>
+</blockquote>
+<p><strong>第四步，比较所有拼写相近的词在文本库的出现频率。频率最高的那个词，就是正确的拼法。</strong></p>
+<blockquote>
+<p>根据<code>Peter Norvig</code>的验证，这种算法的精确度大约为60%-70%（10个拼写错误能够检查出6个。）虽然不令人满意，但是能够接受。毕竟它足够简单，计算速度极快。（本文的最后部分，将详细讨论这种算法的缺陷在哪里。）</p>
+</blockquote>
+<h3 id="3-2-3-Talk-is-Cheap，Show-me-the-code"><a href="#3-2-3-Talk-is-Cheap，Show-me-the-code" class="headerlink" title="3.2.3 Talk is Cheap，Show me the code"></a>3.2.3 Talk is Cheap，Show me the code</h3><h3 id="3-2-4-缺陷"><a href="#3-2-4-缺陷" class="headerlink" title="3.2.4 缺陷"></a>3.2.4 缺陷</h3><p>我们使用的这种算法，有一些缺陷，如果投入生产环境，必须在这些方面加入改进。</p>
+<p><strong>1. 文本库必须有很高的精确性，不能包含拼写错误的词。</strong></p>
+<blockquote>
+<p>如果用户输入一个错误的拼法，文本库恰好包含了这种拼法，它就会被当成正确的拼法。</p>
+</blockquote>
+<p><strong>2. 对于不包含在文本库中的新词，没有提出解决办法。</strong></p>
+<blockquote>
+<p>如果用户输入一个新词，这个词不在文本库之中，就会被当作错误的拼写进行纠正。</p>
+</blockquote>
+<p><strong>3. 程序返回的是”编辑距离”为1的词，但某些情况下，正确的词的”编辑距离”为2。</strong></p>
+<blockquote>
+<p>比如，用户输入reciet，会被纠正为recite（编辑距离为1）,但用户真正想要输入的词是receipt（编辑距离为2）。也就是说，”编辑距离”越短越正确的规则，并非所有情况下都成立。</p>
+</blockquote>
+<p><strong>4. 有些常见拼写错误的”编辑距离”大于2。</strong></p>
+<blockquote>
+<p>这样的错误，程序无法发现。下面就是一些例子，每一行前面那个词是正确的拼法，后面那个则是常见的错误拼法。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">purple perpul</span><br><span class="line">curtains courtens</span><br><span class="line">minutes muinets</span><br><span class="line">successful sucssuful</span><br><span class="line">inefficient ineffiect</span><br><span class="line">availability avaiblity</span><br><span class="line">dissension desention</span><br><span class="line">unnecessarily unessasarily</span><br><span class="line">necessary nessasary</span><br><span class="line">unnecessary unessessay</span><br><span class="line">night nite</span><br><span class="line">assessing accesing</span><br><span class="line">necessitates nessisitates</span><br></pre></td></tr></table></figure>
+<p><strong>5. 用户输入的词的拼写正确，但是其实想输入的是另一个词。</strong></p>
+<blockquote>
+<p>比如，用户输入是where，这个词拼写正确，程序不会纠正。但是，用户真正想输入的其实是were，不小心多打了一个h。</p>
+</blockquote>
+<p><strong>6. 程序返回的是出现频率最高的词，但用户真正想输入的是另一个词。</strong></p>
+<blockquote>
+<p>比如，用户输入ther，程序会返回the，因为它的出现频率最高。但是，用户真正想输入的其实是their，少打了一个i。也就是说，出现频率最高的词，不一定就是用户想输入的词。</p>
+</blockquote>
+<p><strong>7. 某些词有不同的拼法，程序无法辨别。</strong></p>
+<blockquote>
+<p>比如，英国英语和美国英语的拼法不一致。英国用户输入’humur’，应该被纠正为’humour’；美国用户输入’humur’，应该被纠正为’humor’。但是，我们的程序会统一纠正为’humor’。</p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/算法/" rel="tag"># 算法</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/10/17/mac-dev/" rel="next" title="Mac下开发环境搭建">
+                <i class="fa fa-chevron-left"></i> Mac下开发环境搭建
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/24/microservice/" rel="prev" title="微服务架构">
+                微服务架构 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://oueonj87a.bkt.clouddn.com/WechatIMG3.jpeg"
+               alt="Scott Du" />
+          <p class="site-author-name" itemprop="name">Scott Du</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、贝叶斯定理-Bayes’-Theorem"><span class="nav-number">1.</span> <span class="nav-text">一、贝叶斯定理(Bayes’ Theorem)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-条件概率"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 条件概率</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-全概率公式"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 全概率公式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-贝叶斯公式"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 贝叶斯公式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-贝叶斯定理"><span class="nav-number">1.4.</span> <span class="nav-text">1.4 贝叶斯定理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、举几个栗子"><span class="nav-number">2.</span> <span class="nav-text">二、举几个栗子</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-病人分类的栗子"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 病人分类的栗子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-性别推断的例子"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 性别推断的例子</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三、互联网应用场景"><span class="nav-number">3.</span> <span class="nav-text">三、互联网应用场景</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-垃圾邮件的过滤"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 垃圾邮件的过滤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-1-背景"><span class="nav-number">3.1.1.</span> <span class="nav-text">3.1.1 背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-2-训练集"><span class="nav-number">3.1.2.</span> <span class="nav-text">3.1.2 训练集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-2-使用过程"><span class="nav-number">3.1.3.</span> <span class="nav-text">3.1.2 使用过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-3-问题及改进"><span class="nav-number">3.1.4.</span> <span class="nav-text">3.1.3 问题及改进</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-单词拼写检查"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 单词拼写检查</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-1-场景"><span class="nav-number">3.2.1.</span> <span class="nav-text">3.2.1 场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-2-原理"><span class="nav-number">3.2.2.</span> <span class="nav-text">3.2.2 原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-3-算法"><span class="nav-number">3.2.3.</span> <span class="nav-text">3.2.3 算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-3-Talk-is-Cheap，Show-me-the-code"><span class="nav-number">3.2.4.</span> <span class="nav-text">3.2.3 Talk is Cheap，Show me the code</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-4-缺陷"><span class="nav-number">3.2.5.</span> <span class="nav-text">3.2.4 缺陷</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Scott Du</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
