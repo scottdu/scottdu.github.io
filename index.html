@@ -335,11 +335,12 @@
 <script type="math/tex; mode=display">x_{1,2}=\frac{1 \pm \sqrt 5}{2}</script><p>然后</p>
 <script type="math/tex; mode=display">x_1^7+x_2^7=(\frac{1+\sqrt5}{2})^7+(\frac{1-\sqrt5}{2})^7 = 29</script><p>问题如果用计算器计算无理数，可能会丢失精度，更何况没有计算器，对于这种无理数的高次幂运算需要用到二项式定理，太费<code>CPU</code>了，这不是正解。</p>
 <h2 id="解法二：迭代法"><a href="#解法二：迭代法" class="headerlink" title="解法二：迭代法"></a>解法二：迭代法</h2><p>先求解根的低次幂和</p>
+<p>$s_0=x_1^0+x_2^0=2$</p>
 <p>$s_1=x_1+x_2=1$</p>
 <p>$s_2=x_1^2+x_2^2=(x_1+x_2)^2-2x_1x_2=3$</p>
 <p>$s_3=x_1^3+x_2^3=(x_1+x_2)^3-3x_1x_2(x_1+x_2)=4$</p>
 <p>$s_4=x_1^4+x_2^4=(x_1^2+x_2^2)^2-2(x_1^2x_2^2)^2=7$</p>
-<p>然后惊奇地发现$s_2=s_1+0,s3=s1+s2,s4=s3+s2$,这不是斐波那契额数列<code>Fibonacci sequence</code>的特性吗？</p>
+<p>然后惊奇地发现$s_2=s_1+s_0,s3=s1+s2,s4=s3+s2$,这不是斐波那契额数列<code>Fibonacci sequence</code>的特性吗？</p>
 <p>于是就直接得出</p>
 <p>$s_5=s_4+s_3=11$</p>
 <p>$s_6=s_5+s_4=18$</p>
