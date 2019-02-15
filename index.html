@@ -257,6 +257,152 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/15/math1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Scott Du">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="阿杜S考特">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/15/math1/" itemprop="url">某初中数学题的解法</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-15T11:30:49+08:00">
+                2019-02-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>已知$x_1+x_2=1$，$x_1x_2=-1$，求$x_1^7+x_2^7=?$</p>
+<p>这是小朋友问我的一个题目，第一感觉就是用求根公式解方程组，分别求出$x_1$和$x_2$的解，然后代入$x_1^7+x_2^7$，然后解决完毕，呵呵！</p>
+<h2 id="解法一：粗暴解法"><a href="#解法一：粗暴解法" class="headerlink" title="解法一：粗暴解法"></a>解法一：粗暴解法</h2><p>先给出一个定理: 设一元二次方程$ax^2+bx+c=0(a,b,c\in R, a \ne 0)$的两个根$x_1$和$x_2$，<br>由求根公式可以得到</p>
+<script type="math/tex; mode=display">x_{1,2}=\frac{-b \pm \sqrt{b^2-4ac}}{2a}</script><p>根据条件可以得到$x<em>1$和$x_2$是一元二次方程$x^2-x-1=0$的两个根。由一元二次方程的求根公式可知$x</em>{1,2}=\frac{1 \pm \sqrt5}{2}$，然后</p>
+<script type="math/tex; mode=display">x_1^7+x_2^7=(\frac{1+\sqrt5}{2})^7+(\frac{1-\sqrt5}{2})^7 = 29</script><p>问题如果用计算器计算无理数，可能会丢失精度，更何况没有计算器，对于这种无理数的高次幂运算需要用到二项式定理，太费<code>CPU</code>了，这不是正解。</p>
+<h2 id="解法二：迭代法"><a href="#解法二：迭代法" class="headerlink" title="解法二：迭代法"></a>解法二：迭代法</h2><p>先求解根的低次幂和<br>$s_1=x_1+x_2=1$<br>$s_2=x_1^2+x_2^2=(x_1+x_2)^2-2x_1x_2=3$<br>$s_3=x_1^3+x_2^3=(x_1+x_2)^3-3x_1x_2(x_1+x_2)=4$<br>$s_4=x_1^4+x_2^4=(x_1^2+x_2^2)^2-2(x_1^2x_2^2)^2=7$<br>然后惊奇地发现$s_2=s_1+0,s3=s1+s2,s4=s3+s2$,这不是斐波那契额数列<code>Fibonacci sequence</code>的特性吗？</p>
+<p>于是就直接得出<br>$s_5=s_4+s_3=11$<br>$s_6=s_5+s_4=18$<br>$s_7=s_6+s_5=29$</p>
+<p>所以$x_1^7+x_2^7=29$，解决完毕，但是这毕竟是猜想，结果虽然是正确的，但是不严谨！而且如果题目的条件变化了，是不是都满足<code>Fibonacci sequence</code>的特性呢？由此引出了这样的问题：如果我们知道了两个未知数的和以及乘积，是否可以知道所有根的任意次幂的和呢？是不是可以更加泛化一下呢？</p>
+<h2 id="泛化问题"><a href="#泛化问题" class="headerlink" title="泛化问题"></a>泛化问题</h2><p>已知$x_1+x_2=a$，$x_1x_2=b$，<br>求$x_1^n+x_2^n=? 其中a,b都是常数，n \in N$</p>
+<p>解：</p>
+<p>令$s_n=x_1^n+x_2^n$，则</p>
+<p>$s<em>n=x_1^{n-1}x_1+x_2^{n-1}x_2$<br>$s_n=x_1^{n-1}(a-x_2)+x_2^{n-1}(a-x_1)$<br>$s_n=ax_1^{n-1}-x_1^{n-1}x_2+ax_2^{n-1}-x_1x_2^{n-1}$<br>$s_n=a(x_1^{n-1}+x_2^{n-1})-x_1x_2(x_1^{n-2}+x_2^{n-2})$<br>$s_n=a(x_1^{n-1}+x_2^{n-1})-b(x_1^{n-2}+x_2^{n-2})$<br>于是得到了以下的递推公式:<br>$s_n=as</em>{n-1}-bs_{n-2}$</p>
+<p>那么对于原始问题已知$a=1,b=-1$<br>可以得到$s<em>n=s</em>{n-1}+s_{n-2}$<br>由此验证了解法二的严谨性。</p>
+<h2 id="延拓新的问题"><a href="#延拓新的问题" class="headerlink" title="延拓新的问题"></a>延拓新的问题</h2><p>如果$x_1,x_2$没有实数解，以上方法是否适用?</p>
+<p>看一个例子,对于泛化的公式,如果$a=b=2$，<br>即$s<em>1=x_1+x_2=2, x_1x_2=2$<br>显然$x</em>{1,2}=1 \pm i$<br>那么$s<em>2=x_1^2+x_2^2=(1+i)^2+(1-i)^2=0$<br>按照递推公式<br>$s_3=2s_2-2s_1=-4$<br>$s_4=2s_3-2s_2=-8$<br>$s_5=2s_4-2s_3=-8$<br>$s_6=2s_5-2s_4=0$<br>$s_7=2s_6-2s_5=16$<br>$s_8=2s_7-2s_6=32$<br>$s_9=2s_8-2s_7=32$<br>$s</em>{10}=2s<em>9-2s_8=0$<br>$s</em>{11}=2s_{10}-2s_9=-64$<br>貌似也ok，待证明</p>
+<h2 id="总结一下泛华问题"><a href="#总结一下泛华问题" class="headerlink" title="总结一下泛华问题"></a>总结一下泛华问题</h2><p>对于已知$x<em>1+x_2=a$，$x_1x_2=b$，<br>求$s_n= \sum</em>{k=1} =x_1^n+x_2^n=? 其中a,b都是常数，n \in N$</p>
+<p>就会有$s<em>n=as</em>{n-1}-bs_{n-2}, 其中s_0=2,s_1=a$</p>
+<p>最后用<code>python</code>代码实现一下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># a是和, b是积, n是幂</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(a,b,n)</span>:</span></span><br><span class="line">    <span class="keyword">if</span>(n == <span class="number">0</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="number">2</span></span><br><span class="line">    <span class="keyword">if</span>(n == <span class="number">1</span>):</span><br><span class="line">        <span class="keyword">return</span> a</span><br><span class="line">    <span class="keyword">return</span> a*solution(a,b,n<span class="number">-1</span>)- b*solution(a,b,n<span class="number">-2</span>)</span><br></pre></td></tr></table></figure>
+<p>运行结果</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span>&gt;&gt; print(solution(1,-1,0))</span><br><span class="line">2</span><br><span class="line"><span class="meta">&gt;</span>&gt;&gt; print(solution(1,-1,1))</span><br><span class="line">1</span><br><span class="line"><span class="meta">&gt;</span>&gt;&gt; print(solution(1,-1,2))</span><br><span class="line">3</span><br><span class="line"><span class="meta">&gt;</span>&gt;&gt; print(solution(1,-1,3))</span><br><span class="line">4</span><br><span class="line"><span class="meta">&gt;</span>&gt;&gt; print(solution(1,-1,4))</span><br><span class="line">7</span><br><span class="line"><span class="meta">&gt;</span>&gt;&gt; print(solution(1,-1,5))</span><br><span class="line">11</span><br><span class="line"><span class="meta">&gt;</span>&gt;&gt; print(solution(1,-1,6))</span><br><span class="line">18</span><br><span class="line"><span class="meta">&gt;</span>&gt;&gt; print(solution(1,-1,7))</span><br><span class="line">29</span><br></pre></td></tr></table></figure>
+<p>然后</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; print(solution(1,-1,100))</span><br><span class="line"># 等了好久都没算出来</span><br><span class="line"># 容易理解的算法性能差，性能好的算法不容易理解，这就是生活！！！！</span><br></pre></td></tr></table></figure>
+<p>经典优化方案，空间换时间:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(a,b,n)</span>:</span></span><br><span class="line">    sn,s0,s1 = <span class="number">0</span>, <span class="number">2</span>, a</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, n):</span><br><span class="line">        sn = a*s1 - b*s0</span><br><span class="line">        s0 = s1</span><br><span class="line">        s1 = sn</span><br><span class="line">    <span class="keyword">return</span> sn</span><br></pre></td></tr></table></figure>
+<p>测试100</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(solution(<span class="number">1</span>,<span class="number">-1</span>,<span class="number">100</span>))</span><br><span class="line"><span class="number">792070839848372253127</span></span><br><span class="line"><span class="comment"># 计算结果秒出了</span></span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/06/education1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2567,309 +2713,6 @@ P(E2)=(1-P(S|W1))(1-P(S|W2))(1-P(S))</script><p>又由于在$W1$和$W2$已经发
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/11/springcloud-microservice/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Scott Du">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="阿杜S考特">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/08/11/springcloud-microservice/" itemprop="url">基于Spring Cloud的微服务架构实践</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-11T10:10:00+08:00">
-                2017-08-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>转自：<a href="http://gitbook.cn/thanks/orz.html#http://gitbook.cn/m/mazi/author/58def091507b3b4c285a5695" target="_blank" rel="noopener">七夜</a></p>
-<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><blockquote>
-<p>随着公司业务量的飞速发展，平台面临的挑战已经远远大于业务，需求量不断增加，技术人员数量增加，面临的复杂度也大大增加。在这样的场景下，平台的技术架构也完成了从传统的单体架构到微服务架构的演进。</p>
-<div align="center">
-![屏幕快照 2017-08-11 10.12.53](http://oueonj87a.bkt.clouddn.com/屏幕快照 2017-08-11 10.12.53.png)
-</div>
-
-</blockquote>
-<h1 id="系统架构的演进过程"><a href="#系统架构的演进过程" class="headerlink" title="系统架构的演进过程"></a>系统架构的演进过程</h1><blockquote>
-<h2 id="单一应用架构（第一代架构）"><a href="#单一应用架构（第一代架构）" class="headerlink" title="单一应用架构（第一代架构）"></a>单一应用架构（第一代架构）</h2><p>这是平台最开始的情况，当时流量小，为了节约成本，并将所有应用都打包放到一个应用里面，采用的架构为.net+sqlserver</p>
-<p><div align="center">
-![屏幕快照 2017-08-11 10.18.41](http://oueonj87a.bkt.clouddn.com/屏幕快照 2017-08-11 10.18.41.png)
-</div><br><strong>表示层</strong>：位于最外层（最上层），最接近用户。用于显示数据和接收用户输入的数据，为用户提供一种交互式操作的界面，平台所使用的是基于.net的web形式。<br><strong>业务逻辑层（Business Logic Layer）</strong>：无疑是系统架构中体现核心价值的部分。它的关注点主要集中在业务规则的定制、业务流程的实现等与业务需求有关的系统设计，也即是说它是与系统所应对的<code>领域(domain)</code>逻辑有关，很多时候，也将业务逻辑层称为领域层。业务逻辑层在体系架构中的位置很关键，它处于数据访问层与表示层中间，起到了数据交换中承上启下的作用。由于层是一种弱耦合结构，层与层之间的依赖是向下的，底层对于上层而言是“无知”的，改变上层的设计对于其调用的底层而言没有任何影响。如果在分层设计时，遵循了面向接口设计的思想，那么这种向下的依赖也应该是一种弱依赖关系。对于数据访问层而言，它是调用者；对于表示层而言，它却是被调用者。<br><strong>数据层</strong>数据访问层：有时候也称为是持久层，其功能主要是负责数据库的访问，可以访问数据库系统、二进制文件、文本文档或者是XML文档等等，平台在这个阶段使用的是hibernate.net+sqlserver。</p>
-</blockquote>
-<p>第一代架构看似很简单，却支撑了平台的早期业务发展，满足了网站用户访问量在几万规模的处理需求。但是当用户访问量呈现大规模增长，问题就暴露出来了：</p>
-<blockquote>
-<ul>
-<li><strong><em>维护成本不断增高</em></strong>：当出现故障时，有可能引起故障的原因组合就会比较多，这也会导致分析故障、定位故障、修复故障的成本相应增高，故障的平均修复周期会花费很多时间，并且任何一个模块出现故障将会影响其他应用模块；在开发人员对全局功能缺乏深度理解的情况下，修复一个故障，经常引入其他的故障，导致该过程陷入“修复越多，故障越多”的恶性循环。</li>
-<li><strong><em>可伸缩性差</em></strong>：应用程序的所有功能代码都运行在同一个服务器上，将会导致应用程序的水平扩展非常困难，只能使用垂直扩展。</li>
-<li><strong><em>交付周期变长</em></strong>：应用程序做任何细微的修改以及代码提交，都会触发对整个应用程序进行代码编译、运行单元测试、代码检查、构建并生成部署包、验证功能等，这也就版本的反馈周期变长，单位时间内构建的效率变得很低。</li>
-<li><strong><em>新人培训周期变长</em></strong>：随着应用程序的功能越来越多，代码变得越来越复杂的同时，对于新加入团队的成员而言，了解业务背景、熟悉应用程序、配置本地开发环境，这些看似简单的任务，却会花费更长的时间。</li>
-</ul>
-<h2 id="垂直应用架构（第二代架构）"><a href="#垂直应用架构（第二代架构）" class="headerlink" title="垂直应用架构（第二代架构）"></a>垂直应用架构（第二代架构）</h2><p>为了解决第一代架构面临的问题，团队制定了如下的策略，并形成了第二代应用架构（垂直应用架构）</p>
-<div align="center">
-![屏幕快照 2017-08-11 11.02.33](http://oueonj87a.bkt.clouddn.com/屏幕快照 2017-08-11 11.02.33.png)
-</div>
-
-<ul>
-<li>应用拆成独立的应用模块。</li>
-<li><p>各个应用模块独立部署，并在负载均衡通过<code>session</code>保持解决应用模块的水平扩展问题。<br><code>Sticky</code>就是基于<code>cookie</code>的一种负载均衡解决方案，通过<code>cookie</code>实现客户端与后端访问的都是同一个后端服务器。请求来了，服务器发个<code>cookie</code>，并说：下次来带上，直接来找我！在项目中，我们使用了淘宝开源的<code>tengine</code>中的session_sticky模块。</p>
-</li>
-<li><p>数据库拆分成不同数据库，由对应应用访问。</p>
-</li>
-<li>域名拆分。</li>
-<li>动静分离。</li>
-</ul>
-<p>可以看到第二代架构解决应用级别的水平扩展，经过优化后，该架构支撑了几十万用户的访问需求，在这一阶段有部分应用已经使用<code>java</code>完成了<code>mvc</code>架构的重写。当然也存在一些问题。</p>
-<ul>
-<li>应用之间耦合度高，相互依赖严重。</li>
-<li>应用模块之间交互复杂，有时直接访问对方模块的数据库。</li>
-<li>数据库设计过多的关联查询与慢查询，数据库优化困难。</li>
-<li>数据库单点访问严重，出现故障无法恢复。</li>
-<li>数据复制问题严重，造成大量数据无法恢复。<br>我们曾经尝试使用sqlserver always on解决扩展问题，但是实现发现在复制过程中出现至少10秒的延迟，因此放弃了这个方案。</li>
-<li>系统扩展困难。</li>
-<li>各个开发团队各自为战，开发效率低。</li>
-<li>测试工作量巨大，发布困难。</li>
-</ul>
-<h2 id="微服务架构（平台现状：第三代架构）"><a href="#微服务架构（平台现状：第三代架构）" class="headerlink" title="微服务架构（平台现状：第三代架构）"></a>微服务架构（平台现状：第三代架构）</h2><p>为了解决第一代与第二代架构存在的问题，我们对平台进行了梳理优化。根据平台业务需要以及对第一二代架构的总结，我们确定了第三代架构的核心需求：</p>
-<ul>
-<li>核心业务抽取出来，作为独立的服务对外服务。</li>
-<li>服务模块持续独立部署，减少版本交付周期。</li>
-<li>数据库按服务分库分表。</li>
-<li>大量使用缓存，提高访问。</li>
-<li>系统间交互使用轻量级的<code>rest</code>协议，摒弃<code>RPC</code>协议。</li>
-<li>去.net化，开发语言使用<code>java</code>来实现。并依此为基础进行了平台的第三代架构的重构工作。<br><div align="center"> 
-![屏幕快照 2017-08-11 11.22.55](http://oueonj87a.bkt.clouddn.com/屏幕快照 2017-08-11 11.22.55.png)
-</div><br>看第三代架构里面的组成，主要分为八个部分：</li>
-<li>CDN: CDN系统负责实时地根据网络流量和各个节点的连接、负载状况以及到用户的距离和响应时间等综合信息将用户的请求重新导向离用户最近的服务节点上。其目的是使用户可就近取得所需内容，解决Internet网络拥挤的状况，提高用户访问网站的响应速度。平台在选择CDN厂商时，需要考虑经营时间长短，是否有可扩充的贷款资源、灵活的流量和带宽选择、稳定的节点、性价比；综合前面几个因素平台采用了七牛的CDN服务。</li>
-<li>LB层：平台包括很多个业务域，不同的业务域有不同的集群，LB层（Load Balancer）是对多台业务服务器进行流量分发的负载均衡服务，通过流量分发扩展应用系统对外的服务能力，并消除单点故障提升了应用系统的可用性。选择哪种负载，需要综合考虑各种因素（是否满足高并发高性能，Session保持如何解决，负载均衡的算法如何，支持压缩，缓存的内存消耗），主要分为以下两种：LVS：工作在4层，Linux实现的高性能高并发、可伸缩性、可靠的负载均衡器，支持多种转发方式(NAT、DR、IP Tunneling)，其中DR模式支持通过广域网进行负载均衡。支持双击热备（Keepalived或者Heartbeat）。对网络环境的依赖性比较高。Nigix：工作在7层，事件驱动的、异步非阻塞的架构、支持对进程的高并发的负载均衡器/反向代理软件。可以针对域名、目录结构、正则规则针对http做一些分流。通过端口检测到服务器内部的故障，比如根据服务器处理网页返回的状态码、超时等等，并且会把返回错误的请求重新提交到另一个节点，不过其中缺点就是不支持url来检测。对于session sticky，我们通过基于cookie的扩展ngix-sticky-module来实现。这种也是平台目前所采用的方案。</li>
-<li>业务层：代表平台某一领域的业务提供的服务，对于平台而言，有商品、会员、直播、订单、财务、论坛等系统，不同的系统提供不同的领域服务。</li>
-<li>网关与注册中心：提供了同意的底层微服务api入口与注册管理。封装了内部的系统架构并向每个客户端提供Rest API，同时实现了监控、负载均衡、缓存、服务降级、限流等职责。目前平台采用ngix+consul来实现。</li>
-<li>服务层：该层为一些协同工作的小而自治的服务，平台根据业务的边界来确定了服务的边界，每个服务只专注自己边界之内。该层基于spring cloud来构建。</li>
-<li>基础设施层：该层为上层提供基础设施服务，主要为一下几类：redis集群：以高响应速度、内存操作为上层提供缓存服务。mongodb集群：由于mongodb具有灵活文档模型、高可用复制集、可扩展分片集群等特性，平台基于此为上层提供如文章、帖子、链路日志等存储服务。mongodb集群采用了复制+分片的架构解决可用性与扩展性问题。MySQL集群：存储会员、商品、订单等具有事务性要求的数据。Kafka：支撑了平台的所有消息服务。ES(ElasticSearch)：提供了平台的商品、会员、订单、日志等搜索服务。</li>
-<li>集成层：这个特点是整个平台中的最大亮点，包括实践持续集成CI、持续交付CD、DevOps文化，让每个人都参与交付，在规范的流程和标准的交付下，完成一个服务的自动部署发布，进而提高了版本交付链路的整体效率。</li>
-<li>监控层：将系统拆分为更小的、细粒度的微服务给平台带来了很多好处，但是，它也增加了平台系统的运维复杂性。给最终用户提供的任务服务都是有大量的微服务配合完成，一个初始调用最终会触发对个下游的服务调用，如何才能重建请求流，以重现与解决这个问题？为此部署开源的open-falcon平台提供应用级以上的监控、使用ELK提供应用日志的分析、使用自建服务提供链路日志跟踪以及基于spring config server实践统一配置服务。</li>
-</ul>
-</blockquote>
-<h1 id="微服务团队的工作方式"><a href="#微服务团队的工作方式" class="headerlink" title="微服务团队的工作方式"></a>微服务团队的工作方式</h1><blockquote>
-<p><strong><em>康威定律</em></strong>：任何组织在设计一套系统时，所交付的设计方案在结构上都与该组织的沟通结构保持一致。</p>
-<h2 id="工作方式"><a href="#工作方式" class="headerlink" title="工作方式"></a>工作方式</h2><p>在实践第三代架构时，我们对团队组织做了几个调整：</p>
-<ul>
-<li>按照业务边界进行了划分，在一个团队内全栈，让团队自治，按照这样的方式组建，将沟通的成本维持在系统的内部，每个子系统就会更加内聚，彼此的依赖耦合能力变弱，夸系统的沟通成本也就能降低<br><img src="http://oueonj87a.bkt.clouddn.com/屏幕快照 2017-08-11 11.58.14.png" alt="屏幕快照 2017-08-11 11.58.14"></li>
-<li>专门建立了一个架构师部门来负责第三代架构的推进工作。<br>通常对于一个架构师团队，有系统架构、应用架构、运维、DBA、敏捷专家五个角色组成是一个比较合理的结构。那么又如何可控制好架构组的产品，保证架构工作的顺利推进呢？</li>
-<li>首先：打造持续改进的自组织文化是实施微服务的关键基石。只有持续改进，持续学习和反馈，持续打造这样一个文化氛围和团队，微服务架构才能持续发展下去，保持新鲜的生命力，从而实现我们的初衷。</li>
-<li>其次：架构组的产品要经过严格的流程，因为架构组推行的是通用的解决方案，为了保证方案的质量，我们从方案调研到评审再到实施都有一个严格的闭环。<br><img src="http://oueonj87a.bkt.clouddn.com/屏幕快照 2017-08-11 12.02.48.png" alt="屏幕快照 2017-08-11 12.02.48"><br>再谈整个团队的交付流程与开发模式，如果没有预先定义好，则很难让微服务架构发挥出真正的价值，下面我们先来看看微服务架构的交付流程。<br><img src="http://oueonj87a.bkt.clouddn.com/屏幕快照 2017-08-11 12.04.07.png" alt="屏幕快照 2017-08-11 12.04.07"><br>使用微服务架构开发应用程序，我们实际上是针对一个个微服务进行设计、开发、测试、部署，因为每个服务之间是没有彼此依赖的，大概的交付流程就像上图这样。<strong>设计阶段：</strong>架构组将产品功能拆分为若干微服务，为每个微服务设计API接口（例如Rest API），需要给出API文档，包括API的名称、版本、请求参数、响应结果、错误代码等信息。在开发阶段，开发工程师去实现API接口，也包括完成API的单元测试工作，在此期间，前端工程师会并行开发Web UI部分，可根据API文档早出一些假数据（mock数据），这样一来，前端工程师就不必等待后端API全部开发完毕，才能开始自己的工作了，实现了前后端并行开发。<strong>测试阶段：</strong>这一阶段过程全自动化过程，开发人员提交代码到代码服务器，代码服务器触发持续集成构建、测试，如果测试通过则会自动通过Ansible脚本推送到模拟环境；在时间中对于线上环境则是先要走审核流程，通过之后才能推送到生成环境。提高工作效率，并且控制了部分可能因为测试不充分而导致的线上线下不稳定。<strong>开发模式</strong>在以上交付流程中，开发、测试、部署这三个阶段可能都会涉及到对代码行为的控制，我们还需要制定相关开发模式，以确保多人能够良好地协作。</li>
-<li>实践“绞杀者模式”：<br><img src="http://oueonj87a.bkt.clouddn.com/屏幕快照 2017-08-11 12.20.42.png" alt="屏幕快照 2017-08-11 12.20.42"><br>由于第三代架构跨度较大，并且面临着无法修改的.net遗留系统，我们采用绞杀者模式，在遗留系统外面增加新的Proxy代理微服务，并且在LB控制upstream的方式，而不是直接修改原有系统，逐步的实现对老系统的替换。</li>
-<li>开发规范<br><img src="http://oueonj87a.bkt.clouddn.com/屏幕快照 2017-08-11 12.23.05.png" alt="屏幕快照 2017-08-11 12.23.05"><br>经验表明，我们需要善用代码版本控制系统，我曾经遇到一个开发团队，由于分支没有规范，最后一个小版本上线合代码居然花了几个小时，最后开发人员自己都不知道合到哪个分支。拿GitLab来说，它很好地支持了多分支代码版本，我们需要利用这个特性来提高开发效率，上图就是我们目前的分支管理规范。最稳定的代码放在master分支上，我们不要直接在master分支上提交代码，只能在该分支上进行代码合并操作，例如将其他分支的代码合并到master分支上。我们日常开发中的代码需要从master分支上来一条develop分支出来，该分支所有人都能访问，但一般情况下，我们也不会直接在该分支上提交代码，代码同样是从其他分支合并到develop分支上去。当我们需要开发某个特性时，需要从develop分支拉出一条feature分支，例如feature-1与feature-2，在这些分支上并行地开发具体特性。当特性开发完毕后，我们决定需要发布某个版本了，此时需要从develop分支上拉一条release分支，例如release-1.0.0，并将需要发布的特性从相关feature分支一同合并到release分支上，随后将针对release分支推送到测试环境，测试工程师在该分支上做功能而是，开发工程师在该分支上修改bug。待测试工程师无法找到任何bug时，我们可将该release分支部署到预发环境。待上线完成后，将release分支上的代码同时合并到develop分支与master分支，并在master分支上打一个tag，例如v1.0.0。当生产环境发现bug时，我们需要从对应的tag上（例如v1.0.0）拉出一条hotfix分支（例如hotfix-1.0.1），并在该分支上做bug修复。待bug完全修复后，需将hotfix分支上的代码同时合并到develop分支与master分支。对于版本号我们也有要求，格式为：x.y.z，其中，x用于有重大重构时才会升级，y用于有新的特性发布时才会升级，z用于修改了某个bug后才会升级。针对每个微服务，我们都需要严格按照以上开发模式来执行。</li>
-</ul>
-</blockquote>
-<h1 id="微服务开发体系"><a href="#微服务开发体系" class="headerlink" title="微服务开发体系"></a>微服务开发体系</h1><blockquote>
-<p>我们已经对微服务团队的架构、交付流程、开发模式进行了描述，下面我们聊聊微服务的开发体系。</p>
-<h2 id="什么是微服务架构"><a href="#什么是微服务架构" class="headerlink" title="什么是微服务架构"></a>什么是微服务架构</h2><p>Martin Flower的定义：In short, the microservice architectural style[1] is an approach to developing a single application as a suite of small services, each running in its own process and communicating with lightweight mechanisms, often an HTTP resource API. These services are built around business capabilities and independently deployable by fully automated deployment machinery. There is a bare minimum of centralized management of these services, which may be written in different programming languages and use different data storage technologies<br>简单的说，微服务是软件架构上的一个设计风格，它倡导将一个原本独立的系统分成多个小型服务，这些小型服务都在各自独立的进程中运行，服务间通过基于HTTP的RESTful轻量级API进行通信协作。被拆分的每个微服务围绕系统中的某项或一些耦合度较高的业务进行构建，并且每个服务都维护着自身的数据存储、业务开发、自动化测试案例以及独立部署机制。由于有了轻量级通信机制，这些微服务间可以使用不同的语言来编写。</p>
-<h2 id="微服务的拆分粒度"><a href="#微服务的拆分粒度" class="headerlink" title="微服务的拆分粒度"></a>微服务的拆分粒度</h2><p>微服务到底拆分到一个多大的粒度，更多时候是需要在粒度与团队之间找到一个平衡点，微服务越小，微服务独立性带来的好处就越多。但是管理大量微服务也会越来越复杂。基本上拆分需要遵循以下几个原则：</p>
-<ul>
-<li>单一职责原则：即“把因相同原因而变化的东西聚合到一起，把因不同原因而变化的东西分离开来”。通过这个原则确定微服务边界。</li>
-<li>团队自主原则：团队越大，沟通与协助成本就会越高，我们在实践中一个团队不会超过8个人，团队内全栈，是一个全功能团队。</li>
-<li>先分数据库、后分服务：数据模型能否彻底分开，决定了微服务的边界功能是否彻底划清，实践中我们先讨论数据模型边界，数据模型的边界映射了业务的边界，进而从底向上完成服务拆分。<h2 id="如何搭建微服务架构"><a href="#如何搭建微服务架构" class="headerlink" title="如何搭建微服务架构"></a>如何搭建微服务架构</h2>为了搭建好微服务架构，技术选型是一个非常重要的阶段，只有选择合适的“演员”，才能把这台戏演好。<br><img src="http://oueonj87a.bkt.clouddn.com/屏幕快照 2017-08-11 12.45.54.png" alt="屏幕快照 2017-08-11 12.45.54"><br>我们使用Spring Cloud作为微服务开发框架，Spring Boot拥有嵌入式Tomcat，可直接运行一个jar包来发布微服务，此外它还提供了一系列“开箱即用”的插件，例如：配置中心，服务注册与发现，熔断器，路由，代理，控制总线，一次性令牌，全局锁，leader选举，分布式会话，集群状态等，可大量提高我们的开发效率。</li>
-</ul>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>功能</th>
-<th>Spring Cloud</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>路由与负载均衡</td>
-<td>Ribbon</td>
-</tr>
-<tr>
-<td>注册中心</td>
-<td>Eureka</td>
-</tr>
-<tr>
-<td>网关</td>
-<td>Zuul</td>
-</tr>
-<tr>
-<td>断路器</td>
-<td>Hystrix</td>
-</tr>
-<tr>
-<td>分布式配置</td>
-<td>Config</td>
-</tr>
-<tr>
-<td>日志输出</td>
-<td>ELK</td>
-</tr>
-<tr>
-<td>认证集成</td>
-<td>oauth2</td>
-</tr>
-<tr>
-<td>消息总线</td>
-<td>Bus</td>
-</tr>
-<tr>
-<td>批量任务</td>
-<td>Task</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h2 id="工程结构规范"><a href="#工程结构规范" class="headerlink" title="工程结构规范"></a>工程结构规范</h2><p><img src="http://oueonj87a.bkt.clouddn.com/图片 1.png" alt="图片 1"><br>上图是我们实践中每个服务应该具有的项目组成结构。</p>
-<ol>
-<li>微服务名+service: 为对内其它微服务提供服务调用。服务名+api模块为服务间定义的接口规范，使用swagger+rest接口定义。服务名+server模块包含了能直接启动该服务的应用与配置。</li>
-<li>微服务名+web: 供上层web应用请求的入口，该服务中一般会调用底层微服务完成请求。 </li>
-</ol>
-<h2 id="API网关实践"><a href="#API网关实践" class="headerlink" title="API网关实践"></a>API网关实践</h2><p><img src="http://oueonj87a.bkt.clouddn.com/图片 2.png" alt="图片 2"><br>API网关作为后端所有微服务和API的访问入口，对微服务和API进行审计，流控，监控，计费等。常用的API网关解决方案有：</p>
-<ul>
-<li>应用层方案最有名的当然是Netflix的zuul，但这不意味着这种方案就最合适，比如netflix是因为使用AWS，对基础设施把控有限，所以才不得不在应用层做了zuul这样的方案，如果通盘考虑，这种方案不是最合适的方案。但是如果自己的团队对整体技术设施把控有限，且团队结构不完善，应用层方案也可能是最合适你的最佳方案。</li>
-<li>ngix+lua方案也是我们采用并认为最合适的方案，OpenResty和Kong是比较成熟的可选方案，不过Kong使用Postgres或者Cassandra，国内公司估计选择这两货的不多，但Kong的HTTP API设计还是很不错的。</li>
-<li>我们的方案使用ngix+lua+consul组合方案，虽然我们团队大多是java，选择zookeeper会是更加自然的选择，但是作为欣锐派，对压测结果进行了分析，我们最终选择使用consul。良好的HTTP API支持，可以动态管理upstream，这也意味着我们可以通过发布平台或者胶水系统无缝的实现服务注册和发现，对服务的访问方透明。<br><img src="http://oueonj87a.bkt.clouddn.com/图片 3.png" alt="图片 3"><br>在以上的方案中：consul作为状态处处或者配置中心（主要使用consul的KV存储功能）；ngix作为API网关，根据consul中upstreams的相关配置，动态分发流量到配置的upstreams节点；ngix根据配置项，连接到consul集群；启动的API或者微服务实例，通过手工/命令行/发布部署平台，将实例信息注册/写入consul；ngix获取到相应的upstreams信息更新，则动态变更ngix内部的upstreams分发配置，从而将流量路由和分发到对应的API和微服务实例结点；将以上注册和发现逻辑通过脚本或统一的发布部署平台固化后，就可以实现透明的服务访问和扩展。<strong>链路监控实践：</strong>我们发现，以前在单体应用下的日志监控很简单，在微服务架构下却成为了一个大问题，如果无法跟踪业务流，无法定位问题，在复杂的微服务交互关系中，我们就会非常被动，此时分布式链路监控应运而生，其核心就是调用链。通过一个全局的ID将分布在各个服务节点上同一次请求串联起来，还原原有的调用关系、追踪系统问题、分析调用数据、统计系统指标。<br>分布式链路跟踪最早见于2010年Google发表的一篇论文《dapper》。那么我们先来看一下什么是调用链，调用链其实就是将一次分布式请求还原成调用链路。显示的在后端查看一次分布式请求的调用情况，比如各个节点上的耗时、请求具体到了哪台机器上、每个服务节点的请求状态，等等。它能反映出一次请求中经理了多少个服务层级等信息（比如你的系统A调用B，B调用C，那么这次请求的层级就是3），如果你发现有些请求层级大于10，那么这个服务很有可能需要优化了。常见的解决方案有：</li>
-<li>Pinpoint<br>github地址：<a href="https://github.com/naver/pinpoint" target="_blank" rel="noopener">https://github.com/naver/pinpoint</a><br>Pinpint is an open source APM(Application Performance Management) tool for large-scale distributed systems written in Java.<br>对APM有兴趣的朋友都应该看看这个开源项目，这是一个韩国团队开源出来的，通过JavaAgent的机制来做字节码代码植入（探针），实现加入traceid和抓取性能数据的目的。<br>NewRelic、Oneapm之类的工具在java平台上的性能分析也是类似的机制。</li>
-<li>Zipkin<br>官网：OpenZipkin(A distributed tracing system) <a href="http://zipkin.io/" target="_blank" rel="noopener">http://zipkin.io/</a><br>github地址：<a href="https://github.com/openzipkin/zipkin/" target="_blank" rel="noopener">https://github.com/openzipkin/zipkin/</a><br>这是twitter开源出来的，也是参考Dapper的体系来做的。<br>Zipkin的java应用端是通过一个叫Brave的组件来实现对应用内部的性能分析数据采集。<br>Brave的github地址：<a href="https://github.com/openzipkin/brave" target="_blank" rel="noopener">https://github.com/openzipkin/brave</a><br>这个组件通过实现一系列的java拦截器，来做到对http/servlet请求、数据库访问的调用过程跟踪。然后通过在spring之类的配置文件里加入这些拦截器，完成对java应用的性能数据采集。</li>
-<li>CAT<br>github地址：<a href="https://github.com/dianping/cat" target="_blank" rel="noopener">https://github.com/dianping/cat</a><br>这个是大众点评开源出来的，实现的功能也还是蛮丰富的，国内也有一些公司在用了。不过CAT实现跟踪的手段，是要在代码里硬编码写一些“埋点”，也就是侵入式的。这样做有利有弊，好处是可以在自己需要的地方加埋点，比较有针对性；坏处是必须改动现有系统，很多开发团队不愿意。前面三个工具里面，如果不想重复造轮子，我推荐的顺序依次是Pinpoint-&gt;Zipkin-&gt;CAt。原因很简单，就是这三个工具对于程序源代码和配置文件的侵入性，是依次递增的。</li>
-<li>我们的解决方案针对于微服务，我们在spring cloud基础上，对微服务架构进行了扩展，基于Google Dapper的概念，设计了一套基于微服务架构的分布式跟踪系统（WeAPM）<br><img src="http://oueonj87a.bkt.clouddn.com/图片 4.png" alt="图片 4"><br>如上图所示，我们可以通过服务名、时间、日志类型、方法名、异常级别、接口耗时等参数查询响应的日志。在得到的TrakID可以查询到该请求的整个链路日志，为重现问题、分析日志提供了极大方便。<br><img src="http://oueonj87a.bkt.clouddn.com/图片 5.png" alt="图片 5"><h2 id="断路器实践"><a href="#断路器实践" class="headerlink" title="断路器实践"></a>断路器实践</h2>在微服务架构中，我们将系统拆分成了一个个的微服务，这样就有可能因为网络原因是依赖服务自身问题出现调用故障或延迟，而这些问题会直接导致调用方的对外服务也出现延迟，若此时调用方的请求不断增加，最后就会出现因等待出现故障的依赖方响应而形成任务积压，最终导致自身服务的瘫痪。为了解决这样的问题，因此产生了断路器模式<br><img src="http://oueonj87a.bkt.clouddn.com/图片 6.png" alt="图片 6"><br>我们在时间中使用了Hystrix来实现断路器的功能。Hystrix是Netflix开源的微服务框架套件一直，该框架目标在于通过控制那些访问远程系统、服务和第三方库的节点，从而对延迟和故障提供更强大的容错能力。Hystrix具备拥有回退机制和断路器功能的线程和信号隔离，请求缓存和请求打包，以及监控和配置等功能。断路器的使用流程如下：启用断路器</li>
-</ul>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@EnableCircuitBreaker</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Application</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SrpingApplication.run(DVoiceWebApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>代用使用方式</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StoreIntegration</span> </span>&#123;</span><br><span class="line">    <span class="meta">@HystrixCommand</span>(fallbackMethod = <span class="string">"defaultStores"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">getStore</span><span class="params">(Map&lt;String, Object&gt; parameters)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// do stuff that might fail</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">defaultStore</span><span class="params">(Map&lt;String, Object&gt; parameters)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="comment">/* something useful */</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>配置文件</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">#配置Hystrix</span><br><span class="line">hystrix:</span><br><span class="line">  command:</span><br><span class="line">    default:</span><br><span class="line">      fallback:</span><br><span class="line">        enabled: true</span><br><span class="line">      circuitBreaker:</span><br><span class="line">        enabled: true</span><br><span class="line">      metrics:</span><br><span class="line">        rollingPercentile.enabled: false</span><br><span class="line">      execution:</span><br><span class="line">        isolation:</span><br><span class="line">          strategy: SEMAPHORE</span><br><span class="line">          thread:</span><br><span class="line">            interrupteOnTimeout: true</span><br><span class="line">            timeoutInMilliseconds: 1200</span><br><span class="line">  threadpool:</span><br><span class="line">    default:</span><br><span class="line">      coreSize: 30</span><br></pre></td></tr></table></figure>
-<blockquote>
-<h2 id="资源控制实践"><a href="#资源控制实践" class="headerlink" title="资源控制实践"></a>资源控制实践</h2><p>聊到资源控制，估计很多小伙伴会想到Docker，Docker确实是一个实现资源控制很不错的解决方案，我们前期做调研时也对是否使用Docker进行了评审，但是最终还是选择放弃，而使用linux的libcgroup脚本控制，原因如下：</p>
-<ul>
-<li>Docker更加适合大内存做资源可控制、容器化，但是我们线上服务器一般都是32G左右，使用Docker会有资源浪费。</li>
-<li>使用Docker会使运维复杂、来自业务的压力会很大。<br>为什么要有cgroup? Linux系统中经常有个需求就是希望能限制某个或者偶写进程的分配资源。也就是能完成一组容器的概念，在这个容器中，有分配好的特定比例的cpu时间，IO时间，可用内存大小等等。于是就出现了cgroup的概念，cgroup就是controller group，最初由google的工程师提出，后来被整合进Linux内核中，Docker也是基于此来实现。libcgroup使用流程：安装</li>
-</ul>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install libcgroup</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>启动服务</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">service cgcnfig start</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>配置文件模板(以memory为例)：</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mout &#123;</span><br><span class="line">    cpu = /sys/fs//cgroup/cpu;</span><br><span class="line">    cpuacct = /sys/fs/cgroup/cpuacct;</span><br><span class="line">    devices = /sys/fs/cgroup/devices;</span><br><span class="line">    memory = /sys/fs/cgroup/memory;</span><br><span class="line">    freezer = /sys/fs/cgroup/freezer;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>看到memory子系统是挂载在目录/sys/fs/cgroup/memory下，进入这个目录创建一个文件夹，就创建了一个control group了。</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir test</span><br><span class="line">echo &quot;服务进程号&quot;&gt;&gt; task(tasks是test目录下的一个文件)</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>这样就当前这个终端进程加入到了内存限制的croup中了。</p>
-</blockquote>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2920,7 +2763,7 @@ P(E2)=(1-P(S|W1))(1-P(S|W2))(1-P(S))</script><p>又由于在$W1$和$W2$已经发
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">14</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2933,7 +2776,7 @@ P(E2)=(1-P(S|W1))(1-P(S|W2))(1-P(S))</script><p>又由于在$W1$和$W2$已经发
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

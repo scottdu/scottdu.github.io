@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="数学," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="问题已知$x_1+x_2=1$，$x_1x_2=-1$，求$x_1^7+x_2^7=?$ 这是小朋友问我的一个题目，第一感觉就是用求根公式解方程组，分别求出$x_1$和$x_2$的解，然后代入$x_1^7+x_2^7$，然后解决完毕，呵呵！ 解法一：粗暴解法先给出一个定理: 设一元二次方程$ax^2+bx+c=0(a,b,c\in R, a \ne 0)$的两个根$x_1$和$x_2$，由求根公式">
+<meta name="keywords" content="数学">
+<meta property="og:type" content="article">
+<meta property="og:title" content="某初中数学题的解法">
+<meta property="og:url" content="http://yoursite.com/2019/02/15/math1/index.html">
+<meta property="og:site_name" content="阿杜S考特">
+<meta property="og:description" content="问题已知$x_1+x_2=1$，$x_1x_2=-1$，求$x_1^7+x_2^7=?$ 这是小朋友问我的一个题目，第一感觉就是用求根公式解方程组，分别求出$x_1$和$x_2$的解，然后代入$x_1^7+x_2^7$，然后解决完毕，呵呵！ 解法一：粗暴解法先给出一个定理: 设一元二次方程$ax^2+bx+c=0(a,b,c\in R, a \ne 0)$的两个根$x_1$和$x_2$，由求根公式">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-15T06:38:16.673Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="某初中数学题的解法">
+<meta name="twitter:description" content="问题已知$x_1+x_2=1$，$x_1x_2=-1$，求$x_1^7+x_2^7=?$ 这是小朋友问我的一个题目，第一感觉就是用求根公式解方程组，分别求出$x_1$和$x_2$的解，然后代入$x_1^7+x_2^7$，然后解决完毕，呵呵！ 解法一：粗暴解法先给出一个定理: 设一元二次方程$ax^2+bx+c=0(a,b,c\in R, a \ne 0)$的两个根$x_1$和$x_2$，由求根公式">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/02/15/math1/"/>
+
+
+
+
+
+  <title>某初中数学题的解法 | 阿杜S考特</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">阿杜S考特</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">个人空间</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/15/math1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Scott Du">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="阿杜S考特">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">某初中数学题的解法</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-15T11:30:49+08:00">
+                2019-02-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>已知$x_1+x_2=1$，$x_1x_2=-1$，求$x_1^7+x_2^7=?$</p>
+<p>这是小朋友问我的一个题目，第一感觉就是用求根公式解方程组，分别求出$x_1$和$x_2$的解，然后代入$x_1^7+x_2^7$，然后解决完毕，呵呵！</p>
+<h2 id="解法一：粗暴解法"><a href="#解法一：粗暴解法" class="headerlink" title="解法一：粗暴解法"></a>解法一：粗暴解法</h2><p>先给出一个定理: 设一元二次方程$ax^2+bx+c=0(a,b,c\in R, a \ne 0)$的两个根$x_1$和$x_2$，<br>由求根公式可以得到</p>
+<script type="math/tex; mode=display">x_{1,2}=\frac{-b \pm \sqrt{b^2-4ac}}{2a}</script><p>根据条件可以得到$x<em>1$和$x_2$是一元二次方程$x^2-x-1=0$的两个根。由一元二次方程的求根公式可知$x</em>{1,2}=\frac{1 \pm \sqrt5}{2}$，然后</p>
+<script type="math/tex; mode=display">x_1^7+x_2^7=(\frac{1+\sqrt5}{2})^7+(\frac{1-\sqrt5}{2})^7 = 29</script><p>问题如果用计算器计算无理数，可能会丢失精度，更何况没有计算器，对于这种无理数的高次幂运算需要用到二项式定理，太费<code>CPU</code>了，这不是正解。</p>
+<h2 id="解法二：迭代法"><a href="#解法二：迭代法" class="headerlink" title="解法二：迭代法"></a>解法二：迭代法</h2><p>先求解根的低次幂和<br>$s_1=x_1+x_2=1$<br>$s_2=x_1^2+x_2^2=(x_1+x_2)^2-2x_1x_2=3$<br>$s_3=x_1^3+x_2^3=(x_1+x_2)^3-3x_1x_2(x_1+x_2)=4$<br>$s_4=x_1^4+x_2^4=(x_1^2+x_2^2)^2-2(x_1^2x_2^2)^2=7$<br>然后惊奇地发现$s_2=s_1+0,s3=s1+s2,s4=s3+s2$,这不是斐波那契额数列<code>Fibonacci sequence</code>的特性吗？</p>
+<p>于是就直接得出<br>$s_5=s_4+s_3=11$<br>$s_6=s_5+s_4=18$<br>$s_7=s_6+s_5=29$</p>
+<p>所以$x_1^7+x_2^7=29$，解决完毕，但是这毕竟是猜想，结果虽然是正确的，但是不严谨！而且如果题目的条件变化了，是不是都满足<code>Fibonacci sequence</code>的特性呢？由此引出了这样的问题：如果我们知道了两个未知数的和以及乘积，是否可以知道所有根的任意次幂的和呢？是不是可以更加泛化一下呢？</p>
+<h2 id="泛化问题"><a href="#泛化问题" class="headerlink" title="泛化问题"></a>泛化问题</h2><p>已知$x_1+x_2=a$，$x_1x_2=b$，<br>求$x_1^n+x_2^n=? 其中a,b都是常数，n \in N$</p>
+<p>解：</p>
+<p>令$s_n=x_1^n+x_2^n$，则</p>
+<p>$s<em>n=x_1^{n-1}x_1+x_2^{n-1}x_2$<br>$s_n=x_1^{n-1}(a-x_2)+x_2^{n-1}(a-x_1)$<br>$s_n=ax_1^{n-1}-x_1^{n-1}x_2+ax_2^{n-1}-x_1x_2^{n-1}$<br>$s_n=a(x_1^{n-1}+x_2^{n-1})-x_1x_2(x_1^{n-2}+x_2^{n-2})$<br>$s_n=a(x_1^{n-1}+x_2^{n-1})-b(x_1^{n-2}+x_2^{n-2})$<br>于是得到了以下的递推公式:<br>$s_n=as</em>{n-1}-bs_{n-2}$</p>
+<p>那么对于原始问题已知$a=1,b=-1$<br>可以得到$s<em>n=s</em>{n-1}+s_{n-2}$<br>由此验证了解法二的严谨性。</p>
+<h2 id="延拓新的问题"><a href="#延拓新的问题" class="headerlink" title="延拓新的问题"></a>延拓新的问题</h2><p>如果$x_1,x_2$没有实数解，以上方法是否适用?</p>
+<p>看一个例子,对于泛化的公式,如果$a=b=2$，<br>即$s<em>1=x_1+x_2=2, x_1x_2=2$<br>显然$x</em>{1,2}=1 \pm i$<br>那么$s<em>2=x_1^2+x_2^2=(1+i)^2+(1-i)^2=0$<br>按照递推公式<br>$s_3=2s_2-2s_1=-4$<br>$s_4=2s_3-2s_2=-8$<br>$s_5=2s_4-2s_3=-8$<br>$s_6=2s_5-2s_4=0$<br>$s_7=2s_6-2s_5=16$<br>$s_8=2s_7-2s_6=32$<br>$s_9=2s_8-2s_7=32$<br>$s</em>{10}=2s<em>9-2s_8=0$<br>$s</em>{11}=2s_{10}-2s_9=-64$<br>貌似也ok，待证明</p>
+<h2 id="总结一下泛华问题"><a href="#总结一下泛华问题" class="headerlink" title="总结一下泛华问题"></a>总结一下泛华问题</h2><p>对于已知$x<em>1+x_2=a$，$x_1x_2=b$，<br>求$s_n= \sum</em>{k=1} =x_1^n+x_2^n=? 其中a,b都是常数，n \in N$</p>
+<p>就会有$s<em>n=as</em>{n-1}-bs_{n-2}, 其中s_0=2,s_1=a$</p>
+<p>最后用<code>python</code>代码实现一下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># a是和, b是积, n是幂</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(a,b,n)</span>:</span></span><br><span class="line">    <span class="keyword">if</span>(n == <span class="number">0</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="number">2</span></span><br><span class="line">    <span class="keyword">if</span>(n == <span class="number">1</span>):</span><br><span class="line">        <span class="keyword">return</span> a</span><br><span class="line">    <span class="keyword">return</span> a*solution(a,b,n<span class="number">-1</span>)- b*solution(a,b,n<span class="number">-2</span>)</span><br></pre></td></tr></table></figure>
+<p>运行结果</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span>&gt;&gt; print(solution(1,-1,0))</span><br><span class="line">2</span><br><span class="line"><span class="meta">&gt;</span>&gt;&gt; print(solution(1,-1,1))</span><br><span class="line">1</span><br><span class="line"><span class="meta">&gt;</span>&gt;&gt; print(solution(1,-1,2))</span><br><span class="line">3</span><br><span class="line"><span class="meta">&gt;</span>&gt;&gt; print(solution(1,-1,3))</span><br><span class="line">4</span><br><span class="line"><span class="meta">&gt;</span>&gt;&gt; print(solution(1,-1,4))</span><br><span class="line">7</span><br><span class="line"><span class="meta">&gt;</span>&gt;&gt; print(solution(1,-1,5))</span><br><span class="line">11</span><br><span class="line"><span class="meta">&gt;</span>&gt;&gt; print(solution(1,-1,6))</span><br><span class="line">18</span><br><span class="line"><span class="meta">&gt;</span>&gt;&gt; print(solution(1,-1,7))</span><br><span class="line">29</span><br></pre></td></tr></table></figure>
+<p>然后</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; print(solution(1,-1,100))</span><br><span class="line"># 等了好久都没算出来</span><br><span class="line"># 容易理解的算法性能差，性能好的算法不容易理解，这就是生活！！！！</span><br></pre></td></tr></table></figure>
+<p>经典优化方案，空间换时间:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(a,b,n)</span>:</span></span><br><span class="line">    sn,s0,s1 = <span class="number">0</span>, <span class="number">2</span>, a</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, n):</span><br><span class="line">        sn = a*s1 - b*s0</span><br><span class="line">        s0 = s1</span><br><span class="line">        s1 = sn</span><br><span class="line">    <span class="keyword">return</span> sn</span><br></pre></td></tr></table></figure>
+<p>测试100</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(solution(<span class="number">1</span>,<span class="number">-1</span>,<span class="number">100</span>))</span><br><span class="line"><span class="number">792070839848372253127</span></span><br><span class="line"><span class="comment"># 计算结果秒出了</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数学/" rel="tag"># 数学</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/06/education1/" rel="next" title="面向未来的教育理念及方法">
+                <i class="fa fa-chevron-left"></i> 面向未来的教育理念及方法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpeg"
+               alt="Scott Du" />
+          <p class="site-author-name" itemprop="name">Scott Du</p>
+           
+              <p class="site-description motion-element" itemprop="description">多读书 多看报 少吃零食 多睡觉</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#问题"><span class="nav-number">1.</span> <span class="nav-text">问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#解法一：粗暴解法"><span class="nav-number">1.1.</span> <span class="nav-text">解法一：粗暴解法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解法二：迭代法"><span class="nav-number">1.2.</span> <span class="nav-text">解法二：迭代法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#泛化问题"><span class="nav-number">1.3.</span> <span class="nav-text">泛化问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#延拓新的问题"><span class="nav-number">1.4.</span> <span class="nav-text">延拓新的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结一下泛华问题"><span class="nav-number">1.5.</span> <span class="nav-text">总结一下泛华问题</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Scott Du</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
