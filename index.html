@@ -330,22 +330,49 @@
           
             <h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>已知$x_1+x_2=1$，$x_1x_2=-1$，求$x_1^7+x_2^7=?$</p>
 <p>这是小朋友问我的一个题目，第一感觉就是用求根公式解方程组，分别求出$x_1$和$x_2$的解，然后代入$x_1^7+x_2^7$，然后解决完毕，呵呵！</p>
-<h2 id="解法一：粗暴解法"><a href="#解法一：粗暴解法" class="headerlink" title="解法一：粗暴解法"></a>解法一：粗暴解法</h2><p>先给出一个定理: 设一元二次方程$ax^2+bx+c=0(a,b,c\in R, a \ne 0)$的两个根$x_1$和$x_2$，<br>由求根公式可以得到</p>
-<script type="math/tex; mode=display">x_{1,2}=\frac{-b \pm \sqrt{b^2-4ac}}{2a}</script><p>根据条件可以得到$x<em>1$和$x_2$是一元二次方程$x^2-x-1=0$的两个根。由一元二次方程的求根公式可知$$x</em>{1,2}=\frac{1 \pm \sqrt5}{2}$$ 然后</p>
+<h2 id="解法一：粗暴解法"><a href="#解法一：粗暴解法" class="headerlink" title="解法一：粗暴解法"></a>解法一：粗暴解法</h2><p>先给出一个定理: 设一元二次方程$ax^2+bx+c=0(a,b,c\in R, a \ne 0)$的两个根$x_1$和$x_2$,<br>由求根公式可以得到</p>
+<script type="math/tex; mode=display">x_{1,2}=\frac{-b \pm \sqrt{b^2-4ac}}{2a}</script><p>根据条件可以得到$x_1$和$x_2$是一元二次方程$x^2-x-1=0$的两个根。由一元二次方程的求根公式可知</p>
+<script type="math/tex; mode=display">x_{1,2}=\frac{1 \pm \sqrt 5}{2}</script><p>然后</p>
 <script type="math/tex; mode=display">x_1^7+x_2^7=(\frac{1+\sqrt5}{2})^7+(\frac{1-\sqrt5}{2})^7 = 29</script><p>问题如果用计算器计算无理数，可能会丢失精度，更何况没有计算器，对于这种无理数的高次幂运算需要用到二项式定理，太费<code>CPU</code>了，这不是正解。</p>
-<h2 id="解法二：迭代法"><a href="#解法二：迭代法" class="headerlink" title="解法二：迭代法"></a>解法二：迭代法</h2><p>先求解根的低次幂和<br>$s_1=x_1+x_2=1$<br>$s_2=x_1^2+x_2^2=(x_1+x_2)^2-2x_1x_2=3$<br>$s_3=x_1^3+x_2^3=(x_1+x_2)^3-3x_1x_2(x_1+x_2)=4$<br>$s_4=x_1^4+x_2^4=(x_1^2+x_2^2)^2-2(x_1^2x_2^2)^2=7$<br>然后惊奇地发现$s_2=s_1+0,s3=s1+s2,s4=s3+s2$,这不是斐波那契额数列<code>Fibonacci sequence</code>的特性吗？</p>
-<p>于是就直接得出<br>$s_5=s_4+s_3=11$<br>$s_6=s_5+s_4=18$<br>$s_7=s_6+s_5=29$</p>
+<h2 id="解法二：迭代法"><a href="#解法二：迭代法" class="headerlink" title="解法二：迭代法"></a>解法二：迭代法</h2><p>先求解根的低次幂和</p>
+<p>$s_1=x_1+x_2=1$</p>
+<p>$s_2=x_1^2+x_2^2=(x_1+x_2)^2-2x_1x_2=3$</p>
+<p>$s_3=x_1^3+x_2^3=(x_1+x_2)^3-3x_1x_2(x_1+x_2)=4$</p>
+<p>$s_4=x_1^4+x_2^4=(x_1^2+x_2^2)^2-2(x_1^2x_2^2)^2=7$</p>
+<p>然后惊奇地发现$s_2=s_1+0,s3=s1+s2,s4=s3+s2$,这不是斐波那契额数列<code>Fibonacci sequence</code>的特性吗？</p>
+<p>于是就直接得出</p>
+<p>$s_5=s_4+s_3=11$</p>
+<p>$s_6=s_5+s_4=18$</p>
+<p>$s_7=s_6+s_5=29$</p>
 <p>所以$x_1^7+x_2^7=29$，解决完毕，但是这毕竟是猜想，结果虽然是正确的，但是不严谨！而且如果题目的条件变化了，是不是都满足<code>Fibonacci sequence</code>的特性呢？由此引出了这样的问题：如果我们知道了两个未知数的和以及乘积，是否可以知道所有根的任意次幂的和呢？是不是可以更加泛化一下呢？</p>
 <h2 id="泛化问题"><a href="#泛化问题" class="headerlink" title="泛化问题"></a>泛化问题</h2><p>已知$x_1+x_2=a$，$x_1x_2=b$，<br>求$x_1^n+x_2^n=? 其中a,b都是常数，n \in N$</p>
 <p>解：</p>
 <p>令$s_n=x_1^n+x_2^n$，则</p>
-<p>$s<em>n=x_1^{n-1}x_1+x_2^{n-1}x_2$<br>$s_n=x_1^{n-1}(a-x_2)+x_2^{n-1}(a-x_1)$<br>$s_n=ax_1^{n-1}-x_1^{n-1}x_2+ax_2^{n-1}-x_1x_2^{n-1}$<br>$s_n=a(x_1^{n-1}+x_2^{n-1})-x_1x_2(x_1^{n-2}+x_2^{n-2})$<br>$s_n=a(x_1^{n-1}+x_2^{n-1})-b(x_1^{n-2}+x_2^{n-2})$<br>于是得到了以下的递推公式:<br>$s_n=as</em>{n-1}-bs_{n-2}$</p>
-<p>那么对于原始问题已知$a=1,b=-1$<br>可以得到$s<em>n=s</em>{n-1}+s_{n-2}$<br>由此验证了解法二的严谨性。</p>
+<p>$s_n=x_1^{n-1}x_1+x_2^{n-1}x_2$</p>
+<p>$s_n=x_1^{n-1}(a-x_2)+x_2^{n-1}(a-x_1)$</p>
+<p>$s_n=ax_1^{n-1}-x_1^{n-1}x_2+ax_2^{n-1}-x_1x_2^{n-1}$</p>
+<p>$s_n=a(x_1^{n-1}+x_2^{n-1})-x_1x_2(x_1^{n-2}+x_2^{n-2})$</p>
+<p>$s_n=a(x_1^{n-1}+x_2^{n-1})-b(x_1^{n-2}+x_2^{n-2})$</p>
+<p>于是得到了以下的递推公式:</p>
+<script type="math/tex; mode=display">s_n=as_{n-1}-bs_{n-2}</script><p>那么对于原始问题已知$a=1,b=-1$<br>可以得到<script type="math/tex">s_n=s_{n-1}+s_{n-2}</script><br>由此验证了解法二的严谨性。</p>
 <h2 id="延拓新的问题"><a href="#延拓新的问题" class="headerlink" title="延拓新的问题"></a>延拓新的问题</h2><p>如果$x_1,x_2$没有实数解，以上方法是否适用?</p>
-<p>看一个例子,对于泛化的公式,如果$a=b=2$，<br>即$s<em>1=x_1+x_2=2, x_1x_2=2$<br>显然$x</em>{1,2}=1 \pm i$<br>那么$s<em>2=x_1^2+x_2^2=(1+i)^2+(1-i)^2=0$<br>按照递推公式<br>$s_3=2s_2-2s_1=-4$<br>$s_4=2s_3-2s_2=-8$<br>$s_5=2s_4-2s_3=-8$<br>$s_6=2s_5-2s_4=0$<br>$s_7=2s_6-2s_5=16$<br>$s_8=2s_7-2s_6=32$<br>$s_9=2s_8-2s_7=32$<br>$s</em>{10}=2s<em>9-2s_8=0$<br>$s</em>{11}=2s_{10}-2s_9=-64$<br>貌似也ok，待证明</p>
-<h2 id="总结一下泛华问题"><a href="#总结一下泛华问题" class="headerlink" title="总结一下泛华问题"></a>总结一下泛华问题</h2><p>对于已知$x<em>1+x_2=a$，$x_1x_2=b$，<br>求$s_n= \sum</em>{k=1} =x_1^n+x_2^n=? 其中a,b都是常数，n \in N$</p>
-<p>就会有$s<em>n=as</em>{n-1}-bs_{n-2}, 其中s_0=2,s_1=a$</p>
-<p>最后用<code>python</code>代码实现一下</p>
+<p>看一个例子,对于泛化的公式,如果$a=b=2$，<br>即</p>
+<script type="math/tex; mode=display">s_1=x_1+x_2=2, x_1x_2=2</script><p>显然</p>
+<script type="math/tex; mode=display">x_{1,2}=1 \pm i</script><p>那么</p>
+<p>$s_2=x_1^2+x_2^2=(1+i)^2+(1-i)^2=0$</p>
+<p>按照递推公式</p>
+<p>$s_3=2s_2-2s_1=-4$</p>
+<p>$s_4=2s_3-2s_2=-8$</p>
+<p>$s_5=2s_4-2s_3=-8$</p>
+<p>$s_6=2s_5-2s_4=0$</p>
+<p>$s_7=2s_6-2s_5=16$</p>
+<p>$s_8=2s_7-2s_6=32$</p>
+<p>$s_9=2s_8-2s_7=32$</p>
+<p>$s_{10}=2s_9-2s_8=0$</p>
+<p>貌似也ok，待证明</p>
+<h2 id="总结一下泛华问题"><a href="#总结一下泛华问题" class="headerlink" title="总结一下泛华问题"></a>总结一下泛华问题</h2><p>对于已知$x_1+x_2=a$，$x_1x_2=b$，<br>求$s_n =x_1^n+x_2^n=? 其中a,b都是常数，n \in N$</p>
+<p>就会有</p>
+<script type="math/tex; mode=display">s_n=as_{n-1}-bs_{n-2}, 其中s_0=2,s_1=a</script><p>最后用<code>python</code>代码实现一下</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># a是和, b是积, n是幂</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(a,b,n)</span>:</span></span><br><span class="line">    <span class="keyword">if</span>(n == <span class="number">0</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="number">2</span></span><br><span class="line">    <span class="keyword">if</span>(n == <span class="number">1</span>):</span><br><span class="line">        <span class="keyword">return</span> a</span><br><span class="line">    <span class="keyword">return</span> a*solution(a,b,n<span class="number">-1</span>)- b*solution(a,b,n<span class="number">-2</span>)</span><br></pre></td></tr></table></figure>
 <p>运行结果</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span>&gt;&gt; print(solution(1,-1,0))</span><br><span class="line">2</span><br><span class="line"><span class="meta">&gt;</span>&gt;&gt; print(solution(1,-1,1))</span><br><span class="line">1</span><br><span class="line"><span class="meta">&gt;</span>&gt;&gt; print(solution(1,-1,2))</span><br><span class="line">3</span><br><span class="line"><span class="meta">&gt;</span>&gt;&gt; print(solution(1,-1,3))</span><br><span class="line">4</span><br><span class="line"><span class="meta">&gt;</span>&gt;&gt; print(solution(1,-1,4))</span><br><span class="line">7</span><br><span class="line"><span class="meta">&gt;</span>&gt;&gt; print(solution(1,-1,5))</span><br><span class="line">11</span><br><span class="line"><span class="meta">&gt;</span>&gt;&gt; print(solution(1,-1,6))</span><br><span class="line">18</span><br><span class="line"><span class="meta">&gt;</span>&gt;&gt; print(solution(1,-1,7))</span><br><span class="line">29</span><br></pre></td></tr></table></figure>
